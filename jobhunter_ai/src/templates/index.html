@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobHunter AI - BOSS直聘智能求职系统</title>
+<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+:root {
+  --primary: #4361ee;
+  --primary-dark: #3a56d4;
+  --success: #06d6a0;
+  --warning: #ffd166;
+  --danger: #ef476f;
+  --bg: #f0f2f6;
+  --card-shadow: 0 2px 12px rgba(0,0,0,.06);
+  --card-radius: 14px;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif; color: #333; min-height: 100vh; }
+
+/* Navbar */
+.navbar-brand { font-weight: 700; font-size: 20px; letter-spacing: .5px; }
+.navbar-brand i { margin-right: 8px; }
+.nav-tabs-custom { border-bottom: none; }
+.nav-tabs-custom .nav-link {
+  border: none; color: rgba(255,255,255,.75); padding: 10px 24px;
+  font-weight: 500; border-radius: 0; transition: all .2s;
+  position: relative;
+}
+.nav-tabs-custom .nav-link:hover { color: #fff; background: rgba(255,255,255,.1); }
+.nav-tabs-custom .nav-link.active {
+  color: #fff; background: rgba(255,255,255,.15);
+}
+.nav-tabs-custom .nav-link.active::after {
+  content: ''; position: absolute; bottom: 0; left: 20%; right: 20%;
+  height: 3px; background: #fff; border-radius: 3px 3px 0 0;
+}
+
+/* Cards */
+.card { border: none; border-radius: var(--card-radius); box-shadow: var(--card-shadow); margin-bottom: 20px; transition: box-shadow .2s; }
+.card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+.card-header-custom {
+  background: #fff; border-bottom: 1px solid #f0f0f0;
+  padding: 14px 20px; font-weight: 600; font-size: 14px;
+  border-radius: var(--card-radius) var(--card-radius) 0 0 !important;
+}
+.card-body-custom { padding: 20px; }
+
+/* Stats cards */
+.stat-card {
+  text-align: center; padding: 18px 12px; border-radius: 12px;
+  background: #fff; border: 1px solid #f0f0f0;
+  transition: transform .2s, box-shadow .2s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+.stat-card .stat-icon { font-size: 24px; margin-bottom: 6px; }
+.stat-card .num { font-size: 28px; font-weight: 700; line-height: 1.2; }
+.stat-card .label { font-size: 12px; color: #888; margin-top: 4px; }
+
+/* Recommendation badge */
+.rec-badge {
+  display: inline-block; padding: 3px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.rec-强 { background: #d4edda; color: #155724; }
+.rec-建 { background: #cce5ff; color: #004085; }
+.rec-可 { background: #fff3cd; color: #856404; }
+.rec-不 { background: #f8d7da; color: #721c24; }
+
+/* Score bar */
+.score-bar { height: 6px; border-radius: 3px; background: #e9ecef; overflow: hidden; width: 80px; }
+.score-bar-inner { height: 100%; border-radius: 3px; transition: width .6s ease; }
+
+/* Log box */
+.log-box {
+  background: #1a1d23; color: #e8e8e8;
+  font-family: "Cascadia Code", "Fira Code", "Consolas", monospace;
+  font-size: 13px; padding: 16px; border-radius: 10px;
+  height: 240px; overflow-y: auto; white-space: pre-wrap;
+  word-break: break-all; line-height: 1.6;
+}
+.log-box .time { color: #6a9955; }
+.log-box .info { color: #9cdcfe; }
+.log-box .warn { color: #ce9178; }
+.log-box .err { color: #f44747; }
+
+/* Progress */
+.progress-custom { height: 8px; border-radius: 4px; }
+.progress-custom .progress-bar {
+  background: linear-gradient(90deg, var(--primary), #4cc9f0);
+  transition: width .5s ease;
+}
+
+/* Drop zone */
+.drop-zone {
+  border: 2px dashed #d0d5dd; border-radius: 12px; padding: 28px 20px;
+  text-align: center; cursor: pointer; transition: all .3s;
+}
+.drop-zone:hover, .drop-zone.dragover {
+  border-color: var(--primary); background: #f0f4ff;
+}
+.drop-zone .drop-icon { font-size: 36px; color: #bbb; }
+.drop-zone .drop-text { color: #999; font-size: 13px; margin-top: 8px; }
+.file-info { display: none; padding: 10px 16px; background: #f0f4ff; border-radius: 8px; font-size: 13px; }
+.file-info .name { color: var(--primary); font-weight: 500; }
+
+/* Tables */
+.table-custom { font-size: 14px; margin: 0; }
+.table-custom th {
+  background: #f8f9fa; border-top: none; font-weight: 600;
+  font-size: 13px; color: #555; padding: 10px 12px;
+  position: sticky; top: 0; z-index: 1;
+}
+.table-custom td { padding: 10px 12px; vertical-align: middle; }
+.table-custom tbody tr { transition: background .15s; }
+.table-custom tbody tr:hover { background: #f8f9ff; }
+
+/* Charts */
+.chart-container { text-align: center; }
+.chart-container img { max-width: 100%; height: auto; border-radius: 10px; }
+
+/* Result table wrapper for sticky header */
+.table-wrap { max-height: 500px; overflow-y: auto; border-radius: 0 0 var(--card-radius) var(--card-radius); }
+
+/* Spinner overlay */
+.spinner-overlay {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,.75); z-index: 9999;
+  justify-content: center; align-items: center;
+  backdrop-filter: blur(3px);
+}
+.spinner-overlay.active { display: flex; }
+
+/* History */
+.history-empty { text-align: center; padding: 60px 20px; color: #aaa; }
+.history-empty .icon { font-size: 48px; }
+.history-empty p { margin-top: 12px; font-size: 15px; }
+
+.history-card {
+  border: 1px solid #f0f0f0; border-radius: 12px; padding: 16px 20px;
+  margin-bottom: 12px; background: #fff;
+  transition: box-shadow .2s; cursor: pointer;
+}
+.history-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.08); }
+.history-card .hc-title { font-weight: 600; font-size: 15px; }
+.history-card .hc-meta { font-size: 12px; color: #999; margin-top: 4px; }
+.history-card .hc-stats { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+.history-card .hc-stat { font-size: 13px; color: #555; }
+.history-card .hc-stat strong { color: #333; }
+
+/* History detail header */
+.history-detail-header { margin-bottom: 16px; }
+.history-detail-header h4 { margin: 0; font-weight: 700; }
+
+/* Pagination */
+.pagination-custom { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+.pagination-custom .page-btn {
+  min-width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid #e0e0e0; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer; transition: all .15s;
+}
+.pagination-custom .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+.pagination-custom .page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.pagination-custom .page-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* Buttons */
+.btn-primary-custom {
+  background: var(--primary); border-color: var(--primary);
+  padding: 10px 32px; font-weight: 600; border-radius: 10px;
+}
+.btn-primary-custom:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
+.empty-state .big-icon { font-size: 56px; margin-bottom: 12px; }
+.empty-state p { font-size: 15px; margin: 0; }
+
+/* Tab panes */
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stat-card .num { font-size: 22px; }
+  .navbar-brand { font-size: 17px; }
+}
+
+/* Misc */
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+.filter-bar .form-group { flex: 1; min-width: 140px; }
+.text-link { color: var(--primary); text-decoration: none; }
+.text-link:hover { text-decoration: underline; }
+
+#logBox .highlight { color: #4cc9f0; }
+</style>
+</head>
+<body>
+
+<div class="spinner-overlay" id="spinner">
+  <div class="text-center">
+    <div class="spinner-border text-primary" style="width:3rem;height:3rem;" role="status"></div>
+    <p class="mt-3 text-muted">处理中...</p>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark" style="background:linear-gradient(135deg,var(--primary),#3a0ca3);padding:0;">
+  <div class="container">
+    <span class="navbar-brand py-3"><i class="fas fa-robot"></i>JobHunter AI</span>
+    <ul class="nav nav-tabs-custom">
+      <li class="nav-item">
+        <button class="nav-link active" data-tab="analysis">
+          <i class="fas fa-search me-1"></i>分析
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-tab="history">
+          <i class="fas fa-history me-1"></i>历史记录
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container py-4">
+
+<!-- ===== Analysis Tab ===== -->
+<div class="tab-pane active" id="tab-analysis">
+  <div class="row g-4">
+    <!-- Left: Config -->
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header-custom"><i class="fas fa-cog me-2"></i>搜索配置</div>
+        <div class="card-body-custom">
+          <div class="mb-3">
+            <label class="form-label fw500">关键词</label>
+            <input type="text" class="form-control" id="keyword" value="Python" placeholder="多个用逗号分隔">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">省份</label>
+            <select class="form-select" id="province">
+              <option value="">请选择省份</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">城市</label>
+            <select class="form-select" id="city">
+              <option value="">请先选择省份</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">采集页数</label>
+            <input type="number" class="form-control" id="pages" value="3" min="1" max="10">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">AI 模型</label>
+            <select class="form-select" id="model">
+              <option value="qwen-plus">通义千问 Plus ⭐</option>
+              <option value="qwen-max">通义千问 Max</option>
+              <option value="qwen-turbo">通义千问 Turbo（最快）</option>
+              <option value="custom">自定义（.env 配置）</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-primary-custom w-100" id="startBtn">
+            <i class="fas fa-play me-1"></i>开始分析
+          </button>
+        </div>
+      </div>
+
+      <!-- Resume Upload -->
+      <div class="card">
+        <div class="card-header-custom"><i class="fas fa-file me-2"></i>上传简历</div>
+        <div class="card-body-custom">
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <div class="drop-text">点击或拖拽上传简历<br>支持 PDF / DOCX / TXT 格式</div>
+          </div>
+          <input type="file" id="resumeInput" accept=".pdf,.txt,.docx,.doc" style="display:none">
+          <div class="file-info mt-3" id="fileInfo">
+            <i class="fas fa-file-alt me-2"></i>
+            <span class="name" id="fileName"></span>
+            <button class="btn btn-sm btn-outline-danger float-end" id="removeFileBtn"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Results -->
+    <div class="col-lg-8">
+      <!-- Progress -->
+      <div class="card" id="progressCard" style="display:none;">
+        <div class="card-header-custom"><i class="fas fa-spinner me-2"></i>运行进度</div>
+        <div class="card-body-custom">
+          <div class="progress progress-custom mb-3">
+            <div class="progress-bar" id="progressBar" style="width:0%;"></div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="log-box flex-grow-1 me-2" id="logBox" style="height:200px;">等待任务开始...</div>
+            <button class="btn btn-outline-danger btn-sm" id="cancelBtn" style="display:none;white-space:nowrap;align-self:stretch;" title="取消任务">
+              <i class="fas fa-stop-circle me-1"></i>取消
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="card" id="statsCard" style="display:none;">
+        <div class="card-header-custom"><i class="fas fa-chart-bar me-2"></i>匹配概览</div>
+        <div class="card-body-custom">
+          <div class="row g-3" id="statsRow"></div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="card" id="chartCard" style="display:none;">
+        <div class="card-header-custom"><i class="fas fa-image me-2"></i>匹配度分布图</div>
+        <div class="card-body-custom chart-container" id="chartContainer"></div>
+      </div>
+
+      <!-- Result Table -->
+      <div class="card" id="resultCard" style="display:none;">
+        <div class="card-header-custom"><i class="fas fa-list me-2"></i>岗位推荐结果</div>
+        <div class="table-wrap">
+          <table class="table table-custom mb-0">
+            <thead><tr>
+              <th style="width:44px">#</th>
+              <th>职位</th>
+              <th>公司</th>
+              <th>薪资</th>
+              <th style="width:90px">评分</th>
+              <th style="width:82px">推荐</th>
+              <th style="width:44px">链接</th>
+              <th style="min-width:140px">理由</th>
+            </tr></thead>
+            <tbody id="resultBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Empty -->
+      <div class="empty-state" id="emptyState">
+        <div class="big-icon"><i class="fas fa-search"></i></div>
+        <p>配置参数后点击"开始分析"<br>系统将从 BOSS直聘采集数据并进行 AI 智能评分</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== History Tab ===== -->
+<div class="tab-pane" id="tab-history">
+  <!-- Filter Bar -->
+  <div class="card">
+    <div class="card-body-custom">
+      <div class="filter-bar">
+        <div class="form-group">
+          <label class="form-label fw500 small">关键词</label>
+          <input type="text" class="form-control form-control-sm" id="histKeyword" placeholder="筛选关键词">
+        </div>
+        <div class="form-group">
+          <label class="form-label fw500 small">城市</label>
+          <input type="text" class="form-control form-control-sm" id="histCity" placeholder="筛选城市">
+        </div>
+        <div>
+          <button class="btn btn-primary btn-sm" id="histSearchBtn"><i class="fas fa-search me-1"></i>搜索</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History List -->
+  <div id="historyList"></div>
+
+  <!-- History Detail (hidden initially) -->
+  <div id="historyDetail" style="display:none;">
+    <div class="history-detail-header d-flex align-items-center gap-3">
+      <button class="btn btn-outline-secondary btn-sm" id="histBackBtn"><i class="fas fa-arrow-left me-1"></i>返回</button>
+      <h4 class="mb-0" id="histDetailTitle">历史详情</h4>
+    </div>
+    <div class="mt-3">
+      <!-- Stats -->
+      <div class="card"><div class="card-header-custom"><i class="fas fa-chart-bar me-2"></i>匹配概览</div>
+        <div class="card-body-custom"><div class="row g-3" id="histStatsRow"></div></div>
+      </div>
+      <!-- Chart -->
+      <div class="card" id="histChartCard" style="display:none;"><div class="card-header-custom"><i class="fas fa-image me-2"></i>匹配度分布图</div>
+        <div class="card-body-custom chart-container" id="histChartContainer"></div>
+      </div>
+      <!-- Table -->
+      <div class="card"><div class="card-header-custom"><i class="fas fa-list me-2"></i>岗位详情</div>
+        <div class="table-wrap"><table class="table table-custom mb-0">
+          <thead><tr><th style="width:44px">#</th><th>职位</th><th>公司</th><th>薪资</th><th style="width:90px">评分</th><th style="width:82px">推荐</th><th style="width:44px">链接</th><th style="min-width:140px">理由</th></tr></thead>
+          <tbody id="histResultBody"></tbody>
+        </table></div>
+      </div>
+      <!-- Log -->
+      <div class="card"><div class="card-header-custom"><i class="fas fa-terminal me-2"></i>运行日志</div>
+        <div class="card-body-custom"><div class="log-box" id="histLogBox"></div></div>
+      </div>
+      <!-- Delete -->
+      <div class="text-end mb-3">
+        <button class="btn btn-outline-danger btn-sm" id="histDeleteBtn"><i class="fas fa-trash me-1"></i>删除此记录</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div id="histPagination" class="pagination-custom"></div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+(function(){
+'use strict';
+
+// ---- State ----
+let uploadedFile = null;
+let currentTaskId = null;
+let pollTimer = null;
+let histCurrentId = null;
+let histPage = 1;
+let histTotalPages = 1;
+
+const $ = id => document.getElementById(id);
+
+// ---- Tab Switching ----
+document.querySelectorAll('[data-tab]').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const tab = this.dataset.tab;
+    document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    $(`tab-${tab}`).classList.add('active');
+    if (tab === 'history') loadHistory(1);
+  });
+});
+
+// ---- File Upload ----
+function onFileSelect(event) {
+  const file = event.target.files[0];
+  if (file) {
+    uploadedFile = file;
+    $('fileName').textContent = file.name;
+    $('fileInfo').style.display = 'block';
+    $('dropZone').style.display = 'none';
+  }
+}
+
+function removeFile() {
+  uploadedFile = null;
+  $('resumeInput').value = '';
+  $('fileInfo').style.display = 'none';
+  $('dropZone').style.display = 'block';
+}
+
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+
+function recClass(rec) {
+  if (rec.includes('强烈')) return 'rec-强';
+  if (rec.includes('建议')) return 'rec-建';
+  if (rec.includes('可以')) return 'rec-可';
+  return 'rec-不';
+}
+
+function recLabel(rec) {
+  if (rec.includes('强烈')) return '强烈推荐';
+  if (rec.includes('建议')) return '建议投递';
+  if (rec.includes('可以')) return '可以考虑';
+  return '不推荐';
+}
+
+function scoreColor(score) {
+  if (score >= 80) return '#06d6a0';
+  if (score >= 60) return '#ffd166';
+  if (score >= 40) return '#ff9e00';
+  return '#ef476f';
+}
+
+// ---- Analysis: update display ----
+function updateStats(stats, containerId) {
+  const row = $(containerId);
+  if (!row) return;
+  const cards = [
+    { num: stats.total, label: '总岗位数', color: '#4361ee', icon: 'fa-briefcase' },
+    { num: stats.avg_score, label: '平均匹配度', color: '#06d6a0', icon: 'fa-chart-line' },
+    { num: stats.max_score, label: '最高匹配度', color: '#ef476f', icon: 'fa-arrow-up' },
+    { num: stats.min_score, label: '最低匹配度', color: '#888', icon: 'fa-arrow-down' },
+  ];
+  if (stats.counts) {
+    const colorMap = { '强烈推荐': '#06d6a0', '建议投递': '#4361ee', '可以考虑': '#ffd166', '不推荐': '#ef476f' };
+    for (const [k, v] of Object.entries(stats.counts)) {
+      cards.push({ num: v, label: k, color: colorMap[k] || '#888', icon: 'fa-tag' });
+    }
+  }
+  row.innerHTML = cards.map(c => `
+    <div class="col-4 col-md-3">
+      <div class="stat-card">
+        <div class="stat-icon" style="color:${c.color}"><i class="fas ${c.icon}"></i></div>
+        <div class="num" style="color:${c.color}">${c.num}</div>
+        <div class="label">${c.label}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateTable(table, tbodyId) {
+  const body = $(tbodyId);
+  if (!body) return;
+  body.innerHTML = table.map(r => {
+    const linkHtml = r.link ? `<a href="${r.link}" target="_blank" title="查看 BOSS直聘 职位"><i class="fas fa-external-link-alt" style="color:var(--primary);font-size:16px;"></i></a>` : '';
+    const reason = r.reason || r.match_reason || r.rec_reason || r.recommendation_reason || '';
+    return `<tr>
+      <td>${r.rank}</td>
+      <td><strong>${escapeHtml(r.title)}</strong><br><small class="text-muted">${escapeHtml(r.city)}</small></td>
+      <td>${escapeHtml(r.company)}</td>
+      <td>${escapeHtml(r.salary)}</td>
+      <td>
+        <strong style="color:${scoreColor(r.score)}">${r.score}</strong>
+        <div class="score-bar mt-1"><div class="score-bar-inner" style="width:${r.score}%;background:${scoreColor(r.score)}"></div></div>
+      </td>
+      <td><span class="rec-badge ${recClass(r.recommendation)}">${recLabel(r.recommendation)}</span></td>
+      <td style="text-align:center">${linkHtml}</td>
+      <td><small>${escapeHtml(reason)}</small></td>
+    </tr>`;
+  }).join('');
+}
+
+function updateChart(base64, containerId, cardId) {
+  if (base64) {
+    $(containerId).innerHTML = `<img src="data:image/png;base64,${base64}" alt="匹配度分布图">`;
+    $(cardId).style.display = 'block';
+  }
+}
+
+function appendLog(text) {
+  const box = $('logBox');
+  box.textContent = text;
+  box.scrollTop = box.scrollHeight;
+}
+
+function resetBtn() {
+  $('startBtn').disabled = false;
+  $('startBtn').innerHTML = '<i class="fas fa-play me-1"></i>开始分析';
+  $('cancelBtn').style.display = 'none';
+}
+
+async function cancelAnalysis() {
+  if (!currentTaskId) return;
+  $('cancelBtn').disabled = true;
+  $('cancelBtn').innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>取消中...';
+  try {
+    await fetch(`/api/cancel/${currentTaskId}`, { method: 'POST' });
+    appendLog('\n正在取消...');
+  } catch (e) {
+    appendLog(`\n取消失败: ${e.message}`);
+    $('cancelBtn').disabled = false;
+    $('cancelBtn').innerHTML = '<i class="fas fa-stop-circle me-1"></i>取消';
+  }
+}
+
+// ---- Analysis: main flow ----
+async function startAnalysis() {
+  console.log('[JobHunter] startAnalysis');
+  const keyword = ($('keyword').value || '').trim() || 'Python';
+  const city = $('city').value || '上海';
+  const pages = parseInt($('pages').value) || 3;
+  const model = $('model').value;
+
+  const btn = $('startBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>分析中...';
+
+  $('statsCard').style.display = 'none';
+  $('resultCard').style.display = 'none';
+  $('chartCard').style.display = 'none';
+  $('emptyState').style.display = 'none';
+  $('progressCard').style.display = 'block';
+  $('logBox').textContent = '正在提交...';
+  $('progressBar').style.width = '0%';
+  $('cancelBtn').style.display = 'block';
+
+  const form = new FormData();
+  form.append('keyword', keyword);
+  form.append('city', city);
+  form.append('pages', pages);
+  form.append('model', model);
+  if (uploadedFile) form.append('resume', uploadedFile);
+
+  try {
+    const resp = await fetch('/api/analyze', { method: 'POST', body: form });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    currentTaskId = data.task_id;
+    appendLog(`任务已提交 (ID: ${currentTaskId})`);
+    pollStatus();
+  } catch (e) {
+    appendLog(`提交失败: ${e.message}`);
+    resetBtn();
+  }
+}
+
+async function pollStatus() {
+  if (!currentTaskId) return;
+  try {
+    const resp = await fetch(`/api/status/${currentTaskId}`);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+
+    if (data.log) appendLog(data.log);
+    $('progressBar').style.width = (data.progress || 0) + '%';
+
+    if (data.status === 'completed') {
+      const r = data.result;
+      if (r) {
+        if (r.stats) updateStats(r.stats, 'statsRow');
+        if (r.table) updateTable(r.table, 'resultBody');
+        if (r.chart) updateChart(r.chart, 'chartContainer', 'chartCard');
+      }
+      appendLog('\n分析完成！');
+      resetBtn();
+      $('progressBar').style.width = '100%';
+      $('statsCard').style.display = 'block';
+      $('resultCard').style.display = 'block';
+      currentTaskId = null;
+      $('cancelBtn').style.display = 'none';
+    } else if (data.status === 'cancelled') {
+      appendLog('\n任务已取消。');
+      resetBtn();
+      currentTaskId = null;
+      $('cancelBtn').style.display = 'none';
+    } else if (data.status === 'error') {
+      appendLog(`\n错误: ${data.error || '未知错误'}`);
+      resetBtn();
+      currentTaskId = null;
+      $('cancelBtn').style.display = 'none';
+    } else {
+      setTimeout(pollStatus, 1500);
+    }
+  } catch (e) {
+    setTimeout(pollStatus, 3000);
+  }
+}
+
+// ---- History ----
+async function loadHistory(page) {
+  histPage = page;
+  const kw = $('histKeyword').value.trim();
+  const ci = $('histCity').value.trim();
+  let url = `/api/history?page=${page}&per_page=20`;
+  if (kw) url += `&keyword=${encodeURIComponent(kw)}`;
+  if (ci) url += `&city=${encodeURIComponent(ci)}`;
+
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    renderHistoryList(data);
+  } catch (e) {
+    $('historyList').innerHTML = `<div class="alert alert-danger">加载历史失败: ${e.message}</div>`;
+  }
+}
+
+function renderHistoryList(data) {
+  const list = $('historyList');
+  const runs = data.runs || [];
+  const total = data.total || 0;
+  const perPage = data.per_page || 20;
+  histTotalPages = Math.max(1, Math.ceil(total / perPage));
+
+  if (runs.length === 0) {
+    list.innerHTML = '<div class="history-empty"><div class="icon"><i class="fas fa-inbox"></i></div><p>暂无历史记录</p></div>';
+    renderPagination(0);
+    return;
+  }
+
+  list.innerHTML = runs.map(r => {
+    const time = r.created_at ? r.created_at.replace('T', ' ').substring(0, 19) : '';
+    const avg = r.avg_score != null ? r.avg_score.toFixed(1) : '-';
+    return `<div class="history-card" onclick="(function(){window._viewRun(${r.id})})()">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <div class="hc-title"><i class="fas fa-search me-1" style="color:var(--primary)"></i>${escapeHtml(r.keyword)} @ ${escapeHtml(r.city)}</div>
+          <div class="hc-meta"><i class="far fa-clock me-1"></i>${time} | ${r.total_jobs || 0} 个岗位 | AI: ${escapeHtml(r.model || 'deepseek-chat')}</div>
+        </div>
+        <div><span class="num" style="font-size:22px;font-weight:700;color:${avg >= 70 ? '#06d6a0' : avg >= 50 ? '#ffd166' : '#ef476f'}">${avg}</span><small class="text-muted" style="font-size:12px;"> 平均分</small></div>
+      </div>
+      <div class="hc-stats">
+        <span class="hc-stat"><strong>${r.total_jobs || 0}</strong> 总岗位</span>
+        <span class="hc-stat"><strong style="color:#06d6a0">${r.count_strong || 0}</strong> 强烈推荐</span>
+        <span class="hc-stat"><strong style="color:#4361ee">${r.count_recommend || 0}</strong> 建议投递</span>
+        <span class="hc-stat"><strong style="color:#ffd166">${r.count_consider || 0}</strong> 可以考虑</span>
+        <span class="hc-stat"><strong style="color:#ef476f">${r.count_skip || 0}</strong> 不推荐</span>
+        <span class="hc-stat"><span class="text-muted">${r.resume_filename ? '简历: ' + escapeHtml(r.resume_filename) : ''}</span></span>
+      </div>
+    </div>`;
+  }).join('');
+
+  renderPagination(total);
+}
+
+function renderPagination(total) {
+  const el = $('histPagination');
+  if (total === 0) { el.innerHTML = ''; return; }
+  let html = `<button class="page-btn" onclick="window._histGo(${histPage - 1})" ${histPage <= 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+  for (let p = 1; p <= histTotalPages; p++) {
+    if (p === 1 || p === histTotalPages || Math.abs(p - histPage) <= 2) {
+      html += `<button class="page-btn ${p === histPage ? 'active' : ''}" onclick="window._histGo(${p})">${p}</button>`;
+    } else if (Math.abs(p - histPage) === 3) {
+      html += `<button class="page-btn" disabled>...</button>`;
+    }
+  }
+  html += `<button class="page-btn" onclick="window._histGo(${histPage + 1})" ${histPage >= histTotalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+  el.innerHTML = html;
+}
+
+async function viewRun(runId) {
+  histCurrentId = runId;
+  $('historyList').style.display = 'none';
+  $('histPagination').style.display = 'none';
+  $('historyDetail').style.display = 'block';
+  $('histDetailTitle').textContent = `运行 #${runId} 详情`;
+
+  try {
+    const resp = await fetch(`/api/history/${runId}`);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    const run = data.run || {};
+    const jobs = data.jobs || [];
+
+    $('histChartCard').style.display = 'none';
+    if (run.chart_b64) updateChart(run.chart_b64, 'histChartContainer', 'histChartCard');
+
+    const stats = {
+      total: run.total_jobs || 0, avg_score: run.avg_score || 0,
+      max_score: run.max_score || 0, min_score: run.min_score || 0,
+      counts: { '强烈推荐': run.count_strong || 0, '建议投递': run.count_recommend || 0, '可以考虑': run.count_consider || 0, '不推荐': run.count_skip || 0 },
+    };
+    updateStats(stats, 'histStatsRow');
+    updateTable(jobs, 'histResultBody');
+  } catch (e) {
+    $('histStatsRow').innerHTML = `<div class="col-12"><div class="alert alert-danger">加载详情失败: ${e.message}</div></div>`;
+  }
+
+  // Load log
+  try {
+    const resp = await fetch(`/api/history/${runId}/log`);
+    if (resp.ok) {
+      const data = await resp.json();
+      $('histLogBox').textContent = data.log || '(日志为空)';
+    } else {
+      $('histLogBox').textContent = '(日志加载失败)';
+    }
+  } catch {
+    $('histLogBox').textContent = '(日志加载失败)';
+  }
+
+  $('histDeleteBtn').onclick = async function() {
+    if (!confirm('确定删除此历史记录？')) return;
+    try {
+      const resp = await fetch(`/api/history/${runId}`, { method: 'DELETE' });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      backToHistory();
+    } catch (e) {
+      alert('删除失败: ' + e.message);
+    }
+  };
+}
+
+function backToHistory() {
+  histCurrentId = null;
+  $('historyList').style.display = '';
+  $('histPagination').style.display = '';
+  $('historyDetail').style.display = 'none';
+  loadHistory(histPage);
+}
+
+// ---- 省份/城市数据 ----
+const CITY_DATA = {
+  "直辖市": ["北京","上海","天津","重庆"],
+  "广东": ["广州","深圳","东莞","佛山","珠海","惠州","中山"],
+  "浙江": ["杭州","宁波","温州","嘉兴","金华","绍兴","台州"],
+  "江苏": ["南京","苏州","无锡","常州","南通","徐州"],
+  "四川": ["成都"],
+  "湖北": ["武汉"],
+  "福建": ["厦门","福州","泉州"],
+  "山东": ["青岛","济南","烟台"],
+  "湖南": ["长沙"],
+  "安徽": ["合肥"],
+  "河南": ["郑州"],
+  "河北": ["石家庄"],
+  "陕西": ["西安"],
+  "辽宁": ["沈阳","大连"],
+  "云南": ["昆明"],
+  "吉林": ["长春"],
+  "黑龙江": ["哈尔滨"],
+  "山西": ["太原"],
+  "广西": ["南宁"],
+  "贵州": ["贵阳"],
+  "江西": ["南昌"],
+  "新疆": ["乌鲁木齐"],
+  "甘肃": ["兰州"],
+  "海南": ["海口"],
+};
+
+function initCitySelector() {
+  const provSel = $('province');
+  const citySel = $('city');
+  if (!provSel || !citySel) {
+    console.error('[JobHunter] province/city elements not found');
+    return;
+  }
+
+  provSel.innerHTML = '';
+  citySel.innerHTML = '';
+
+  // 填充省份
+  const provinces = Object.keys(CITY_DATA);
+  provinces.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p;
+    opt.textContent = p;
+    provSel.appendChild(opt);
+  });
+
+  // 省份切换时更新城市
+  function updateCities() {
+    const cities = CITY_DATA[provSel.value] || [];
+    citySel.innerHTML = '';
+    cities.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = c;
+      citySel.appendChild(opt);
+    });
+  }
+
+  provSel.addEventListener('change', updateCities);
+
+  // 默认选中 上海
+  provSel.value = '直辖市';
+  updateCities();
+  citySel.value = '上海';
+}
+
+// ---- Init ----
+try {
+  console.log('[JobHunter] init');
+
+  // 初始化城市选择器
+  initCitySelector();
+
+  // Tab nav buttons
+  $('startBtn').addEventListener('click', startAnalysis);
+  $('cancelBtn').addEventListener('click', cancelAnalysis);
+
+  // Drop zone
+  const dz = $('dropZone');
+  if (dz) {
+    dz.addEventListener('click', () => $('resumeInput').click());
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragover'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+    dz.addEventListener('drop', e => {
+      e.preventDefault();
+      dz.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      const validExts = ['.pdf', '.txt', '.docx', '.doc'];
+      const ext = '.' + file.name.split('.').pop().toLowerCase();
+      if (file && validExts.includes(ext)) {
+        uploadedFile = file;
+        $('fileName').textContent = file.name;
+        $('fileInfo').style.display = 'block';
+        $('dropZone').style.display = 'none';
+      }
+    });
+  }
+  $('resumeInput').addEventListener('change', onFileSelect);
+  $('removeFileBtn').addEventListener('click', removeFile);
+
+  // History filters
+  $('histSearchBtn').addEventListener('click', () => loadHistory(1));
+  $('histKeyword').addEventListener('keyup', e => { if (e.key === 'Enter') loadHistory(1); });
+  $('histCity').addEventListener('keyup', e => { if (e.key === 'Enter') loadHistory(1); });
+
+  // History nav
+  $('histBackBtn').addEventListener('click', backToHistory);
+
+  // Expose for inline onclick
+  window._viewRun = viewRun;
+  window._histGo = function(p) { loadHistory(p); };
+
+  console.log('[JobHunter] init complete');
+} catch (e) {
+  console.error('[JobHunter] init error:', e);
+}
+})();
+</script>
+</body>
+</html>

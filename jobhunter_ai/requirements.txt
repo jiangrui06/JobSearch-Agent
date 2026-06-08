@@ -1,0 +1,26 @@
+# ==================== JobHunter AI 依赖 ====================
+
+# ---- BOSS直聘爬虫 ----
+DrissionPage>=4.1.0
+jsonpath-ng>=1.6.0
+
+# ---- AI API 调用 ----
+openai>=1.0.0
+
+# ---- 数据处理 ----
+pandas>=1.5.0
+
+# ---- PDF 简历解析 ----
+pdfplumber>=0.10.0
+
+# ---- 可视化 ----
+matplotlib>=3.7.0
+
+# ---- Web UI ----
+gradio>=4.36.0,<5.0.0
+fastapi>=0.110.0
+uvicorn>=0.27.0
+python-multipart>=0.0.9
+
+# ---- 环境变量管理 ----
+python-dotenv>=1.0.0
