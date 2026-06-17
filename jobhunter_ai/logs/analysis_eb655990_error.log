@@ -1,0 +1,44 @@
+[17:26:16] === 阶段1/2: 采集 BOSS直聘数据 ===
+关键词: Python  |  城市: 广州  |  页数: 3
+
+错误: 
+与页面的连接已断开。
+版本: 4.1.1.4
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\scraper\boss_scraper.py", line 137, in search
+    page_obj.ele('xpath=//button[@class="btn btn-search"]', timeout=3).click()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_units\clicker.py", line 23, in __call__
+    return self.left(by_js, timeout, wait_stop)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_units\clicker.py", line 58, in left
+    self._ele.wait.stop_moving(timeout=end_time - perf_counter())
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_units\waiter.py", line 370, in stop_moving
+    if self._ele.rect.size == size and self._ele.rect.location == location:
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_units\rect.py", line 29, in size
+    border = self._ele.owner._run_cdp('DOM.getBoxModel', backendNodeId=self._ele._backend_id,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_pages\chromium_base.py", line 389, in _run_cdp
+    return r if __ERROR__ not in r else raise_error(r, self.browser, ignore)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_functions\tools.py", line 199, in raise_error
+    raise r
+DrissionPage.errors.PageDisconnectedError: 
+与页面的连接已断开。
+版本: 4.1.1.4
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\web_app.py", line 105, in _run_analysis
+    all_raw = scraper.search(keyword=keyword, city=city, page=pages, cancel_check=_is_cancelled)
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\scraper\boss_scraper.py", line 142, in search
+    page_obj.get(search_url)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_pages\chromium_base.py", line 414, in get
+    self._url_available = self._d_connect(self._url, times=retry, interval=interval,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_pages\chromium_base.py", line 773, in _d_connect
+    result = self._run_cdp('Page.navigate', frameId=self._frame_id, url=to_url, _timeout=timeout)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_pages\chromium_base.py", line 389, in _run_cdp
+    return r if __ERROR__ not in r else raise_error(r, self.browser, ignore)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_functions\tools.py", line 199, in raise_error
+    raise r
+DrissionPage.errors.PageDisconnectedError: 
+与页面的连接已断开。
+版本: 4.1.1.4
+

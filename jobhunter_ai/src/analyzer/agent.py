@@ -1,14 +1,20 @@
 """AI Agent: 对 BOSS直聘岗位进行匹配度评分并给出个性化推荐。"""
 
+import hashlib
 import json
 import logging
 import re
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 from typing import Any, Optional
 
 import pandas as pd
 
 from config.settings import (
     AI_MODEL,
+    DATA_DIR,
     DEEPSEEK_API_BASE,
     DEEPSEEK_API_KEY,
     SALARY_EXPECTATION,
@@ -16,6 +22,13 @@ from config.settings import (
 from src.utils.resume_parser import parse_resume
 
 logger = logging.getLogger(__name__)
+
+# 并发 worker 数量（可根据 API 限速调整）
+MAX_WORKERS = 1
+# API 请求间隔（秒），防止触发限速
+API_DELAY = 3.0
+# 请求超时（秒）
+REQUEST_TIMEOUT = 60
 
 SYSTEM_PROMPT = """你是一名顶级的 HR 专家和职业顾问，擅长分析职位描述与候选人简历之间的匹配度。
 
@@ -36,6 +49,7 @@ SYSTEM_PROMPT = """你是一名顶级的 HR 专家和职业顾问，擅长分析
    - "可以考虑"：部分匹配，可作为备选
    - "不推荐"：匹配度低，不建议浪费精力
 7. **推荐理由**：简要说明为什么给出这个推荐等级。
+	8. **投递招呼语**：生成一段 20-50 字的个性化打招呼文案，用于 BOSS直聘 投递时发送给 HR。要求：简洁有力、结合岗位和简历亮点，不要只用套话。
 
 **必须输出严格的 JSON 格式**（不要包含 markdown 代码块标记）：
 {
@@ -46,9 +60,91 @@ SYSTEM_PROMPT = """你是一名顶级的 HR 专家和职业顾问，擅长分析
   "match_score": 80,
   "match_reason": "您的 Python 技能与岗位高度匹配（85分），...",
   "recommendation": "建议投递",
-  "recommendation_reason": "技能匹配度高，薪资在期望范围内，建议投递。"
+  "recommendation_reason": "技能匹配度高，薪资在期望范围内，建议投递。",
+  "greeting": "您好，我有3年Python后端开发经验，熟悉微服务架构和Redis，对贵岗位很感兴趣，期待进一步沟通。"
 }
 """
+
+
+def _make_cache_key(job_desc: str, resume_text: str, model: str) -> str:
+    """生成缓存 key（基于岗位描述+简历前500字+模型名）。"""
+    content = f"{model}|{job_desc}|{resume_text[:500]}"
+    return hashlib.md5(content.encode("utf-8")).hexdigest()
+
+
+class _ScoreCache:
+    """线程安全的文件缓存，避免对相同岗位重复请求 LLM。"""
+
+    def __init__(self, cache_dir: Path):
+        self._dir = cache_dir
+        self._dir.mkdir(parents=True, exist_ok=True)
+        self._lock = threading.Lock()
+        # 内存缓存，减少磁盘 IO
+        self._mem: dict[str, dict] = {}
+
+    def _path(self, key: str) -> Path:
+        return self._dir / f"{key}.json"
+
+    def get(self, key: str) -> Optional[dict]:
+        # 先查内存
+        with self._lock:
+            if key in self._mem:
+                return self._mem[key]
+        # 再查磁盘
+        path = self._path(key)
+        if path.exists():
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                with self._lock:
+                    self._mem[key] = data
+                return data
+            except Exception:
+                return None
+        return None
+
+    def set(self, key: str, value: dict) -> None:
+        with self._lock:
+            self._mem[key] = value
+        try:
+            with open(self._path(key), "w", encoding="utf-8") as f:
+                json.dump(value, f, ensure_ascii=False)
+        except Exception as e:
+            logger.warning(f"缓存写入失败: {e}")
+
+    def clear_memory(self) -> None:
+        """清理内存缓存（不影响磁盘）。"""
+        with self._lock:
+            self._mem.clear()
+
+
+class _RateLimiter:
+    """滑动窗口限流器：跟踪最近 60s 内的请求次数，超过 RPM 限制时主动等待。"""
+
+    def __init__(self, max_rpm: int = 30, window: int = 60):
+        self.max_rpm = max_rpm
+        self.window = window
+        self._lock = threading.Lock()
+        self._timestamps: list[float] = []
+
+    def acquire(self):
+        """等待直到可以安全发送下一个请求。"""
+        with self._lock:
+            now = time.time()
+            cutoff = now - self.window
+            self._timestamps = [t for t in self._timestamps if t > cutoff]
+
+            if len(self._timestamps) >= self.max_rpm:
+                # RPM 配额已满，等待最早的时间戳过期
+                wait = self._timestamps[0] + self.window - now
+                if wait > 0:
+                    logger.warning(f"RPM 配额已用 {len(self._timestamps)}/{self.max_rpm}，等待 {wait:.1f}s")
+                    time.sleep(wait)
+                    now = time.time()
+                    cutoff = now - self.window
+                    self._timestamps = [t for t in self._timestamps if t > cutoff]
+
+            self._timestamps.append(now)
 
 
 class JobAgent:
@@ -56,7 +152,10 @@ class JobAgent:
 
     def __init__(self):
         self._client = None
+        self._cache = _ScoreCache(DATA_DIR / "score_cache")
         self._init_client()
+        # 滑动窗口限流器（跟踪 RPM，动态调整请求速度）
+        self._rate_limiter = _RateLimiter(max_rpm=30, window=60)
 
     def _init_client(self):
         """初始化 DeepSeek 客户端。"""
@@ -69,6 +168,7 @@ class JobAgent:
             self._client = OpenAI(
                 api_key=DEEPSEEK_API_KEY,
                 base_url=DEEPSEEK_API_BASE,
+                timeout=REQUEST_TIMEOUT,
             )
             logger.info(f"已初始化 DeepSeek 客户端（{DEEPSEEK_API_BASE}）")
         except Exception as e:
@@ -90,7 +190,7 @@ class JobAgent:
     def analyze_jobs(
         self, df: pd.DataFrame, resume_text: str
     ) -> pd.DataFrame:
-        """为 DataFrame 中每个岗位进行评分并生成推荐。
+        """为 DataFrame 中每个岗位进行评分并生成推荐（并发 + 缓存 + 限流）。
 
         Args:
             df: 包含岗位信息的 DataFrame
@@ -115,11 +215,12 @@ class JobAgent:
             df["recommendation_reason"] = "系统配置错误，无法进行分析"
             return df
 
-        scores: list[int] = []
-        reasons: list[str] = []
-        recs: list[str] = []
-        rec_reasons: list[str] = []
+        total = len(df)
+        logger.info(f"开始评分: 共 {total} 个岗位, 并发 {MAX_WORKERS}, 缓存目录 {self._cache._dir}")
+        start_time = time.time()
 
+        # 构造任务列表
+        tasks = []
         for idx, row in df.iterrows():
             job_desc = (
                 f"职位：{row.get('title', '')}\n"
@@ -128,28 +229,103 @@ class JobAgent:
                 f"薪资：{row.get('salary', '')}\n"
                 f"要求：{row.get('requirements', '')}"
             )
+            tasks.append((idx, job_desc, resume_text))
 
-            result = self._analyze_single(job_desc, resume_text)
+        # 并发执行
+        results_map: dict[int, dict[str, Any]] = {}
+        cache_hits = 0
+        cache_misses = 0
+        completed = 0
+
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            future_to_idx: dict = {}
+            for idx, job_desc, resume in tasks:
+                cache_key = _make_cache_key(job_desc, resume, AI_MODEL or "default")
+                cached = self._cache.get(cache_key)
+                if cached is not None:
+                    results_map[idx] = cached
+                    cache_hits += 1
+                    completed += 1
+                    continue
+                cache_misses += 1
+                future = executor.submit(
+                    self._analyze_single_with_cache,
+                    idx,
+                    job_desc,
+                    resume,
+                    cache_key,
+                )
+                future_to_idx[future] = idx
+
+            for future in as_completed(future_to_idx):
+                idx = future_to_idx[future]
+                try:
+                    results_map[idx] = future.result()
+                except Exception as e:
+                    logger.error(f"岗位 {idx} 评分异常: {e}")
+                    results_map[idx] = {
+                        "match_score": 0,
+                        "match_reason": f"并发评分异常: {e}",
+                        "recommendation": "不推荐",
+                        "recommendation_reason": "系统异常",
+                        "greeting": "",
+                    }
+                completed += 1
+                if completed % 5 == 0 or completed == total:
+                    elapsed = time.time() - start_time
+                    logger.info(f"评分进度: {completed}/{total} ({elapsed:.1f}s)")
+
+        elapsed = time.time() - start_time
+        logger.info(
+            f"评分完成: 总计 {total} 个, 缓存命中 {cache_hits}, "
+            f"请求 {cache_misses}, 耗时 {elapsed:.1f}s, "
+            f"平均 {elapsed/max(1, cache_misses):.1f}s/请求"
+        )
+
+        # 按原始顺序组装结果
+        scores: list[int] = []
+        reasons: list[str] = []
+        recs: list[str] = []
+        rec_reasons: list[str] = []
+        greetings: list[str] = []
+
+        for idx, _ in enumerate(df.iterrows()):
+            result = results_map.get(idx, {})
             scores.append(result.get("match_score", 0))
             reasons.append(result.get("match_reason", ""))
             recs.append(result.get("recommendation", "可以考虑"))
             rec_reasons.append(result.get("recommendation_reason", ""))
-
-            logger.info(
-                f"[{idx + 1}/{len(df)}] {row.get('title', '')} @ "
-                f"{row.get('company', '')} -> {scores[-1]}分 - {recs[-1]}"
-            )
+            greeting = result.get("greeting", "")
+            if not greeting:
+                greeting = f"您好，我对贵公司的{df.iloc[idx].get('title', '该岗位')}很感兴趣，希望能进一步沟通。"
+            greetings.append(greeting)
 
         df["match_score"] = scores
         df["match_reason"] = reasons
         df["recommendation"] = recs
         df["recommendation_reason"] = rec_reasons
+        df["greeting"] = greetings
         return df
+
+    def _throttle(self):
+        """限流：确保不超出 API 的 RPM 限制。"""
+        self._rate_limiter.acquire()
+        # 基础的固定间隔保障
+        time.sleep(API_DELAY)
+
+    def _analyze_single_with_cache(
+        self, idx: int, job_description: str, resume_content: str, cache_key: str
+    ) -> dict[str, Any]:
+        """带缓存的单个岗位分析（供线程池调用）。"""
+        self._throttle()
+        result = self._analyze_single(job_description, resume_content)
+        self._cache.set(cache_key, result)
+        return result
 
     def _analyze_single(
         self, job_description: str, resume_content: str
     ) -> dict[str, Any]:
-        """对单个岗位进行分析。"""
+        """对单个岗位进行分析（含 429 重试）。"""
         user_prompt = (
             f"## 简历内容\n{resume_content[:4000]}\n\n"
             f"## 岗位描述\n{job_description[:2000]}\n\n"
@@ -157,28 +333,37 @@ class JobAgent:
             "请按系统提示的 JSON 格式输出评分结果。"
         )
 
-        try:
-            response = self._client.chat.completions.create(
-                model=AI_MODEL if AI_MODEL else "deepseek-chat",
-                temperature=0.3,
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": user_prompt},
-                ],
-            )
-            return self._parse_response(response.choices[0].message.content)
-        except Exception as e:
-            logger.error(f"DeepSeek 调用失败: {e}")
-            return {
-                "skill_match": 0,
-                "experience_match": 0,
-                "salary_match": 0,
-                "growth_potential": 0,
-                "match_score": 0,
-                "match_reason": f"AI 评分失败: {e}",
-                "recommendation": "不推荐",
-                "recommendation_reason": "AI 分析失败，无法给出推荐",
-            }
+        max_attempts = 4
+        for attempt in range(max_attempts):
+            try:
+                response = self._client.chat.completions.create(
+                    model=AI_MODEL if AI_MODEL else "deepseek-chat",
+                    temperature=0.3,
+                    messages=[
+                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "user", "content": user_prompt},
+                    ],
+                )
+                return self._parse_response(response.choices[0].message.content)
+            except Exception as e:
+                err_str = str(e)
+                is_429 = '429' in err_str or 'rpm exhausted' in err_str or 'quota_exceeded' in err_str
+                if is_429 and attempt < max_attempts - 1:
+                    wait = (attempt + 1) * 5  # 5s, 10s, 15s
+                    logger.warning(f"RPM 限流，{wait}s 后重试 ({attempt + 2}/{max_attempts})...")
+                    time.sleep(wait)
+                    continue
+                logger.error(f"DeepSeek 调用失败: {e}")
+                return {
+                    "skill_match": 0,
+                    "experience_match": 0,
+                    "salary_match": 0,
+                    "growth_potential": 0,
+                    "match_score": 0,
+                    "match_reason": f"AI 评分失败: {e}",
+                    "recommendation": "不推荐",
+                    "recommendation_reason": "AI 分析失败，无法给出推荐",
+                }
 
     def _parse_response(self, text: str) -> dict[str, Any]:
         """从 LLM 响应中解析 JSON。"""

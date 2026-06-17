@@ -1,0 +1,31 @@
+2026-06-16 14:19:53 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-16 14:19:53 [INFO] src.scheduler: 定时任务调度器已启动
+2026-06-16 14:19:53 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 14:19:53 [INFO] src.scheduler: 已恢复定时任务: 611 (daily 17:35)
+2026-06-16 14:19:53 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 14:19:53 [INFO] src.scheduler: 已恢复定时任务: 每日12：00 (daily 00:01)
+2026-06-16 14:19:53 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 14:19:53 [INFO] src.scheduler: 已恢复定时任务: 612 (daily 01:00)
+2026-06-16 14:19:53 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 14:19:53 [INFO] src.scheduler: 已恢复定时任务: 每天执行 (daily 02:00)
+2026-06-16 14:20:02 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-16 14:20:02 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-16 14:20:08 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-16 14:20:08 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/shanghai/
+2026-06-16 14:20:11 [INFO] src.scraper.boss_scraper: 搜索关键词: Python
+2026-06-16 14:20:25 [WARNING] src.scraper.boss_scraper: 无法翻页，提前结束
+2026-06-16 14:20:25 [INFO] src.scraper.boss_scraper: 采集完成: 15 条
+2026-06-16 14:20:26 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-16 14:20:26 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-16 14:20:26 [INFO] src.analyzer.agent: 开始评分: 共 15 个岗位, 并发 8, 缓存目录 C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-16 14:20:26 [INFO] src.analyzer.agent: 评分完成: 总计 15 个, 缓存命中 15, 请求 0, 耗时 0.0s, 平均 0.0s/请求
+2026-06-16 14:20:41 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-16 14:20:41 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-16 14:20:47 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-16 14:21:01 [INFO] src.scraper.boss_scraper: 等待 9.3s...
+2026-06-16 14:21:17 [INFO] src.scraper.boss_scraper: 等待 6.6s...
+2026-06-16 14:21:31 [INFO] src.scraper.boss_scraper: 等待 7.4s...
+2026-06-16 14:21:46 [INFO] src.scraper.boss_scraper: 等待 8.3s...
+2026-06-16 14:21:54 [INFO] src.scraper.boss_scraper: 等待 9.1s...
+2026-06-16 14:22:03 [INFO] src.scraper.boss_scraper: 等待 6.3s...
+2026-06-16 14:22:10 [INFO] src.scraper.boss_scraper: 浏览器已关闭

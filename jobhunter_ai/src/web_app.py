@@ -55,11 +55,72 @@ tasks: dict[str, dict[str, Any]] = {}
 
 # 可用模型
 AVAILABLE_MODELS = [
-    {"id": "qwen-plus", "name": "通义千问 Plus"},
-    {"id": "qwen-max", "name": "通义千问 Max"},
-    {"id": "qwen-turbo", "name": "通义千问 Turbo"},
+    {"id": "sensenova-6.7-flash-lite", "name": "SenseNova 6.7 Flash Lite"},
+    {"id": "deepseek-v4-flash", "name": "DeepSeek V4 Flash"},
+    {"id": "sensenova-u1-fast", "name": "SenseNova U1 Fast"},
     {"id": "custom", "name": "自定义模型"},
 ]
+
+# ---------- 简历管理 ----------
+
+RESUME_DIR = DATA_DIR / "resumes"
+RESUMES_FILE = RESUME_DIR / "resumes.json"
+
+
+def _ensure_resume_dir():
+    """确保简历存储目录存在。"""
+    RESUME_DIR.mkdir(parents=True, exist_ok=True)
+    if not RESUMES_FILE.exists():
+        RESUMES_FILE.write_text("[]", encoding="utf-8")
+
+
+def _load_resumes() -> list[dict]:
+    """加载简历列表。"""
+    _ensure_resume_dir()
+    try:
+        return json.loads(RESUMES_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+
+
+def _save_resumes(resumes: list[dict]) -> None:
+    """保存简历列表。"""
+    _ensure_resume_dir()
+    RESUMES_FILE.write_text(
+        json.dumps(resumes, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+def _add_resume(filename: str, file_path: str, file_size: int) -> dict:
+    """添加一条简历记录。"""
+    resumes = _load_resumes()
+    record = {
+        "id": str(uuid.uuid4())[:8],
+        "name": filename,
+        "path": file_path,
+        "size": file_size,
+        "created_at": datetime.now().isoformat(),
+    }
+    resumes.append(record)
+    _save_resumes(resumes)
+    return record
+
+
+def _delete_resume(rid: str) -> bool:
+    """删除简历记录及文件。"""
+    resumes = _load_resumes()
+    for r in resumes:
+        if r.get("id") == rid:
+            # 删除文件
+            fpath = Path(r.get("path", ""))
+            if fpath.exists():
+                fpath.unlink(missing_ok=True)
+            resumes.remove(r)
+            _save_resumes(resumes)
+            return True
+    return False
+
 
 # ---------- 后台任务 ----------
 
@@ -101,11 +162,8 @@ def _run_analysis(
         elif model == "custom":
             pass  # 保留 .env 中的设置
 
-        scraper = BossZhipinScraper()
-        try:
+        with BossZhipinScraper() as scraper:
             all_raw = scraper.search(keyword=keyword, city=city, page=pages, cancel_check=_is_cancelled)
-        finally:
-            scraper.close()
 
         if _is_cancelled():
             _print("\n用户取消了操作。")
@@ -181,6 +239,7 @@ def _run_analysis(
                 "reason": str(row.get("match_reason", "")),
                 "match_reason": str(row.get("match_reason", "")),
                 "rec_reason": str(row.get("recommendation_reason", "")),
+                "greeting": str(row.get("greeting", "")),
                 "recommendation_reason": str(row.get("recommendation_reason", "")),
             })
 
@@ -263,6 +322,65 @@ def _run_analysis(
         builtins.print = _orig_print
 
 
+
+def _run_send_greetings(task_id: str, jobs: list[dict]):
+    """\u5728\u540e\u53f0\u7ebf\u7a0b\u4e2d\u6279\u91cf\u6295\u9012\uff08\u81ea\u52a8\u590d\u7528\u6301\u4e45\u5316\u767b\u5f55\u6001\uff09\u3002"""
+    import builtins
+    import random
+
+    log_buf = io.StringIO()
+    _orig_print = builtins.print
+
+    def _print(*args, **kwargs):
+        kwargs["file"] = kwargs.get("file", log_buf)
+        _orig_print(*args, **kwargs)
+        tasks[task_id]["log"] = log_buf.getvalue()
+
+    builtins.print = _print
+
+    try:
+        tasks[task_id]["status"] = "running"
+        tasks[task_id]["progress"] = 5
+
+        sendable = [j for j in jobs if j.get("recommendation") in ("\u5f3a\u70c8\u63a8\u8350", "\u5efa\u8bae\u6295\u9012")]
+        if not sendable:
+            _print("\u6ca1\u6709\u7b26\u5408\u6295\u9012\u6761\u4ef6\u7684\u5c97\u4f4d\uff08\u9700\u8981 \u5f3a\u70c8\u63a8\u8350 \u6216 \u5efa\u8bae\u6295\u9012\uff09")
+            tasks[task_id]["status"] = "completed"
+            tasks[task_id]["progress"] = 100
+            tasks[task_id]["result"] = {"results": []}
+            builtins.print = _orig_print
+            return
+
+        _print(f"\u5f00\u59cb\u6279\u91cf\u6295\u9012 {len(sendable)} \u4e2a\u5c97\u4f4d...\n")
+        _print("\u6d4f\u89c8\u5668\u5df2\u6253\u5f00\uff0c\u5c1d\u8bd5\u4f7f\u7528\u5df2\u4fdd\u5b58\u7684\u767b\u5f55\u6001...")
+        _print("\u5982\u679c\u63d0\u793a\u767b\u5f55\uff0c\u8bf7\u5728\u6d4f\u89c8\u5668\u4e2d\u626b\u7801\u5b8c\u6210\u767b\u5f55\uff08\u767b\u5f55\u540e\u53ea\u9700\u4e00\u6b21\uff0c\u540e\u7eed\u81ea\u52a8\u590d\u7528\uff09\n")
+
+        from src.scraper.boss_scraper import BossZhipinScraper
+        with BossZhipinScraper() as scraper:
+            results = scraper.send_greetings(sendable)
+            success = sum(1 for r in results if r["status"] == "\u6210\u529f")
+            skipped = sum(1 for r in results if r["status"] == "\u8df3\u8fc7")
+            failed = sum(1 for r in results if r["status"] == "\u5931\u8d25")
+            _print(f"\n\u6295\u9012\u5b8c\u6210: \u6210\u529f {success} \u4e2a / \u8df3\u8fc7 {skipped} \u4e2a / \u5931\u8d25 {failed} \u4e2a")
+            for r in results:
+                if r["status"] != "\u6210\u529f":
+                    _print(f"  {r['title']}: {r['status']} - {r.get('error', '')}")
+
+        tasks[task_id].update({
+            "status": "completed",
+            "progress": 100,
+            "result": {"results": results},
+        })
+        _print("\n\u6295\u9012\u6d41\u7a0b\u7ed3\u675f")
+    except Exception as e:
+        import traceback
+        _print(f"\n\u6295\u9012\u5f02\u5e38: {e}")
+        _print(traceback.format_exc())
+        tasks[task_id]["status"] = "error"
+        tasks[task_id]["error"] = str(e)
+    finally:
+        builtins.print = _orig_print
+
 def _generate_chart_base64(df: pd.DataFrame) -> Optional[str]:
     """生成匹配度分布图，返回 base64 编码的 PNG。"""
     try:
@@ -312,6 +430,34 @@ def _generate_chart_base64(df: pd.DataFrame) -> Optional[str]:
 
 # ---------- API 路由 ----------
 
+
+
+
+@app.post("/api/send-greetings")
+async def start_send_greetings(request: dict):
+    """start batch delivery task, receives {jobs: [...]}"""
+    import uuid
+    jobs = request.get("jobs", [])
+    if not jobs:
+        return JSONResponse({"error": "jobs list is empty"}, status_code=400)
+
+    task_id = str(uuid.uuid4())[:8]
+    tasks[task_id] = {
+        "status": "queued",
+        "progress": 0,
+        "log": "",
+        "result": None,
+        "error": None,
+    }
+
+    thread = threading.Thread(
+        target=_run_send_greetings,
+        args=(task_id, jobs),
+        daemon=True,
+    )
+    thread.start()
+
+    return JSONResponse({"task_id": task_id})
 
 @app.get("/favicon.ico")
 async def favicon():
@@ -380,6 +526,51 @@ async def start_analysis(
     thread.start()
 
     return JSONResponse({"task_id": task_id})
+
+
+# ---------- 简历 API ----------
+
+
+@app.post("/api/resume/upload")
+async def upload_resume(file: UploadFile = File(...)):
+    """上传简历文件，保存到简历库。"""
+    if not file.filename:
+        return JSONResponse({"error": "no_file"}, status_code=400)
+
+    ext = Path(file.filename).suffix or ".txt"
+    if ext.lower() not in (".pdf", ".docx", ".doc", ".txt"):
+        return JSONResponse({"error": "不支持的格式，仅支持 PDF/DOCX/TXT"}, status_code=400)
+
+    _ensure_resume_dir()
+    save_name = f"{str(uuid.uuid4())[:8]}_{file.filename}"
+    save_path = RESUME_DIR / save_name
+    content = await file.read()
+    save_path.write_bytes(content)
+
+    record = _add_resume(
+        filename=file.filename,
+        file_path=str(save_path.resolve()),
+        file_size=len(content),
+    )
+    return JSONResponse({"resume": record})
+
+
+@app.get("/api/resumes")
+async def list_resumes():
+    """获取所有已上传的简历。"""
+    return JSONResponse({"resumes": _load_resumes()})
+
+
+@app.delete("/api/resume/{resume_id}")
+async def delete_resume(resume_id: str):
+    """删除简历。"""
+    ok = _delete_resume(resume_id)
+    if not ok:
+        return JSONResponse({"error": "not_found"}, status_code=404)
+    return JSONResponse({"success": True})
+
+
+# ---------- 取消任务 ----------
 
 
 @app.post("/api/cancel/{task_id}")
@@ -464,12 +655,114 @@ async def delete_history(run_id: int):
     return JSONResponse({"success": True})
 
 
+# ---------- 定时任务 API ----------
+
+@app.get("/api/schedule")
+async def list_scheduled_tasks():
+    """获取所有定时任务。"""
+    from src.scheduler import list_tasks
+    return JSONResponse({"tasks": list_tasks()})
+
+
+@app.post("/api/schedule")
+async def create_scheduled_task(request: dict):
+    """创建定时任务。
+
+    请求体示例:
+    {
+        "name": "每日投递",
+        "keyword": "Python",
+        "city": "上海",
+        "pages": 3,
+        "schedule_type": "daily",  // "daily" 或 "once"
+        "schedule_time": "09:00",
+        "resume_path": "",
+        "resume_id": "",           // 或指定已上传简历的 ID
+        "auto_send": true,
+        "min_score": 70,
+        "recommendations": ["强烈推荐", "建议投递"]
+    }
+    """
+    from src.scheduler import add_task
+
+    required = ["name", "keyword", "city", "schedule_type", "schedule_time"]
+    for field in required:
+        if field not in request:
+            return JSONResponse({"error": f"missing_field: {field}"}, status_code=400)
+
+    # 如果传了 resume_id，解析为实际路径
+    resume_path = request.get("resume_path", "")
+    resume_id = request.get("resume_id", "")
+    if resume_id and not resume_path:
+        resumes = _load_resumes()
+        match = next((r for r in resumes if r.get("id") == resume_id), None)
+        if match:
+            resume_path = match.get("path", "")
+        else:
+            return JSONResponse({"error": f"简历不存在: {resume_id}"}, status_code=400)
+
+    task = add_task(
+        name=request["name"],
+        keyword=request["keyword"],
+        city=request["city"],
+        pages=request.get("pages", 3),
+        schedule_type=request["schedule_type"],
+        schedule_time=request["schedule_time"],
+        resume_path=resume_path,
+        resume_id=resume_id,
+        auto_send=request.get("auto_send", True),
+        min_score=request.get("min_score", 70),
+        recommendations=request.get("recommendations", ["强烈推荐", "建议投递"]),
+    )
+    return JSONResponse({"task": task})
+
+
+@app.post("/api/schedule/{task_id}/toggle")
+async def toggle_scheduled_task(task_id: str, request: dict):
+    """启用/禁用定时任务。"""
+    from src.scheduler import toggle_task
+    enabled = request.get("enabled", True)
+    toggle_task(task_id, enabled)
+    return JSONResponse({"success": True, "enabled": enabled})
+
+
+@app.delete("/api/schedule/{task_id}")
+async def delete_scheduled_task(task_id: str):
+    """删除定时任务。"""
+    from src.scheduler import remove_task
+    remove_task(task_id)
+    return JSONResponse({"success": True})
+
+
+@app.post("/api/schedule/{task_id}/run")
+async def run_scheduled_task_now(task_id: str):
+    """立即执行一次定时任务。"""
+    from src.scheduler import list_tasks, _run_scheduled_task
+    tasks = list_tasks()
+    task = next((t for t in tasks if t.get("id") == task_id), None)
+    if not task:
+        return JSONResponse({"error": "not_found"}, status_code=404)
+
+    # 在后台线程执行
+    thread = threading.Thread(
+        target=_run_scheduled_task,
+        args=(task_id, task),
+        daemon=True,
+    )
+    thread.start()
+    return JSONResponse({"success": True, "message": "任务已触发"})
+
+
 # ---------- 启动 ----------
 
 if __name__ == "__main__":
     setup_web_logging()
     from src.database import init_db
     init_db(DATA_DIR)
+
+    # 初始化定时任务调度器
+    from src.scheduler import init_scheduler
+    init_scheduler()
 
     port = 7860
     # 端口被占用时自动找可用端口

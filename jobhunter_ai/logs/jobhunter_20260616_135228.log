@@ -1,0 +1,9 @@
+2026-06-16 13:52:29 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-16 13:52:31 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/shanghai/
+2026-06-16 13:52:32 [INFO] src.scraper.boss_scraper: 搜索关键词: Python开发 机器学习 数据挖掘
+2026-06-16 13:52:46 [WARNING] src.scraper.boss_scraper: 无法翻页，提前结束
+2026-06-16 13:52:46 [INFO] src.scraper.boss_scraper: 采集完成: 15 条
+2026-06-16 13:52:47 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-16 13:52:47 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-16 13:52:47 [INFO] src.analyzer.agent: 开始评分: 共 15 个岗位, 并发 8, 缓存目录 C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-16 13:52:47 [INFO] src.analyzer.agent: 评分完成: 总计 15 个, 缓存命中 15, 请求 0, 耗时 0.0s, 平均 0.0s/请求

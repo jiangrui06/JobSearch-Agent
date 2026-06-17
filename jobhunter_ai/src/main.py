@@ -125,15 +125,12 @@ def run_pipeline(args) -> pd.DataFrame:
     keywords = [kw.strip() for kw in args.keyword.split(",")]
     combined_keyword = " ".join(keywords)
 
-    scraper = BossZhipinScraper()
-    try:
+    with BossZhipinScraper() as scraper:
         all_raw = scraper.search(
             keyword=combined_keyword,
             city=args.city,
             page=args.pages,
         )
-    finally:
-        scraper.close()
 
     if not all_raw:
         print("\n  未采集到数据，流程终止。")
@@ -278,7 +275,65 @@ def main():
     df = run_pipeline(args)
     output_results(df, args.top)
 
+    # ---------- 半自动投递 ----------
+    if not df.empty and "greeting" in df.columns:
+        interactive_send(df)
+
     print(f"\n流程完成。日志: {log_file}\n")
+
+
+def interactive_send(df: pd.DataFrame):
+    """评分完成后，询问用户是否批量投递招呼语。"""
+    # 只考虑推荐等级较高的岗位
+    sendable = df[df["recommendation"].isin(["强烈推荐", "建议投递"])].copy()
+    if sendable.empty:
+        return
+
+    print("\n" + "=" * 70)
+    print("是否对推荐岗位批量投递招呼语？")
+    print("(系统将打开浏览器，逐个发送 AI 生成的个性化招呼语)")
+    choice = input("  输入 y 确认投递，按回车跳过: ").strip().lower()
+    if choice != "y":
+        print("已跳过投递。")
+        return
+
+    # 确保 greeting 列存在
+    if "greeting" not in sendable.columns:
+        sendable["greeting"] = "您好，我对贵岗位很感兴趣，希望能进一步沟通。"
+
+    print("\n以下岗位将进行投递：")
+    print("-" * 70)
+    for idx, (_, row) in enumerate(sendable.iterrows(), 1):
+        greeting = row.get("greeting", "")
+        print(f"  #{idx} {row.get('title', '')} @ {row.get('company', '')}")
+        print(f"      招呼语: {greeting[:60]}{'...' if len(greeting) > 60 else ''}")
+        print()
+
+    confirm = input("  确认投递以上岗位？(y/回车取消): ").strip().lower()
+    if confirm != "y":
+        print("已取消投递。")
+        return
+
+    # 转为字典列表传给 scraper
+    jobs_to_send = []
+    for _, row in sendable.iterrows():
+        jobs_to_send.append({
+            "title": row.get("title", ""),
+            "link": row.get("link", ""),
+            "greeting": row.get("greeting", ""),
+        })
+
+    print("\n打开浏览器进行投递...")
+    print("请在浏览器中扫码登录 BOSS直聘（如已登录则自动继续）")
+    with BossZhipinScraper() as scraper:
+        results = scraper.send_greetings(jobs_to_send)
+        success = sum(1 for r in results if r["status"] == "成功")
+        skipped = sum(1 for r in results if r["status"] == "跳过")
+        failed = sum(1 for r in results if r["status"] == "失败")
+        print(f"\n投递汇总: 成功 {success} / 跳过 {skipped} / 失败 {failed}")
+        for r in results:
+            if r["status"] != "成功":
+                print(f"  {r['title']}: {r['status']} - {r.get('error', '')}")
 
 
 if __name__ == "__main__":

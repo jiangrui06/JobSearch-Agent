@@ -1,0 +1,8 @@
+2026-06-10 16:11:34 [INFO] src.scraper.boss_scraper: 采集到 45 条实时数据
+2026-06-10 16:11:34 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-10 16:11:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 16:11:42 [INFO] src.analyzer.agent: [1/45] python开发 @ 某大型知名计算机软件公司 -> 80分 - 建议投递
+2026-06-10 16:11:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 16:11:48 [INFO] src.analyzer.agent: [2/45] 机器学习/深度学习 @ 北京某小型移动互联网公司 -> 20分 - 可以考虑
+2026-06-10 16:11:54 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 16:11:54 [INFO] src.analyzer.agent: [3/45] 机器人数据采集 @ 苏州聚功匠科技 -> 72分 - 可以考虑

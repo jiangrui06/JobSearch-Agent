@@ -1,0 +1,1 @@
+{"skill_match": 0, "experience_match": 0, "salary_match": 0, "growth_potential": 0, "match_score": 0, "match_reason": "AI 评分失败: Error code: 400 - {'error': {'message': 'engine is not available temporarily', 'type': 'failed_precondition_error', 'code': '9'}}", "recommendation": "不推荐", "recommendation_reason": "AI 分析失败，无法给出推荐"}

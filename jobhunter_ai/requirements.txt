@@ -24,3 +24,6 @@ python-multipart>=0.0.9
 
 # ---- 环境变量管理 ----
 python-dotenv>=1.0.0
+
+# ---- 定时任务调度 ----
+apscheduler>=3.10.0

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "a84409c7",
+    "name": "611",
+    "keyword": "Python",
+    "city": "广州",
+    "pages": 1,
+    "schedule_type": "daily",
+    "schedule_time": "17:35",
+    "resume_path": "",
+    "auto_send": true,
+    "min_score": 70,
+    "recommendations": [
+      "强烈推荐",
+      "建议投递"
+    ],
+    "enabled": true,
+    "created_at": "2026-06-11T17:31:01.693174",
+    "last_status": "completed",
+    "last_message": "执行成功，采集 15 个岗位",
+    "last_run": "2026-06-17T17:36:40.093835"
+  },
+  {
+    "id": "5ac03b65",
+    "name": "每日12：00",
+    "keyword": "人工智能训练师",
+    "city": "广州",
+    "pages": 10,
+    "schedule_type": "daily",
+    "schedule_time": "00:01",
+    "resume_path": "",
+    "auto_send": true,
+    "min_score": 70,
+    "recommendations": [
+      "强烈推荐",
+      "建议投递"
+    ],
+    "enabled": true,
+    "created_at": "2026-06-11T18:43:59.418223",
+    "last_status": "completed",
+    "last_message": "执行成功，采集 15 个岗位",
+    "last_run": "2026-06-17T00:02:20.069976"
+  },
+  {
+    "id": "db86f712",
+    "name": "612",
+    "keyword": "Python",
+    "city": "广州",
+    "pages": 10,
+    "schedule_type": "daily",
+    "schedule_time": "01:00",
+    "resume_path": "C:\\Users\\Administrator\\Desktop\\JobSearch-Agent\\jobhunter_ai\\data\\resumes\\ad1f89f5_蒋睿简历一页版.docx",
+    "resume_id": "c1715840",
+    "auto_send": true,
+    "min_score": 70,
+    "recommendations": [
+      "强烈推荐",
+      "建议投递"
+    ],
+    "enabled": true,
+    "created_at": "2026-06-12T13:50:41.194567",
+    "last_status": "completed",
+    "last_message": "执行成功，采集 15 个岗位",
+    "last_run": "2026-06-17T01:02:20.052574"
+  },
+  {
+    "id": "4cfce892",
+    "name": "每天执行",
+    "keyword": "人工智能训练师",
+    "city": "广州",
+    "pages": 10,
+    "schedule_type": "daily",
+    "schedule_time": "02:00",
+    "resume_path": "C:\\Users\\Administrator\\Desktop\\JobSearch-Agent\\jobhunter_ai\\data\\resumes\\ad1f89f5_蒋睿简历一页版.docx",
+    "resume_id": "c1715840",
+    "auto_send": true,
+    "min_score": 70,
+    "recommendations": [
+      "强烈推荐",
+      "建议投递"
+    ],
+    "enabled": true,
+    "created_at": "2026-06-12T13:51:26.323531",
+    "last_status": "completed",
+    "last_message": "执行成功，采集 150 个岗位",
+    "last_run": "2026-06-17T17:59:53.974711"
+  },
+  {
+    "id": "12e3de49",
+    "name": "617",
+    "keyword": "人工智能训练师",
+    "city": "广州",
+    "pages": 3,
+    "schedule_type": "daily",
+    "schedule_time": "09:00",
+    "resume_path": "C:\\Users\\Administrator\\Desktop\\JobSearch-Agent\\jobhunter_ai\\data\\resumes\\ad1f89f5_蒋睿简历一页版.docx",
+    "resume_id": "c1715840",
+    "auto_send": true,
+    "min_score": 70,
+    "recommendations": [
+      "强烈推荐",
+      "建议投递"
+    ],
+    "enabled": true,
+    "created_at": "2026-06-17T17:37:49.987925",
+    "last_status": "completed",
+    "last_message": "执行成功，采集 15 个岗位",
+    "last_run": "2026-06-17T17:40:31.228063"
+  }
+]

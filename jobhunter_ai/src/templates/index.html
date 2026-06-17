@@ -217,6 +217,11 @@ body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "Pi
         </button>
       </li>
       <li class="nav-item">
+        <button class="nav-link" data-tab="schedule">
+          <i class="fas fa-clock me-1"></i>定时任务
+        </button>
+      </li>
+      <li class="nav-item">
         <button class="nav-link" data-tab="history">
           <i class="fas fa-history me-1"></i>历史记录
         </button>
@@ -340,10 +345,152 @@ body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "Pi
         </div>
       </div>
 
+      <!-- Send Greetings -->
+      <div class="card" id="sendCard" style="display:none;">
+        <div class="card-header-custom"><i class="fas fa-paper-plane me-2"></i>批量投递</div>
+        <div class="card-body-custom">
+          <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+            <button class="btn btn-primary" id="sendBtn">
+              <i class="fas fa-rocket me-1"></i>投递推荐岗位招呼语
+            </button>
+            <small class="text-muted">将对"强烈推荐"和"建议投递"的岗位自动发送 AI 生成的个性化招呼语</small>
+          </div>
+          <div class="log-box" id="sendLogBox" style="height:150px;display:none;">点击上方按钮开始投递...</div>
+          <div class="table-wrap" id="sendResultWrap" style="display:none;">
+            <table class="table table-custom mb-0">
+              <thead><tr><th>岗位</th><th>公司</th><th>状态</th><th>说明</th></tr></thead>
+              <tbody id="sendResultBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <!-- Empty -->
       <div class="empty-state" id="emptyState">
         <div class="big-icon"><i class="fas fa-search"></i></div>
         <p>配置参数后点击"开始分析"<br>系统将从 BOSS直聘采集数据并进行 AI 智能评分</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Schedule Tab ===== -->
+<div class="tab-pane" id="tab-schedule">
+  <div class="row g-4">
+    <!-- Left: Create Task -->
+    <div class="col-lg-4">
+      <!-- Resume Management Card -->
+      <div class="card">
+        <div class="card-header-custom">
+          <i class="fas fa-file-upload me-2"></i>简历管理
+          <button class="btn btn-sm btn-outline-primary float-end" type="button" id="resumeCollapseBtn">
+            <i class="fas fa-chevron-up" id="resumeCollapseIcon"></i>
+          </button>
+        </div>
+        <div id="resumeCollapse">
+          <div class="card-body-custom">
+            <!-- Drop zone -->
+            <div class="drop-zone" id="schDropZone">
+              <div class="drop-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div class="drop-text">点击或拖拽上传简历<br>支持 PDF / DOCX / TXT 格式</div>
+            </div>
+            <input type="file" id="schResumeInput" accept=".pdf,.txt,.docx,.doc" style="display:none">
+            <div class="file-info mt-3" id="schFileInfo" style="display:none;">
+              <i class="fas fa-file-alt me-2"></i>
+              <span class="name" id="schFileName"></span>
+              <button class="btn btn-sm btn-outline-danger float-end" id="schRemoveFileBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <!-- Resume list -->
+            <div class="mt-3" id="schResumeList">
+              <label class="form-label fw500 small text-muted">已上传简历</label>
+              <div id="schResumeItems" class="mb-2"></div>
+              <div id="schResumeEmpty" class="small text-muted" style="display:block;">暂无简历，请上传</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Task Card -->
+      <div class="card">
+        <div class="card-header-custom"><i class="fas fa-plus-circle me-2"></i>新建定时任务</div>
+        <div class="card-body-custom">
+          <div class="mb-3">
+            <label class="form-label fw500">任务名称</label>
+            <input type="text" class="form-control" id="schName" placeholder="例如：每日自动投递">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">关键词</label>
+            <input type="text" class="form-control" id="schKeyword" value="Python" placeholder="多个用逗号分隔">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">城市</label>
+            <input type="text" class="form-control" id="schCity" value="上海" placeholder="城市名">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">采集页数</label>
+            <input type="number" class="form-control" id="schPages" value="3" min="1" max="10">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">执行时间</label>
+            <input type="time" class="form-control" id="schTime" value="09:00">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">执行方式</label>
+            <select class="form-select" id="schType">
+              <option value="daily">每天执行</option>
+              <option value="once">仅执行一次</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">选择简历</label>
+            <select class="form-select" id="schResumeSelect">
+              <option value="">不使用简历</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">最低匹配度</label>
+            <input type="number" class="form-control" id="schMinScore" value="70" min="0" max="100">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw500">可投递等级</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="schRec1" checked value="强烈推荐">
+              <label class="form-check-label" for="schRec1">强烈推荐</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="schRec2" checked value="建议投递">
+              <label class="form-check-label" for="schRec2">建议投递</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="schRec3" value="可以考虑">
+              <label class="form-check-label" for="schRec3">可以考虑</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="schAutoSend" checked>
+              <label class="form-check-label" for="schAutoSend">自动投递</label>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-primary-custom w-100" id="schCreateBtn">
+            <i class="fas fa-save me-1"></i>创建任务
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Task List -->
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header-custom"><i class="fas fa-list-alt me-2"></i>任务列表</div>
+        <div class="card-body-custom">
+          <div id="scheduleList">
+            <div class="empty-state">
+              <div class="big-icon"><i class="fas fa-clock"></i></div>
+              <p>暂无定时任务<br>在左侧创建新任务</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -419,6 +566,8 @@ body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "Pi
 // ---- State ----
 let uploadedFile = null;
 let currentTaskId = null;
+let lastResultJobs = [];
+let sendTaskId = null;
 let pollTimer = null;
 let histCurrentId = null;
 let histPage = 1;
@@ -426,17 +575,8 @@ let histTotalPages = 1;
 
 const $ = id => document.getElementById(id);
 
-// ---- Tab Switching ----
-document.querySelectorAll('[data-tab]').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const tab = this.dataset.tab;
-    document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-    $(`tab-${tab}`).classList.add('active');
-    if (tab === 'history') loadHistory(1);
-  });
-});
+// ---- Init (after all functions defined) ----
+// Tab switching & event listeners are registered inside the try block below
 
 // ---- File Upload ----
 function onFileSelect(event) {
@@ -628,6 +768,10 @@ async function pollStatus() {
       $('progressBar').style.width = '100%';
       $('statsCard').style.display = 'block';
       $('resultCard').style.display = 'block';
+      if (r && r.table) {
+        lastResultJobs = r.table;
+        $('sendCard').style.display = 'block';
+      }
       currentTaskId = null;
       $('cancelBtn').style.display = 'none';
     } else if (data.status === 'cancelled') {
@@ -645,6 +789,70 @@ async function pollStatus() {
     }
   } catch (e) {
     setTimeout(pollStatus, 3000);
+  }
+}
+
+// ---- Batch Send ----
+async function startSend() {
+  if (!lastResultJobs.length) return;
+  $('sendBtn').disabled = true;
+  $('sendBtn').innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>投递中...';
+  $('sendLogBox').style.display = 'block';
+  $('sendLogBox').textContent = '提交任务...\n';
+  $('sendResultWrap').style.display = 'none';
+
+  try {
+    const resp = await fetch('/api/send-greetings', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({jobs: lastResultJobs}),
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    sendTaskId = data.task_id;
+    $('sendLogBox').textContent += '任务已提交 (ID: ' + sendTaskId + ')\n';
+    pollSendStatus();
+  } catch (e) {
+    $('sendLogBox').textContent += '提交失败: ' + e.message + '\n';
+    $('sendBtn').disabled = false;
+    $('sendBtn').innerHTML = '<i class="fas fa-rocket me-1"></i>投递推荐岗位招呼语';
+  }
+}
+
+async function pollSendStatus() {
+  if (!sendTaskId) return;
+  try {
+    const resp = await fetch('/api/status/' + sendTaskId);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+
+    $('sendLogBox').textContent = data.log || $('sendLogBox').textContent;
+    $('sendLogBox').scrollTop = $('sendLogBox').scrollHeight;
+
+    if (data.status === 'completed') {
+      const results = (data.result && data.result.results) || [];
+      if (results.length > 0) {
+        const tbody = $('sendResultBody');
+        tbody.innerHTML = results.map(r => {
+          const statusClass = r.status === '成功' ? 'text-success' : r.status === '跳过' ? 'text-warning' : 'text-danger';
+          return '<tr><td>' + escapeHtml(r.title) + '</td><td>' + escapeHtml(r.company || '') + '</td><td class="' + statusClass + '"><strong>' + r.status + '</strong></td><td><small>' + escapeHtml(r.error || '') + '</small></td></tr>';
+        }).join('');
+        $('sendResultWrap').style.display = 'block';
+      }
+      $('sendLogBox').textContent += '\n投递完成！';
+      $('sendBtn').disabled = false;
+      $('sendBtn').innerHTML = '<i class="fas fa-rocket me-1"></i>投递推荐岗位招呼语';
+      sendTaskId = null;
+    } else if (data.status === 'error') {
+      $('sendLogBox').textContent += '\n错误: ' + (data.error || '未知错误') + '\n';
+      $('sendBtn').disabled = false;
+      $('sendBtn').innerHTML = '<i class="fas fa-rocket me-1"></i>投递推荐岗位招呼语';
+      sendTaskId = null;
+    } else {
+      setTimeout(pollSendStatus, 1500);
+    }
+  } catch (e) {
+    setTimeout(pollSendStatus, 3000);
   }
 }
 
@@ -817,36 +1025,34 @@ function initCitySelector() {
     return;
   }
 
-  provSel.innerHTML = '';
-  citySel.innerHTML = '';
-
-  // 填充省份
-  const provinces = Object.keys(CITY_DATA);
-  provinces.forEach(p => {
-    const opt = document.createElement('option');
-    opt.value = p;
-    opt.textContent = p;
-    provSel.appendChild(opt);
-  });
+  // 构建省份选项HTML（不先清除，避免出错时空下拉）
+  var provinces = Object.keys(CITY_DATA);
+  var provHtml = '';
+  for (var i = 0; i < provinces.length; i++) {
+    provHtml += '<option value="' + provinces[i] + '">' + provinces[i] + '</option>';
+  }
+  provSel.innerHTML = provHtml;
 
   // 省份切换时更新城市
-  function updateCities() {
-    const cities = CITY_DATA[provSel.value] || [];
-    citySel.innerHTML = '';
-    cities.forEach(c => {
-      const opt = document.createElement('option');
-      opt.value = c;
-      opt.textContent = c;
-      citySel.appendChild(opt);
-    });
-  }
+  var updateCities = function() {
+    var cities = CITY_DATA[provSel.value] || [];
+    var cityHtml = '';
+    for (var j = 0; j < cities.length; j++) {
+      cityHtml += '<option value="' + cities[j] + '">' + cities[j] + '</option>';
+    }
+    citySel.innerHTML = cityHtml;
+  };
 
   provSel.addEventListener('change', updateCities);
 
   // 默认选中 上海
-  provSel.value = '直辖市';
-  updateCities();
-  citySel.value = '上海';
+  try {
+    provSel.value = '直辖市';
+    updateCities();
+    citySel.value = '上海';
+  } catch (e) {
+    console.error('[JobHunter] initCitySelector default error:', e);
+  }
 }
 
 // ---- Init ----
@@ -858,7 +1064,21 @@ try {
 
   // Tab nav buttons
   $('startBtn').addEventListener('click', startAnalysis);
+  $('sendBtn').addEventListener('click', startSend);
   $('cancelBtn').addEventListener('click', cancelAnalysis);
+
+  // Tab Switching (注册在 try 块内，确保 loadSchedule/loadHistory 可访问)
+  document.querySelectorAll('[data-tab]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const tab = this.dataset.tab;
+      document.querySelectorAll('[data-tab]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      $(`tab-${tab}`).classList.add('active');
+      if (tab === 'history') loadHistory(1);
+      if (tab === 'schedule') loadSchedule();
+    });
+  });
 
   // Drop zone
   const dz = $('dropZone');
@@ -891,9 +1111,232 @@ try {
   // History nav
   $('histBackBtn').addEventListener('click', backToHistory);
 
+  // ---- Schedule ----
+  let resumeMap = {}; // id -> name mapping
+
+  async function loadSchedule() {
+    try {
+      const [scheduleResp, resumeResp] = await Promise.all([
+        fetch('/api/schedule'),
+        fetch('/api/resumes'),
+      ]);
+      if (!scheduleResp.ok) throw new Error(`HTTP ${scheduleResp.status}`);
+      const scheduleData = await scheduleResp.json();
+
+      if (resumeResp.ok) {
+        const resumeData = await resumeResp.json();
+        const resumes = resumeData.resumes || [];
+        resumeMap = {};
+        resumes.forEach(r => { resumeMap[r.id] = escapeHtml(r.name); });
+        renderResumeList(resumes);
+        populateResumeSelect(resumes);
+      }
+
+      renderScheduleList(scheduleData.tasks || []);
+    } catch (e) {
+      $('scheduleList').innerHTML = `<div class="alert alert-danger">加载任务失败: ${e.message}</div>`;
+    }
+  }
+
+  function renderScheduleList(tasks) {
+    const list = $('scheduleList');
+    if (tasks.length === 0) {
+      list.innerHTML = '<div class="empty-state"><div class="big-icon"><i class="fas fa-clock"></i></div><p>暂无定时任务<br>在左侧创建新任务</p></div>';
+      return;
+    }
+    list.innerHTML = tasks.map(t => {
+      const typeLabel = t.schedule_type === 'daily' ? '每天' : '仅一次';
+      const statusClass = t.enabled ? 'text-success' : 'text-muted';
+      const statusText = t.enabled ? '启用中' : '已禁用';
+      const lastRun = t.last_run ? t.last_run.replace('T', ' ').substring(0, 19) : '从未';
+      const resumeName = t.resume_id ? (resumeMap[t.resume_id] || ('简历: ' + escapeHtml(t.resume_id))) : '';
+      return `<div class="history-card">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <div class="hc-title"><i class="fas fa-clock me-1" style="color:var(--primary)"></i>${escapeHtml(t.name)}</div>
+            <div class="hc-meta">${escapeHtml(t.keyword)} @ ${escapeHtml(t.city)} | ${typeLabel} ${t.schedule_time} | ${t.pages}页</div>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" ${t.enabled ? 'checked' : ''} onchange="window._toggleTask('${t.id}', this.checked)">
+          </div>
+        </div>
+        <div class="hc-stats">
+          <span class="hc-stat ${statusClass}"><strong>${statusText}</strong></span>
+          <span class="hc-stat">最低分: <strong>${t.min_score}</strong></span>
+          <span class="hc-stat">自动投递: <strong>${t.auto_send ? '是' : '否'}</strong></span>
+          <span class="hc-stat">上次执行: <strong>${lastRun}</strong></span>
+          <span class="hc-stat">状态: <strong>${{'completed': '已完成', 'error': '失败', 'pending': '待执行', 'running': '执行中'}[t.last_status] || t.last_status || '待执行'}</strong></span>
+        </div>
+        ${resumeName ? '<div class="mt-1 small"><i class="fas fa-file-alt me-1" style="color:var(--primary)"></i>' + resumeName + '</div>' : ''}
+        <div class="mt-2">
+          <button class="btn btn-sm btn-outline-primary me-2" onclick="window._runTaskNow('${t.id}')"><i class="fas fa-play me-1"></i>立即执行</button>
+          <button class="btn btn-sm btn-outline-danger" onclick="window._deleteTask('${t.id}')"><i class="fas fa-trash me-1"></i>删除</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ---- Resume management ----
+  function renderResumeList(resumes) {
+    const items = $('schResumeItems');
+    const empty = $('schResumeEmpty');
+    if (!resumes.length) {
+      items.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    items.innerHTML = resumes.map(r => {
+      const sizeStr = r.size > 1024 ? (r.size / 1024).toFixed(1) + 'KB' : r.size + 'B';
+      return '<div class="d-flex justify-content-between align-items-center py-1 border-bottom small">' +
+        '<span><i class="fas fa-file-alt me-1" style="color:var(--primary)"></i>' + escapeHtml(r.name) + ' <span class="text-muted">(' + sizeStr + ')</span></span>' +
+        '<button class="btn btn-sm btn-outline-danger py-0 px-1" onclick="window._deleteResume(\'' + r.id + '\')" title="删除简历"><i class="fas fa-trash"></i></button>' +
+        '</div>';
+    }).join('');
+  }
+
+  function populateResumeSelect(resumes) {
+    const sel = $('schResumeSelect');
+    sel.innerHTML = '<option value="">不使用简历</option>';
+    resumes.forEach(r => {
+      sel.innerHTML += '<option value="' + r.id + '">' + escapeHtml(r.name) + '</option>';
+    });
+  }
+
+  window._deleteResume = async function(resumeId) {
+    if (!confirm('确定删除此简历？')) return;
+    try {
+      const resp = await fetch('/api/resume/' + resumeId, { method: 'DELETE' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      await loadSchedule();
+    } catch (e) {
+      alert('删除失败: ' + e.message);
+    }
+  };
+
+  async function uploadScheduleResume(file) {
+    const form = new FormData();
+    form.append('file', file);
+    try {
+      const resp = await fetch('/api/resume/upload', { method: 'POST', body: form });
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error || 'HTTP ' + resp.status);
+      }
+      $('schResumeInput').value = '';
+      $('schFileInfo').style.display = 'none';
+      $('schDropZone').style.display = 'block';
+      await loadSchedule();
+    } catch (e) {
+      alert('上传失败: ' + e.message);
+    }
+  }
+
+  async function createTask() {
+    const name = $('schName').value.trim();
+    const keyword = $('schKeyword').value.trim();
+    const city = $('schCity').value.trim();
+    const pages = parseInt($('schPages').value) || 3;
+    const schedule_time = $('schTime').value;
+    const schedule_type = $('schType').value;
+    const min_score = parseInt($('schMinScore').value) || 70;
+    const auto_send = $('schAutoSend').checked;
+    const recommendations = [];
+    if ($('schRec1').checked) recommendations.push($('schRec1').value);
+    if ($('schRec2').checked) recommendations.push($('schRec2').value);
+    if ($('schRec3').checked) recommendations.push($('schRec3').value);
+
+    if (!name || !keyword || !city || !schedule_time) {
+      alert('请填写完整信息');
+      return;
+    }
+
+    $('schCreateBtn').disabled = true;
+    $('schCreateBtn').innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>创建中...';
+
+    try {
+      const resume_id = $('schResumeSelect').value;
+      const resp = await fetch('/api/schedule', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ name, keyword, city, pages, schedule_time, schedule_type, resume_id, min_score, auto_send, recommendations }),
+      });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      await loadSchedule();
+      $('schName').value = '';
+    } catch (e) {
+      alert('创建失败: ' + e.message);
+    } finally {
+      $('schCreateBtn').disabled = false;
+      $('schCreateBtn').innerHTML = '<i class="fas fa-save me-1"></i>创建任务';
+    }
+  }
+
+  window._toggleTask = async function(taskId, enabled) {
+    try {
+      await fetch(`/api/schedule/${taskId}/toggle`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ enabled }),
+      });
+      await loadSchedule();
+    } catch (e) {
+      alert('操作失败: ' + e.message);
+    }
+  };
+
+  window._deleteTask = async function(taskId) {
+    if (!confirm('确定删除此任务？')) return;
+    try {
+      await fetch(`/api/schedule/${taskId}`, { method: 'DELETE' });
+      await loadSchedule();
+    } catch (e) {
+      alert('删除失败: ' + e.message);
+    }
+  };
+
+  window._runTaskNow = async function(taskId) {
+    try {
+      const resp = await fetch(`/api/schedule/${taskId}/run`, { method: 'POST' });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      alert('任务已触发，请在日志中查看进度');
+    } catch (e) {
+      alert('执行失败: ' + e.message);
+    }
+  };
+
   // Expose for inline onclick
   window._viewRun = viewRun;
   window._histGo = function(p) { loadHistory(p); };
+
+  // Schedule init
+  $('schCreateBtn').addEventListener('click', createTask);
+
+  // Schedule resume upload
+  const schDz = $('schDropZone');
+  if (schDz) {
+    schDz.addEventListener('click', () => $('schResumeInput').click());
+    schDz.addEventListener('dragover', e => { e.preventDefault(); schDz.classList.add('dragover'); });
+    schDz.addEventListener('dragleave', () => schDz.classList.remove('dragover'));
+    schDz.addEventListener('drop', e => {
+      e.preventDefault();
+      schDz.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file) uploadScheduleResume(file);
+    });
+  }
+  $('schResumeInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) uploadScheduleResume(file);
+  });
+
+  // Resume card collapse toggle
+  let resumeCollapseOpen = true;
+  $('resumeCollapseBtn').addEventListener('click', function() {
+    resumeCollapseOpen = !resumeCollapseOpen;
+    $('resumeCollapse').style.display = resumeCollapseOpen ? '' : 'none';
+    $('resumeCollapseIcon').className = resumeCollapseOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+  });
 
   console.log('[JobHunter] init complete');
 } catch (e) {

@@ -12,6 +12,7 @@ from pathlib import Path
 import gradio as gr
 
 import pandas as pd
+import json
 
 _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
@@ -41,11 +42,8 @@ def run_analysis(keyword, city, pages, resume_path, progress=gr.Progress()):
         emit(f"关键词: {keyword}  |  城市: {city}  |  页数: {pages}")
         progress(0.05, desc="正在登录BOSS直聘...")
 
-        scraper = BossZhipinScraper()
-        try:
+        with BossZhipinScraper() as scraper:
             all_raw = scraper.search(keyword=keyword, city=city, page=int(pages))
-        finally:
-            scraper.close()
 
         if not all_raw:
             emit("未采集到数据，流程终止。")
@@ -160,6 +158,36 @@ def launch_browser_for_login():
 # ---------- Gradio UI ----------
 
 
+
+
+def batch_send_greetings(state_data):
+    """从 gr.State 读取结果，调用 scraper 批量投递。"""
+    if not state_data:
+        return "没有数据，请先运行分析。"
+
+    import io
+    out = io.StringIO()
+
+    sendable = [j for j in state_data if j.get("recommendation") in ("强烈推荐", "建议投递")]
+    if not sendable:
+        return "没有强烈推荐或建议投递的岗位。"
+
+    print(f"\n批量投递: {len(sendable)} 个岗位")
+    out.write(f"开始投递 {len(sendable)} 个岗位...\n")
+    out.write("请在打开的浏览器中扫码登录 BOSS直聘（如已登录则自动继续）\n\n")
+
+    with BossZhipinScraper() as scraper:
+        results = scraper.send_greetings(sendable)
+        success = sum(1 for r in results if r["status"] == "成功")
+        skipped = sum(1 for r in results if r["status"] == "跳过")
+        failed = sum(1 for r in results if r["status"] == "失败")
+        out.write(f"\n投递完成: 成功 {success} / 跳过 {skipped} / 失败 {failed}\n")
+        for r in results:
+            if r["status"] != "成功":
+                out.write(f"  {r['title']}: {r['status']} - {r.get('error', '')}\n")
+
+    return out.getvalue()
+
 def create_ui():
     """构建并返回 Gradio Blocks 应用。"""
     css = """
@@ -216,6 +244,16 @@ def create_ui():
         with gr.Row():
             chart_img = gr.Image(label="匹配度分布图", type="filepath")
 
+        # ---------- 批量投递 ----------
+        state = gr.State([])
+
+        with gr.Row():
+            send_output = gr.Textbox(label="投递结果", lines=8, max_lines=15, interactive=False)
+
+        with gr.Row():
+            send_btn = gr.Button("批量投递招呼语", variant="secondary", size="sm")
+            login_btn2 = gr.Button("打开浏览器登录", variant="secondary", size="sm")
+
         # ---------- 按钮事件 ----------
 
         login_btn.click(
@@ -226,10 +264,11 @@ def create_ui():
         def _run_wrapper(kw, c, p, r, progress=gr.Progress()):
             log, df, stats, chart = run_analysis(kw, c, p, r, progress)
             if df.empty:
-                return log, [], stats, None
+                return log, [], stats, None, []
 
             # 格式化表格
             table_data = []
+            state_data = []
             for idx, row in df.iterrows():
                 table_data.append([
                     idx + 1,
@@ -241,13 +280,32 @@ def create_ui():
                     row.get("recommendation", ""),
                     row.get("recommendation_reason", "")[:60],
                 ])
+                state_data.append({
+                    "title": row.get("title", ""),
+                    "company": row.get("company", ""),
+                    "link": row.get("link", ""),
+                    "greeting": row.get("greeting", ""),
+                    "recommendation": row.get("recommendation", ""),
+                    "match_score": int(row.get("match_score", 0)),
+                })
 
-            return log, table_data, stats, chart
+            return log, table_data, stats, chart, state_data
 
         analyze_btn.click(
             fn=_run_wrapper,
             inputs=[keyword, city, pages, resume],
-            outputs=[log_output, results_table, stats_json, chart_img],
+            outputs=[log_output, results_table, stats_json, chart_img, state],
+        )
+
+        login_btn2.click(
+            fn=launch_browser_for_login,
+            outputs=login_msg,
+        )
+
+        send_btn.click(
+            fn=batch_send_greetings,
+            inputs=[state],
+            outputs=[send_output],
         )
 
     return demo

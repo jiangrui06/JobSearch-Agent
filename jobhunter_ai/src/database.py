@@ -1,24 +1,48 @@
-"""SQLite 持久化层：存储分析历史记录。"""
+"""SQLite 持久化层：存储分析历史记录（优化版：连接池 + 批量写入）。"""
 
 import sqlite3
 import threading
-from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
 
 DB_PATH: Optional[Path] = None
 _write_lock = threading.Lock()
+# 连接池：每个线程复用自己的连接
+_conn_pool: dict[int, sqlite3.Connection] = {}
+_pool_lock = threading.Lock()
+
+
+def _get_thread_conn() -> sqlite3.Connection:
+    """获取当前线程的数据库连接（连接池）。"""
+    if DB_PATH is None:
+        raise RuntimeError("database not initialized, call init_db() first")
+    tid = threading.current_thread().ident
+    if tid not in _conn_pool or _conn_pool[tid] is None:
+        conn = sqlite3.connect(str(DB_PATH), check_same_thread=False)
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA foreign_keys=ON")
+        conn.execute("PRAGMA synchronous=NORMAL")  # 平衡性能与安全性
+        with _pool_lock:
+            _conn_pool[tid] = conn
+    return _conn_pool[tid]
 
 
 def get_connection() -> sqlite3.Connection:
-    """获取数据库连接（每次调用新建，保证线程安全）。"""
-    if DB_PATH is None:
-        raise RuntimeError("database not initialized, call init_db() first")
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA foreign_keys=ON")
-    return conn
+    """获取数据库连接（优先连接池）。"""
+    return _get_thread_conn()
+
+
+def close_all_connections() -> None:
+    """关闭所有连接池中的连接（应用退出时调用）。"""
+    with _pool_lock:
+        for tid, conn in list(_conn_pool.items()):
+            try:
+                conn.close()
+            except Exception:
+                pass
+            _conn_pool[tid] = None
+        _conn_pool.clear()
 
 
 def init_db(db_dir: Path) -> None:
@@ -27,7 +51,8 @@ def init_db(db_dir: Path) -> None:
     db_dir.mkdir(parents=True, exist_ok=True)
     DB_PATH = db_dir / "jobhunter.db"
 
-    conn = get_connection()
+    conn = sqlite3.connect(str(DB_PATH))
+    conn.row_factory = sqlite3.Row
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS analysis_runs (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -102,17 +127,17 @@ def save_run(run_data: dict[str, Any]) -> int:
         )
         run_id = cur.lastrowid
         conn.commit()
-        conn.close()
         return run_id
 
 
 def save_jobs(run_id: int, jobs: list[dict[str, Any]]) -> None:
-    """批量插入岗位数据。"""
+    """批量插入岗位数据（使用 executemany）。"""
+    if not jobs:
+        return
     with _write_lock:
         conn = get_connection()
-        rows = []
-        for j in jobs:
-            rows.append((
+        rows = [
+            (
                 run_id,
                 j.get("rank", 0),
                 j.get("title", ""),
@@ -126,7 +151,9 @@ def save_jobs(run_id: int, jobs: list[dict[str, Any]]) -> None:
                 j.get("match_reason", ""),
                 j.get("recommendation", "可以考虑"),
                 j.get("recommendation_reason", ""),
-            ))
+            )
+            for j in jobs
+        ]
         conn.executemany(
             """INSERT INTO analysis_jobs
                (run_id, rank, title, company, city, salary, link,
@@ -136,7 +163,6 @@ def save_jobs(run_id: int, jobs: list[dict[str, Any]]) -> None:
             rows,
         )
         conn.commit()
-        conn.close()
 
 
 def update_run(run_id: int, **kwargs: Any) -> None:
@@ -149,7 +175,6 @@ def update_run(run_id: int, **kwargs: Any) -> None:
         vals = list(kwargs.values()) + [run_id]
         conn.execute(f"UPDATE analysis_runs SET {sets} WHERE id = ?", vals)
         conn.commit()
-        conn.close()
 
 
 def delete_run(run_id: int) -> bool:
@@ -159,7 +184,6 @@ def delete_run(run_id: int) -> bool:
         cur = conn.execute("DELETE FROM analysis_runs WHERE id = ?", (run_id,))
         deleted = cur.rowcount > 0
         conn.commit()
-        conn.close()
         return deleted
 
 
@@ -172,7 +196,6 @@ def get_run(run_id: int) -> Optional[dict[str, Any]]:
     row = conn.execute(
         "SELECT * FROM analysis_runs WHERE id = ?", (run_id,)
     ).fetchone()
-    conn.close()
     return dict(row) if row else None
 
 
@@ -213,7 +236,6 @@ def get_runs(
         params + [per_page, offset],
     ).fetchall()
 
-    conn.close()
     return [dict(r) for r in rows], total
 
 
@@ -224,5 +246,4 @@ def get_run_jobs(run_id: int) -> list[dict[str, Any]]:
         "SELECT * FROM analysis_jobs WHERE run_id = ? ORDER BY rank",
         (run_id,),
     ).fetchall()
-    conn.close()
     return [dict(r) for r in rows]

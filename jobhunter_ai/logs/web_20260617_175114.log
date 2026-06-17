@@ -1,0 +1,722 @@
+2026-06-17 17:51:14 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-17 17:51:14 [INFO] src.scheduler: 定时任务调度器已启动
+2026-06-17 17:51:14 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-17 17:51:14 [INFO] src.scheduler: 已恢复定时任务: 611 (daily 17:35)
+2026-06-17 17:51:14 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-17 17:51:14 [INFO] src.scheduler: 已恢复定时任务: 每日12：00 (daily 00:01)
+2026-06-17 17:51:14 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-17 17:51:14 [INFO] src.scheduler: 已恢复定时任务: 612 (daily 01:00)
+2026-06-17 17:51:14 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-17 17:51:14 [INFO] src.scheduler: 已恢复定时任务: 每天执行 (daily 02:00)
+2026-06-17 17:51:14 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-17 17:51:14 [INFO] src.scheduler: 已恢复定时任务: 617 (daily 09:00)
+2026-06-17 17:51:23 [INFO] src.scheduler: [定时任务 4cfce892] 开始执行
+2026-06-17 17:51:23 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-17 17:51:23 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-17 17:51:29 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-17 17:51:29 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/guangzhou/
+2026-06-17 17:51:32 [INFO] src.scraper.boss_scraper: 搜索关键词: 人工智能训练师
+2026-06-17 17:51:33 [INFO] src.scraper.boss_scraper: 正在采集第 1 页...
+2026-06-17 17:51:34 [INFO] src.scraper.boss_scraper: 正在采集第 2 页...
+2026-06-17 17:51:34 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:51:39 [INFO] src.scraper.boss_scraper: 正在采集第 3 页...
+2026-06-17 17:51:39 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:51:44 [INFO] src.scraper.boss_scraper: 正在采集第 4 页...
+2026-06-17 17:51:44 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:51:49 [INFO] src.scraper.boss_scraper: 正在采集第 5 页...
+2026-06-17 17:51:49 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:51:55 [INFO] src.scraper.boss_scraper: 正在采集第 6 页...
+2026-06-17 17:51:55 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:52:00 [INFO] src.scraper.boss_scraper: 正在采集第 7 页...
+2026-06-17 17:52:00 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:52:05 [INFO] src.scraper.boss_scraper: 正在采集第 8 页...
+2026-06-17 17:52:05 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:52:10 [INFO] src.scraper.boss_scraper: 正在采集第 9 页...
+2026-06-17 17:52:10 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:52:15 [INFO] src.scraper.boss_scraper: 正在采集第 10 页...
+2026-06-17 17:52:15 [INFO] src.scraper.boss_scraper: 滚动到底部触发懒加载...
+2026-06-17 17:52:21 [INFO] src.scraper.boss_scraper: 采集完成: 150 条
+2026-06-17 17:52:22 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-17 17:52:22 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-17 17:52:22 [INFO] src.utils.resume_parser: 成功解析简历 DOCX（26 段落，1181 字符）
+2026-06-17 17:52:22 [INFO] src.analyzer.agent: 开始评分: 共 150 个岗位, 并发 8, 缓存目录 C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-17 17:52:30 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:31 [INFO] src.analyzer.agent: 评分进度: 15/150 (8.5s)
+2026-06-17 17:52:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:32 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:32 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:34 [INFO] src.analyzer.agent: 评分进度: 20/150 (11.7s)
+2026-06-17 17:52:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:37 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:40 [INFO] src.analyzer.agent: 评分进度: 25/150 (17.8s)
+2026-06-17 17:52:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:46 [INFO] src.analyzer.agent: 评分进度: 30/150 (24.4s)
+2026-06-17 17:52:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:53 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:53 [INFO] src.analyzer.agent: 评分进度: 35/150 (31.3s)
+2026-06-17 17:52:55 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:57 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:57 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:57 [INFO] openai._base_client: Retrying request to /chat/completions in 0.493604 seconds
+2026-06-17 17:52:57 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:57 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:57 [INFO] openai._base_client: Retrying request to /chat/completions in 0.471902 seconds
+2026-06-17 17:52:57 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:57 [INFO] openai._base_client: Retrying request to /chat/completions in 0.842382 seconds
+2026-06-17 17:52:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:58 [INFO] src.analyzer.agent: 评分进度: 40/150 (35.7s)
+2026-06-17 17:52:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:58 [INFO] openai._base_client: Retrying request to /chat/completions in 0.431989 seconds
+2026-06-17 17:52:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:58 [INFO] openai._base_client: Retrying request to /chat/completions in 0.780194 seconds
+2026-06-17 17:52:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:52:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:58 [INFO] openai._base_client: Retrying request to /chat/completions in 0.756370 seconds
+2026-06-17 17:52:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:58 [INFO] openai._base_client: Retrying request to /chat/completions in 0.403728 seconds
+2026-06-17 17:52:59 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:59 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:52:59 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:59 [INFO] openai._base_client: Retrying request to /chat/completions in 0.798143 seconds
+2026-06-17 17:52:59 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:59 [INFO] openai._base_client: Retrying request to /chat/completions in 0.447100 seconds
+2026-06-17 17:52:59 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:59 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:52:59 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:59 [INFO] openai._base_client: Retrying request to /chat/completions in 0.378090 seconds
+2026-06-17 17:52:59 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:52:59 [INFO] openai._base_client: Retrying request to /chat/completions in 0.843934 seconds
+2026-06-17 17:53:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:00 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:00 [INFO] openai._base_client: Retrying request to /chat/completions in 0.800283 seconds
+2026-06-17 17:53:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:00 [INFO] openai._base_client: Retrying request to /chat/completions in 0.380197 seconds
+2026-06-17 17:53:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:00 [INFO] src.analyzer.agent: 评分进度: 45/150 (38.2s)
+2026-06-17 17:53:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:00 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:00 [INFO] openai._base_client: Retrying request to /chat/completions in 0.768594 seconds
+2026-06-17 17:53:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:00 [INFO] openai._base_client: Retrying request to /chat/completions in 0.403238 seconds
+2026-06-17 17:53:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:01 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:01 [INFO] openai._base_client: Retrying request to /chat/completions in 0.407589 seconds
+2026-06-17 17:53:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:01 [INFO] openai._base_client: Retrying request to /chat/completions in 0.770065 seconds
+2026-06-17 17:53:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:01 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:01 [INFO] openai._base_client: Retrying request to /chat/completions in 0.496563 seconds
+2026-06-17 17:53:02 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:02 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:02 [INFO] src.analyzer.agent: 评分进度: 50/150 (39.7s)
+2026-06-17 17:53:02 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:02 [INFO] openai._base_client: Retrying request to /chat/completions in 0.399984 seconds
+2026-06-17 17:53:02 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:02 [INFO] openai._base_client: Retrying request to /chat/completions in 0.764675 seconds
+2026-06-17 17:53:02 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:02 [INFO] openai._base_client: Retrying request to /chat/completions in 0.396438 seconds
+2026-06-17 17:53:02 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:02 [INFO] openai._base_client: Retrying request to /chat/completions in 0.835064 seconds
+2026-06-17 17:53:03 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:03 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:03 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:03 [INFO] openai._base_client: Retrying request to /chat/completions in 0.847333 seconds
+2026-06-17 17:53:03 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:03 [INFO] openai._base_client: Retrying request to /chat/completions in 0.485476 seconds
+2026-06-17 17:53:03 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:03 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:03 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:03 [INFO] openai._base_client: Retrying request to /chat/completions in 0.466632 seconds
+2026-06-17 17:53:03 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:03 [INFO] openai._base_client: Retrying request to /chat/completions in 0.945242 seconds
+2026-06-17 17:53:04 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:04 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:04 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:04 [INFO] openai._base_client: Retrying request to /chat/completions in 0.975541 seconds
+2026-06-17 17:53:04 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:04 [INFO] openai._base_client: Retrying request to /chat/completions in 0.438846 seconds
+2026-06-17 17:53:04 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:04 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:04 [INFO] openai._base_client: Retrying request to /chat/completions in 0.415250 seconds
+2026-06-17 17:53:04 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:04 [INFO] openai._base_client: Retrying request to /chat/completions in 0.821493 seconds
+2026-06-17 17:53:05 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:05 [INFO] openai._base_client: Retrying request to /chat/completions in 0.761177 seconds
+2026-06-17 17:53:05 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:05 [INFO] openai._base_client: Retrying request to /chat/completions in 0.439885 seconds
+2026-06-17 17:53:05 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:05 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:05 [INFO] src.analyzer.agent: 评分进度: 55/150 (42.9s)
+2026-06-17 17:53:05 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:05 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:05 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:05 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:05 [INFO] openai._base_client: Retrying request to /chat/completions in 0.445057 seconds
+2026-06-17 17:53:05 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:05 [INFO] openai._base_client: Retrying request to /chat/completions in 0.985648 seconds
+2026-06-17 17:53:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:06 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:06 [INFO] openai._base_client: Retrying request to /chat/completions in 0.894833 seconds
+2026-06-17 17:53:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:06 [INFO] openai._base_client: Retrying request to /chat/completions in 0.485673 seconds
+2026-06-17 17:53:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:06 [INFO] openai._base_client: Retrying request to /chat/completions in 0.377940 seconds
+2026-06-17 17:53:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:06 [INFO] openai._base_client: Retrying request to /chat/completions in 0.809433 seconds
+2026-06-17 17:53:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:06 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:07 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:07 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:07 [INFO] src.analyzer.agent: 评分进度: 60/150 (44.8s)
+2026-06-17 17:53:07 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:07 [INFO] openai._base_client: Retrying request to /chat/completions in 0.792007 seconds
+2026-06-17 17:53:07 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:07 [INFO] openai._base_client: Retrying request to /chat/completions in 0.398092 seconds
+2026-06-17 17:53:07 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:07 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:07 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:07 [INFO] openai._base_client: Retrying request to /chat/completions in 0.935010 seconds
+2026-06-17 17:53:07 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:08 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:08 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:08 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:08 [INFO] openai._base_client: Retrying request to /chat/completions in 0.467268 seconds
+2026-06-17 17:53:08 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:08 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:08 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:08 [INFO] openai._base_client: Retrying request to /chat/completions in 0.436517 seconds
+2026-06-17 17:53:08 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:08 [INFO] openai._base_client: Retrying request to /chat/completions in 0.996331 seconds
+2026-06-17 17:53:09 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:09 [INFO] openai._base_client: Retrying request to /chat/completions in 0.417007 seconds
+2026-06-17 17:53:09 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:09 [INFO] openai._base_client: Retrying request to /chat/completions in 0.893326 seconds
+2026-06-17 17:53:09 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:09 [INFO] openai._base_client: Retrying request to /chat/completions in 0.493429 seconds
+2026-06-17 17:53:09 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:09 [INFO] openai._base_client: Retrying request to /chat/completions in 0.926554 seconds
+2026-06-17 17:53:09 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:09 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:09 [INFO] src.analyzer.agent: 评分进度: 65/150 (47.5s)
+2026-06-17 17:53:10 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:10 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:10 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:10 [INFO] openai._base_client: Retrying request to /chat/completions in 0.480138 seconds
+2026-06-17 17:53:10 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:10 [INFO] openai._base_client: Retrying request to /chat/completions in 0.751157 seconds
+2026-06-17 17:53:10 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:10 [INFO] openai._base_client: Retrying request to /chat/completions in 0.457350 seconds
+2026-06-17 17:53:10 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:10 [INFO] openai._base_client: Retrying request to /chat/completions in 0.789426 seconds
+2026-06-17 17:53:11 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:11 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:11 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:11 [INFO] openai._base_client: Retrying request to /chat/completions in 0.797015 seconds
+2026-06-17 17:53:11 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:11 [INFO] openai._base_client: Retrying request to /chat/completions in 0.432807 seconds
+2026-06-17 17:53:11 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:11 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:11 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:11 [INFO] openai._base_client: Retrying request to /chat/completions in 0.405184 seconds
+2026-06-17 17:53:11 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:11 [INFO] openai._base_client: Retrying request to /chat/completions in 0.811882 seconds
+2026-06-17 17:53:12 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:12 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:12 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:12 [INFO] openai._base_client: Retrying request to /chat/completions in 0.926809 seconds
+2026-06-17 17:53:12 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:12 [INFO] openai._base_client: Retrying request to /chat/completions in 0.385325 seconds
+2026-06-17 17:53:12 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:12 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:12 [INFO] src.analyzer.agent: 评分进度: 70/150 (50.3s)
+2026-06-17 17:53:12 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:12 [INFO] openai._base_client: Retrying request to /chat/completions in 0.938280 seconds
+2026-06-17 17:53:12 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:12 [INFO] openai._base_client: Retrying request to /chat/completions in 0.393992 seconds
+2026-06-17 17:53:13 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:13 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:13 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:13 [INFO] openai._base_client: Retrying request to /chat/completions in 0.856425 seconds
+2026-06-17 17:53:13 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:13 [INFO] openai._base_client: Retrying request to /chat/completions in 0.397756 seconds
+2026-06-17 17:53:13 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:13 [INFO] openai._base_client: Retrying request to /chat/completions in 0.469367 seconds
+2026-06-17 17:53:14 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:14 [INFO] openai._base_client: Retrying request to /chat/completions in 0.801996 seconds
+2026-06-17 17:53:14 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:14 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:14 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:14 [INFO] openai._base_client: Retrying request to /chat/completions in 0.833916 seconds
+2026-06-17 17:53:14 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:14 [INFO] openai._base_client: Retrying request to /chat/completions in 0.404827 seconds
+2026-06-17 17:53:14 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:14 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:14 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:14 [INFO] openai._base_client: Retrying request to /chat/completions in 0.396422 seconds
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:15 [INFO] openai._base_client: Retrying request to /chat/completions in 0.845819 seconds
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:15 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:15 [INFO] src.analyzer.agent: 评分进度: 75/150 (52.9s)
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:15 [INFO] openai._base_client: Retrying request to /chat/completions in 0.816269 seconds
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:15 [INFO] openai._base_client: Retrying request to /chat/completions in 0.383478 seconds
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:15 [INFO] openai._base_client: Retrying request to /chat/completions in 0.988408 seconds
+2026-06-17 17:53:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:15 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:16 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:16 [INFO] openai._base_client: Retrying request to /chat/completions in 0.429882 seconds
+2026-06-17 17:53:16 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:16 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:16 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:16 [INFO] openai._base_client: Retrying request to /chat/completions in 0.440414 seconds
+2026-06-17 17:53:16 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:16 [INFO] openai._base_client: Retrying request to /chat/completions in 0.808397 seconds
+2026-06-17 17:53:16 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:16 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:17 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:17 [INFO] openai._base_client: Retrying request to /chat/completions in 0.397222 seconds
+2026-06-17 17:53:17 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:17 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:17 [INFO] src.analyzer.agent: 评分进度: 80/150 (54.9s)
+2026-06-17 17:53:17 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:17 [INFO] openai._base_client: Retrying request to /chat/completions in 0.790853 seconds
+2026-06-17 17:53:17 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:17 [INFO] openai._base_client: Retrying request to /chat/completions in 0.378871 seconds
+2026-06-17 17:53:18 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:18 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:18 [INFO] openai._base_client: Retrying request to /chat/completions in 0.453680 seconds
+2026-06-17 17:53:18 [INFO] openai._base_client: Retrying request to /chat/completions in 0.840889 seconds
+2026-06-17 17:53:18 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:18 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:18 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:18 [INFO] openai._base_client: Retrying request to /chat/completions in 0.429222 seconds
+2026-06-17 17:53:18 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:18 [INFO] openai._base_client: Retrying request to /chat/completions in 0.909490 seconds
+2026-06-17 17:53:18 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:18 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:19 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:19 [INFO] openai._base_client: Retrying request to /chat/completions in 0.424162 seconds
+2026-06-17 17:53:19 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:19 [INFO] openai._base_client: Retrying request to /chat/completions in 0.792471 seconds
+2026-06-17 17:53:19 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:19 [INFO] openai._base_client: Retrying request to /chat/completions in 0.905707 seconds
+2026-06-17 17:53:19 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:19 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:19 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:19 [INFO] openai._base_client: Retrying request to /chat/completions in 0.434019 seconds
+2026-06-17 17:53:20 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:20 [INFO] openai._base_client: Retrying request to /chat/completions in 0.438646 seconds
+2026-06-17 17:53:20 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:20 [INFO] openai._base_client: Retrying request to /chat/completions in 0.904975 seconds
+2026-06-17 17:53:20 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:20 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:20 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:20 [INFO] openai._base_client: Retrying request to /chat/completions in 0.752125 seconds
+2026-06-17 17:53:20 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:20 [INFO] openai._base_client: Retrying request to /chat/completions in 0.458882 seconds
+2026-06-17 17:53:21 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:21 [INFO] openai._base_client: Retrying request to /chat/completions in 0.415863 seconds
+2026-06-17 17:53:21 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:21 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:21 [INFO] src.analyzer.agent: 评分进度: 85/150 (58.6s)
+2026-06-17 17:53:21 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:21 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:21 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:21 [INFO] openai._base_client: Retrying request to /chat/completions in 0.888934 seconds
+2026-06-17 17:53:21 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:21 [INFO] openai._base_client: Retrying request to /chat/completions in 0.431529 seconds
+2026-06-17 17:53:21 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:21 [INFO] openai._base_client: Retrying request to /chat/completions in 0.840690 seconds
+2026-06-17 17:53:21 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:22 [INFO] openai._base_client: Retrying request to /chat/completions in 0.849320 seconds
+2026-06-17 17:53:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:22 [INFO] openai._base_client: Retrying request to /chat/completions in 0.443851 seconds
+2026-06-17 17:53:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:22 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:22 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:22 [INFO] openai._base_client: Retrying request to /chat/completions in 0.443850 seconds
+2026-06-17 17:53:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:22 [INFO] openai._base_client: Retrying request to /chat/completions in 0.844610 seconds
+2026-06-17 17:53:23 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:23 [INFO] openai._base_client: Retrying request to /chat/completions in 0.454790 seconds
+2026-06-17 17:53:23 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:23 [INFO] openai._base_client: Retrying request to /chat/completions in 0.971564 seconds
+2026-06-17 17:53:23 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:23 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:23 [INFO] src.analyzer.agent: 评分进度: 90/150 (61.0s)
+2026-06-17 17:53:23 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:23 [INFO] openai._base_client: Retrying request to /chat/completions in 0.462492 seconds
+2026-06-17 17:53:23 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:23 [INFO] openai._base_client: Retrying request to /chat/completions in 0.915767 seconds
+2026-06-17 17:53:24 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:24 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:24 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:24 [INFO] openai._base_client: Retrying request to /chat/completions in 0.969176 seconds
+2026-06-17 17:53:24 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:24 [INFO] openai._base_client: Retrying request to /chat/completions in 0.379349 seconds
+2026-06-17 17:53:24 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:24 [INFO] openai._base_client: Retrying request to /chat/completions in 0.493556 seconds
+2026-06-17 17:53:24 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:24 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:24 [INFO] openai._base_client: Retrying request to /chat/completions in 0.925677 seconds
+2026-06-17 17:53:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:25 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:25 [INFO] openai._base_client: Retrying request to /chat/completions in 0.478015 seconds
+2026-06-17 17:53:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:25 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:25 [INFO] openai._base_client: Retrying request to /chat/completions in 0.790105 seconds
+2026-06-17 17:53:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:25 [INFO] src.analyzer.agent: 评分进度: 95/150 (63.0s)
+2026-06-17 17:53:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:25 [INFO] openai._base_client: Retrying request to /chat/completions in 0.404185 seconds
+2026-06-17 17:53:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:25 [INFO] openai._base_client: Retrying request to /chat/completions in 0.842690 seconds
+2026-06-17 17:53:26 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:26 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:26 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:26 [INFO] openai._base_client: Retrying request to /chat/completions in 0.767678 seconds
+2026-06-17 17:53:26 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:26 [INFO] openai._base_client: Retrying request to /chat/completions in 0.452227 seconds
+2026-06-17 17:53:26 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:26 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:26 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:26 [INFO] openai._base_client: Retrying request to /chat/completions in 0.407013 seconds
+2026-06-17 17:53:26 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:26 [INFO] openai._base_client: Retrying request to /chat/completions in 0.760948 seconds
+2026-06-17 17:53:26 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:26 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:27 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:27 [INFO] openai._base_client: Retrying request to /chat/completions in 0.916295 seconds
+2026-06-17 17:53:27 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:27 [INFO] openai._base_client: Retrying request to /chat/completions in 0.489229 seconds
+2026-06-17 17:53:27 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:27 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:27 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:27 [INFO] openai._base_client: Retrying request to /chat/completions in 0.489744 seconds
+2026-06-17 17:53:27 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:27 [INFO] openai._base_client: Retrying request to /chat/completions in 0.949840 seconds
+2026-06-17 17:53:28 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:28 [INFO] src.analyzer.agent: 评分进度: 100/150 (65.6s)
+2026-06-17 17:53:28 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:28 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:28 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:28 [INFO] openai._base_client: Retrying request to /chat/completions in 0.455513 seconds
+2026-06-17 17:53:28 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:28 [INFO] openai._base_client: Retrying request to /chat/completions in 0.818110 seconds
+2026-06-17 17:53:28 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:28 [INFO] openai._base_client: Retrying request to /chat/completions in 0.871054 seconds
+2026-06-17 17:53:28 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:28 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:29 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:29 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:29 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:29 [INFO] openai._base_client: Retrying request to /chat/completions in 0.393961 seconds
+2026-06-17 17:53:29 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:29 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:29 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:29 [INFO] openai._base_client: Retrying request to /chat/completions in 0.777176 seconds
+2026-06-17 17:53:29 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:29 [INFO] openai._base_client: Retrying request to /chat/completions in 0.389212 seconds
+2026-06-17 17:53:30 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:30 [INFO] openai._base_client: Retrying request to /chat/completions in 0.492337 seconds
+2026-06-17 17:53:30 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:30 [INFO] openai._base_client: Retrying request to /chat/completions in 0.835931 seconds
+2026-06-17 17:53:30 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:30 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:30 [INFO] src.analyzer.agent: 评分进度: 105/150 (68.0s)
+2026-06-17 17:53:30 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:30 [INFO] openai._base_client: Retrying request to /chat/completions in 0.499896 seconds
+2026-06-17 17:53:30 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:30 [INFO] openai._base_client: Retrying request to /chat/completions in 0.978665 seconds
+2026-06-17 17:53:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:31 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:31 [INFO] openai._base_client: Retrying request to /chat/completions in 0.387440 seconds
+2026-06-17 17:53:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:31 [INFO] openai._base_client: Retrying request to /chat/completions in 0.849592 seconds
+2026-06-17 17:53:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:31 [INFO] openai._base_client: Retrying request to /chat/completions in 0.903554 seconds
+2026-06-17 17:53:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:31 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:32 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:32 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:32 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:32 [INFO] openai._base_client: Retrying request to /chat/completions in 0.425275 seconds
+2026-06-17 17:53:32 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:32 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:32 [INFO] src.analyzer.agent: 评分进度: 110/150 (70.2s)
+2026-06-17 17:53:32 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:32 [INFO] openai._base_client: Retrying request to /chat/completions in 0.430229 seconds
+2026-06-17 17:53:32 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:32 [INFO] openai._base_client: Retrying request to /chat/completions in 0.818645 seconds
+2026-06-17 17:53:33 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:33 [INFO] openai._base_client: Retrying request to /chat/completions in 0.791423 seconds
+2026-06-17 17:53:33 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:33 [INFO] openai._base_client: Retrying request to /chat/completions in 0.380759 seconds
+2026-06-17 17:53:33 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:33 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:33 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:33 [INFO] openai._base_client: Retrying request to /chat/completions in 0.814856 seconds
+2026-06-17 17:53:33 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:33 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:33 [INFO] openai._base_client: Retrying request to /chat/completions in 0.445281 seconds
+2026-06-17 17:53:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:34 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:34 [INFO] openai._base_client: Retrying request to /chat/completions in 0.401942 seconds
+2026-06-17 17:53:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:34 [INFO] openai._base_client: Retrying request to /chat/completions in 0.818442 seconds
+2026-06-17 17:53:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:34 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:34 [INFO] openai._base_client: Retrying request to /chat/completions in 0.378687 seconds
+2026-06-17 17:53:34 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:34 [INFO] src.analyzer.agent: 评分进度: 115/150 (72.4s)
+2026-06-17 17:53:35 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:35 [INFO] openai._base_client: Retrying request to /chat/completions in 0.797800 seconds
+2026-06-17 17:53:35 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:35 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:35 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:35 [INFO] openai._base_client: Retrying request to /chat/completions in 0.495759 seconds
+2026-06-17 17:53:35 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:35 [INFO] openai._base_client: Retrying request to /chat/completions in 0.413999 seconds
+2026-06-17 17:53:35 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:35 [INFO] openai._base_client: Retrying request to /chat/completions in 0.920742 seconds
+2026-06-17 17:53:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:36 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:36 [INFO] openai._base_client: Retrying request to /chat/completions in 0.956531 seconds
+2026-06-17 17:53:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:36 [INFO] openai._base_client: Retrying request to /chat/completions in 0.381489 seconds
+2026-06-17 17:53:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:36 [INFO] openai._base_client: Retrying request to /chat/completions in 0.475902 seconds
+2026-06-17 17:53:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:36 [INFO] openai._base_client: Retrying request to /chat/completions in 0.882493 seconds
+2026-06-17 17:53:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:36 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:37 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:37 [INFO] openai._base_client: Retrying request to /chat/completions in 0.390879 seconds
+2026-06-17 17:53:37 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:37 [INFO] openai._base_client: Retrying request to /chat/completions in 0.907242 seconds
+2026-06-17 17:53:37 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:37 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:37 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:37 [INFO] openai._base_client: Retrying request to /chat/completions in 0.830268 seconds
+2026-06-17 17:53:37 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:37 [INFO] openai._base_client: Retrying request to /chat/completions in 0.498074 seconds
+2026-06-17 17:53:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:38 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:38 [INFO] src.analyzer.agent: 评分进度: 120/150 (75.8s)
+2026-06-17 17:53:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:38 [INFO] openai._base_client: Retrying request to /chat/completions in 0.472561 seconds
+2026-06-17 17:53:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:38 [INFO] openai._base_client: Retrying request to /chat/completions in 0.864638 seconds
+2026-06-17 17:53:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:38 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:38 [INFO] openai._base_client: Retrying request to /chat/completions in 0.454323 seconds
+2026-06-17 17:53:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:38 [INFO] openai._base_client: Retrying request to /chat/completions in 0.959092 seconds
+2026-06-17 17:53:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:39 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:39 [INFO] openai._base_client: Retrying request to /chat/completions in 0.447646 seconds
+2026-06-17 17:53:39 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:39 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:39 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:39 [INFO] openai._base_client: Retrying request to /chat/completions in 0.841564 seconds
+2026-06-17 17:53:39 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:39 [INFO] openai._base_client: Retrying request to /chat/completions in 0.783209 seconds
+2026-06-17 17:53:39 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:39 [INFO] openai._base_client: Retrying request to /chat/completions in 0.494641 seconds
+2026-06-17 17:53:39 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:39 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:40 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:40 [INFO] src.analyzer.agent: 评分进度: 125/150 (77.8s)
+2026-06-17 17:53:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:40 [INFO] openai._base_client: Retrying request to /chat/completions in 0.455476 seconds
+2026-06-17 17:53:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:40 [INFO] openai._base_client: Retrying request to /chat/completions in 0.831614 seconds
+2026-06-17 17:53:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:40 [INFO] openai._base_client: Retrying request to /chat/completions in 0.497480 seconds
+2026-06-17 17:53:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:40 [INFO] openai._base_client: Retrying request to /chat/completions in 0.992318 seconds
+2026-06-17 17:53:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:41 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:41 [INFO] openai._base_client: Retrying request to /chat/completions in 0.463205 seconds
+2026-06-17 17:53:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:41 [INFO] openai._base_client: Retrying request to /chat/completions in 0.951155 seconds
+2026-06-17 17:53:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:41 [INFO] openai._base_client: Retrying request to /chat/completions in 0.485215 seconds
+2026-06-17 17:53:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:41 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:42 [INFO] openai._base_client: Retrying request to /chat/completions in 0.958519 seconds
+2026-06-17 17:53:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:42 [INFO] openai._base_client: Retrying request to /chat/completions in 0.397600 seconds
+2026-06-17 17:53:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:42 [INFO] openai._base_client: Retrying request to /chat/completions in 0.764191 seconds
+2026-06-17 17:53:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:42 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:42 [INFO] openai._base_client: Retrying request to /chat/completions in 0.760695 seconds
+2026-06-17 17:53:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:42 [INFO] openai._base_client: Retrying request to /chat/completions in 0.426855 seconds
+2026-06-17 17:53:43 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:43 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:43 [INFO] src.analyzer.agent: 评分进度: 130/150 (80.8s)
+2026-06-17 17:53:43 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:43 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:43 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:43 [INFO] openai._base_client: Retrying request to /chat/completions in 0.488239 seconds
+2026-06-17 17:53:43 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:43 [INFO] openai._base_client: Retrying request to /chat/completions in 0.851793 seconds
+2026-06-17 17:53:43 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:43 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:43 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:43 [INFO] openai._base_client: Retrying request to /chat/completions in 0.879357 seconds
+2026-06-17 17:53:44 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:44 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:44 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:44 [INFO] openai._base_client: Retrying request to /chat/completions in 0.386143 seconds
+2026-06-17 17:53:44 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:44 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:44 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:44 [INFO] openai._base_client: Retrying request to /chat/completions in 0.486136 seconds
+2026-06-17 17:53:45 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:45 [INFO] openai._base_client: Retrying request to /chat/completions in 0.859792 seconds
+2026-06-17 17:53:45 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:45 [INFO] openai._base_client: Retrying request to /chat/completions in 0.495458 seconds
+2026-06-17 17:53:45 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:45 [INFO] openai._base_client: Retrying request to /chat/completions in 0.942383 seconds
+2026-06-17 17:53:45 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:45 [INFO] openai._base_client: Retrying request to /chat/completions in 0.497643 seconds
+2026-06-17 17:53:45 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:45 [INFO] openai._base_client: Retrying request to /chat/completions in 0.851943 seconds
+2026-06-17 17:53:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:46 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:46 [INFO] src.analyzer.agent: 评分进度: 135/150 (83.7s)
+2026-06-17 17:53:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:46 [INFO] openai._base_client: Retrying request to /chat/completions in 0.407247 seconds
+2026-06-17 17:53:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:46 [INFO] openai._base_client: Retrying request to /chat/completions in 0.790938 seconds
+2026-06-17 17:53:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:46 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:46 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:46 [INFO] openai._base_client: Retrying request to /chat/completions in 0.385307 seconds
+2026-06-17 17:53:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:47 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:47 [INFO] openai._base_client: Retrying request to /chat/completions in 0.851727 seconds
+2026-06-17 17:53:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:47 [INFO] openai._base_client: Retrying request to /chat/completions in 0.417396 seconds
+2026-06-17 17:53:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:47 [INFO] openai._base_client: Retrying request to /chat/completions in 0.425360 seconds
+2026-06-17 17:53:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:48 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:48 [INFO] src.analyzer.agent: 评分进度: 140/150 (85.8s)
+2026-06-17 17:53:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:48 [INFO] openai._base_client: Retrying request to /chat/completions in 0.884174 seconds
+2026-06-17 17:53:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:48 [INFO] openai._base_client: Retrying request to /chat/completions in 0.481468 seconds
+2026-06-17 17:53:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:48 [INFO] openai._base_client: Retrying request to /chat/completions in 0.981849 seconds
+2026-06-17 17:53:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:48 [INFO] openai._base_client: Retrying request to /chat/completions in 0.451084 seconds
+2026-06-17 17:53:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:49 [INFO] openai._base_client: Retrying request to /chat/completions in 0.919113 seconds
+2026-06-17 17:53:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:49 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:49 [INFO] openai._base_client: Retrying request to /chat/completions in 0.947361 seconds
+2026-06-17 17:53:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:49 [INFO] openai._base_client: Retrying request to /chat/completions in 0.412544 seconds
+2026-06-17 17:53:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:49 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:50 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:50 [INFO] openai._base_client: Retrying request to /chat/completions in 0.961679 seconds
+2026-06-17 17:53:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:50 [INFO] openai._base_client: Retrying request to /chat/completions in 0.426941 seconds
+2026-06-17 17:53:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:50 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:50 [INFO] openai._base_client: Retrying request to /chat/completions in 0.907098 seconds
+2026-06-17 17:53:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:50 [INFO] src.analyzer.agent: 评分进度: 145/150 (88.5s)
+2026-06-17 17:53:51 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:51 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:53:51 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:53:51 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-06-17 17:53:51 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 429 - {'error': {'message': 'rpm exhausted', 'type': 'quota_exceeded_error', 'code': '8'}}
+2026-06-17 17:54:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:54:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-17 17:54:01 [INFO] src.analyzer.agent: 评分进度: 150/150 (99.0s)
+2026-06-17 17:54:01 [INFO] src.analyzer.agent: 评分完成: 总计 150 个, 缓存命中 13, 请求 137, 耗时 99.0s, 平均 0.7s/请求
+2026-06-17 17:54:01 [INFO] src.scheduler: [定时任务 4cfce892] 自动投递 24 个岗位
+2026-06-17 17:54:02 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-17 17:54:02 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-17 17:54:08 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-17 17:54:15 [INFO] src.scraper.boss_scraper: 等待 8.2s...
+2026-06-17 17:54:30 [INFO] src.scraper.boss_scraper: 等待 6.6s...
+2026-06-17 17:54:44 [INFO] src.scraper.boss_scraper: 等待 6.2s...
+2026-06-17 17:54:57 [INFO] src.scraper.boss_scraper: 等待 6.3s...
+2026-06-17 17:55:11 [INFO] src.scraper.boss_scraper: 等待 9.7s...
+2026-06-17 17:55:28 [INFO] src.scraper.boss_scraper: 等待 7.7s...
+2026-06-17 17:55:42 [INFO] src.scraper.boss_scraper: 等待 10.0s...
+2026-06-17 17:55:59 [INFO] src.scraper.boss_scraper: 等待 8.0s...
+2026-06-17 17:56:15 [INFO] src.scraper.boss_scraper: 等待 8.0s...
+2026-06-17 17:56:30 [INFO] src.scraper.boss_scraper: 等待 7.2s...
+2026-06-17 17:56:44 [INFO] src.scraper.boss_scraper: 等待 8.3s...
+2026-06-17 17:57:00 [INFO] src.scraper.boss_scraper: 等待 5.2s...
+2026-06-17 17:57:12 [INFO] src.scraper.boss_scraper: 等待 8.8s...
+2026-06-17 17:57:28 [INFO] src.scraper.boss_scraper: 等待 9.6s...
+2026-06-17 17:57:45 [INFO] src.scraper.boss_scraper: 等待 10.0s...
+2026-06-17 17:58:02 [INFO] src.scraper.boss_scraper: 等待 5.1s...
+2026-06-17 17:58:14 [INFO] src.scraper.boss_scraper: 等待 8.7s...
+2026-06-17 17:58:30 [INFO] src.scraper.boss_scraper: 等待 7.5s...
+2026-06-17 17:58:44 [INFO] src.scraper.boss_scraper: 等待 5.5s...
+2026-06-17 17:58:57 [INFO] src.scraper.boss_scraper: 等待 5.5s...
+2026-06-17 17:59:10 [INFO] src.scraper.boss_scraper: 等待 5.3s...
+2026-06-17 17:59:22 [INFO] src.scraper.boss_scraper: 等待 9.5s...
+2026-06-17 17:59:39 [INFO] src.scraper.boss_scraper: 等待 6.3s...
+2026-06-17 17:59:52 [INFO] src.scheduler: [定时任务 4cfce892] 投递完成: 成功 24/24
+2026-06-17 17:59:53 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-17 17:59:53 [INFO] src.scheduler: [定时任务 4cfce892] 结果已保存: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\scheduled_4cfce892_20260617_175953.csv

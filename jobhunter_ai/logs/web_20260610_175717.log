@@ -1,0 +1,32 @@
+2026-06-10 17:57:41 [INFO] src.scraper.boss_scraper: 采集到 15 条实时数据
+2026-06-10 17:57:41 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-10 17:57:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:57:48 [INFO] src.analyzer.agent: [1/15] 【Python初级开发工程师（可应届）】10-12k @ 共生代管理顾问 -> 80分 - 建议投递
+2026-06-10 17:57:54 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:57:54 [INFO] src.analyzer.agent: [2/15] Python（外资金融 每周2天居家） @ TEKsystems -> 0分 - 不推荐
+2026-06-10 17:58:00 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:00 [INFO] src.analyzer.agent: [3/15] Python @ 广州吉飞 -> 73分 - 建议投递
+2026-06-10 17:58:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:06 [INFO] src.analyzer.agent: [4/15] Python数据采集 @ 广州玉团网络科技 -> 65分 - 可以考虑
+2026-06-10 17:58:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:15 [INFO] src.analyzer.agent: [5/15] python实习生 @ 致点信息科技 -> 40分 - 可以考虑
+2026-06-10 17:58:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:22 [INFO] src.analyzer.agent: [6/15] python实习生 @ 无锡智联开源科技 -> 65分 - 可以考虑
+2026-06-10 17:58:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:31 [INFO] src.analyzer.agent: [7/15] python实习生 @ 掌信科技 -> 77分 - 建议投递
+2026-06-10 17:58:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:38 [INFO] src.analyzer.agent: [8/15] python工程师 @ 广州龙庭中古商贸 -> 80分 - 建议投递
+2026-06-10 17:58:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:47 [INFO] src.analyzer.agent: [9/15] python全栈工程师 @ 深圳市电智科技 -> 80分 - 建议投递
+2026-06-10 17:58:55 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:58:55 [INFO] src.analyzer.agent: [10/15] Python工程师（双休） @ 知宴科技 -> 74分 - 建议投递
+2026-06-10 17:59:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:59:06 [INFO] src.analyzer.agent: [11/15] 大模型应用开发工程师（Python后端开发） @ 易森科技 -> 80分 - 建议投递
+2026-06-10 17:59:12 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:59:12 [INFO] src.analyzer.agent: [12/15] Python开发工程师 @ 海颐软件 -> 82分 - 建议投递
+2026-06-10 17:59:18 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:59:18 [INFO] src.analyzer.agent: [13/15] python @ 华为 -> 80分 - 建议投递
+2026-06-10 17:59:28 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:59:28 [INFO] src.analyzer.agent: [14/15] 高级python工程师(包吃) @ 遇渼文化传媒 -> 69分 - 可以考虑
+2026-06-10 17:59:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 17:59:36 [INFO] src.analyzer.agent: [15/15] Python @ 深圳永动软件有限公司 -> 73分 - 可以考虑

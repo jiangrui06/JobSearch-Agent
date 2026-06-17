@@ -1,0 +1,6 @@
+2026-06-11 14:07:58 [INFO] src.scraper.boss_scraper: 采集到 15 条实时数据
+2026-06-11 14:07:59 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-11 14:10:06 [INFO] src.scraper.boss_scraper: 采集到 15 条实时数据
+2026-06-11 14:10:06 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-11 14:10:13 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 14:10:13 [INFO] src.analyzer.agent: [1/15] python @ 华为 -> 66分 - 可以考虑

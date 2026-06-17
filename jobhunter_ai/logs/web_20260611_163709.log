@@ -1,0 +1,43 @@
+2026-06-11 16:37:19 [INFO] src.scraper.boss_scraper: 浏览器已启动
+2026-06-11 16:37:24 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/guangzhou/
+2026-06-11 16:37:26 [INFO] src.scraper.boss_scraper: 搜索关键词: Python
+2026-06-11 16:37:28 [INFO] src.scraper.boss_scraper: 采集完成: 15 条
+2026-06-11 16:37:29 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-11 16:37:29 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-11 16:37:29 [INFO] src.analyzer.agent: 开始评分: 共 15 个岗位, 并发 8, 缓存目录 C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-11 16:37:38 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:37:39 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:37:51 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:37:51 [INFO] src.analyzer.agent: 评分进度: 15/15 (21.9s)
+2026-06-11 16:37:51 [INFO] src.analyzer.agent: 评分完成: 总计 15 个, 缓存命中 12, 请求 3, 耗时 21.9s, 平均 7.3s/请求
+2026-06-11 16:40:15 [INFO] src.scraper.boss_scraper: 浏览器已启动
+2026-06-11 16:40:24 [INFO] src.scraper.boss_scraper: [python开发实习生] can_apply=True, already_applied=False
+2026-06-11 16:40:48 [INFO] src.scraper.boss_scraper: [Python数据采集] can_apply=True, already_applied=False
+2026-06-11 16:41:17 [INFO] src.scraper.boss_scraper: [python] can_apply=False, already_applied=False
+2026-06-11 16:41:17 [WARNING] src.scraper.boss_scraper: 截图失败: 
+与页面的连接已断开。
+版本: 4.1.1.4
+2026-06-11 16:41:27 [WARNING] src.scraper.boss_scraper: 截图失败: 
+与页面的连接已断开。
+版本: 4.1.1.4
+2026-06-11 16:41:27 [INFO] src.scraper.boss_scraper: 等待 7.5s...
+2026-06-11 16:41:45 [WARNING] src.scraper.boss_scraper: 截图失败: 
+与页面的连接已断开。
+版本: 4.1.1.4
+2026-06-11 16:41:45 [INFO] src.scraper.boss_scraper: 等待 7.6s...
+2026-06-11 16:42:03 [WARNING] src.scraper.boss_scraper: 截图失败: 
+与页面的连接已断开。
+版本: 4.1.1.4
+2026-06-11 16:42:03 [INFO] src.scraper.boss_scraper: 等待 5.2s...
+2026-06-11 16:42:18 [WARNING] src.scraper.boss_scraper: 截图失败: 
+与页面的连接已断开。
+版本: 4.1.1.4
+2026-06-11 16:42:18 [INFO] src.scraper.boss_scraper: 等待 6.1s...
+2026-06-11 16:42:34 [WARNING] src.scraper.boss_scraper: 截图失败: 
+与页面的连接已断开。
+版本: 4.1.1.4
+2026-06-11 16:42:34 [INFO] src.scraper.boss_scraper: 等待 6.8s...
+2026-06-11 16:42:51 [WARNING] src.scraper.boss_scraper: 截图失败: 
+与页面的连接已断开。
+版本: 4.1.1.4
+2026-06-11 16:42:51 [INFO] src.scraper.boss_scraper: 浏览器已关闭

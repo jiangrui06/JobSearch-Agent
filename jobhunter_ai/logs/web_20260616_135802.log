@@ -1,0 +1,43 @@
+2026-06-16 13:58:02 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-16 13:58:02 [INFO] src.scheduler: 定时任务调度器已启动
+2026-06-16 13:58:02 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 13:58:02 [INFO] src.scheduler: 已恢复定时任务: 611 (daily 17:35)
+2026-06-16 13:58:02 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 13:58:02 [INFO] src.scheduler: 已恢复定时任务: 每日12：00 (daily 00:01)
+2026-06-16 13:58:02 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 13:58:02 [INFO] src.scheduler: 已恢复定时任务: 612 (daily 01:00)
+2026-06-16 13:58:02 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-16 13:58:02 [INFO] src.scheduler: 已恢复定时任务: 每天执行 (daily 02:00)
+2026-06-16 13:58:10 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-16 13:58:10 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-16 13:58:16 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-16 13:58:16 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/shanghai/
+2026-06-16 13:58:19 [INFO] src.scraper.boss_scraper: 搜索关键词: Python
+2026-06-16 13:58:32 [WARNING] src.scraper.boss_scraper: 无法翻页，提前结束
+2026-06-16 13:58:32 [INFO] src.scraper.boss_scraper: 采集完成: 15 条
+2026-06-16 13:58:33 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-16 13:58:34 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-16 13:58:34 [INFO] src.analyzer.agent: 开始评分: 共 15 个岗位, 并发 8, 缓存目录 C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-16 13:58:40 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:41 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:42 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:43 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:44 [INFO] src.analyzer.agent: 评分进度: 5/15 (9.8s)
+2026-06-16 13:58:44 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:47 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:48 [INFO] src.analyzer.agent: 评分进度: 10/15 (13.9s)
+2026-06-16 13:58:48 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:51 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:52 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:52 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:52 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-16 13:58:52 [INFO] src.analyzer.agent: 评分进度: 15/15 (18.6s)
+2026-06-16 13:58:52 [INFO] src.analyzer.agent: 评分完成: 总计 15 个, 缓存命中 0, 请求 15, 耗时 18.6s, 平均 1.2s/请求
+2026-06-16 13:59:09 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-16 13:59:09 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-16 13:59:15 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-16 13:59:45 [INFO] src.scraper.boss_scraper: 浏览器已关闭

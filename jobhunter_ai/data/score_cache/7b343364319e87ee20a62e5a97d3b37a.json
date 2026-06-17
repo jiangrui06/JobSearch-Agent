@@ -1,0 +1,1 @@
+{"skill_match": 65, "experience_match": 10, "salary_match": 50, "growth_potential": 60, "match_score": 40, "match_reason": "候选人精通Python且具备AI项目经验，但简历未体现爬虫专项技术栈（如Scrapy、反爬策略等），且工作年限远未达到岗位要求的3-5年。", "recommendation": "不推荐", "recommendation_reason": "候选人虽具备Python基础，但缺乏爬虫专项经验，且工作年限远未达到岗位要求的3-5年，匹配度极低。", "greeting": "您好，我精通Python及AI应用开发，虽经验尚浅但学习力强，对爬虫技术有浓厚兴趣，希望能争取面试机会。"}

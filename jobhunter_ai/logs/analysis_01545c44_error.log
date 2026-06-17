@@ -1,0 +1,38 @@
+[23:20:50] === 阶段1/2: 采集 BOSS直聘数据 ===
+关键词: Python  |  城市: 上海  |  页数: 3
+
+错误: 
+浏览器未开启或已关闭。
+版本: 4.1.1.4
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_base\driver.py", line 161, in start
+    self._ws = create_connection(self.address, enable_multithread=True, suppress_origin=True)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\websocket\_core.py", line 664, in create_connection
+    websock.connect(url, **options)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\websocket\_core.py", line 263, in connect
+    self.sock, addrs = connect(
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\websocket\_http.py", line 146, in connect
+    sock = _open_socket(addrinfo_list, options.sockopt, options.timeout)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\websocket\_http.py", line 233, in _open_socket
+    raise err
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\websocket\_http.py", line 210, in _open_socket
+    sock.connect(address)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\web_app.py", line 166, in _run_analysis
+    all_raw = scraper.search(keyword=keyword, city=city, page=pages, cancel_check=_is_cancelled)
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\scraper\boss_scraper.py", line 172, in search
+    page_obj.listen.start(LISTEN_PATTERN)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_units\listener.py", line 95, in start
+    self._driver = Driver(self._target_id, self._address)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_base\driver.py", line 49, in __init__
+    self.start()
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_base\driver.py", line 168, in start
+    raise BrowserConnectError(_S._lang.BROWSER_NOT_EXIST)
+DrissionPage.errors.BrowserConnectError: 
+浏览器未开启或已关闭。
+版本: 4.1.1.4
+

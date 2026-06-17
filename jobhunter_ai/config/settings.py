@@ -1,4 +1,4 @@
-"""用户配置：API密钥、求职偏好、爬虫设置。"""
+"""用户配置：API密钥、求职偏好、爬虫设置、性能调优。"""
 
 import os
 from pathlib import Path
@@ -22,6 +22,17 @@ SALARY_EXPECTATION = os.getenv("SALARY_EXPECTATION", "")
 
 # ==================== BOSS直聘爬虫配置 ====================
 SHOW_BROWSER = os.getenv("SHOW_BROWSER", "true").lower() == "true"
+
+# ==================== 性能调优配置 ====================
+# AI 评分并发数（根据 API 限速调整）
+# 注：先声科技 SenseNova 免费套餐 RPM 限制较低，建议 1-3
+MAX_WORKERS = int(os.getenv("MAX_WORKERS", "1"))
+# API 请求间隔（秒），防止触发限速
+API_DELAY = float(os.getenv("API_DELAY", "3.0"))
+# 单次 API 请求超时（秒）
+REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", "30"))
+# 是否启用 AI 评分缓存
+ENABLE_CACHE = os.getenv("ENABLE_CACHE", "true").lower() == "true"
 
 # ==================== 输出配置 ====================
 TOP_N_RESULTS = int(os.getenv("TOP_N_RESULTS", "10"))

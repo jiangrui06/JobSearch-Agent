@@ -1,0 +1,29 @@
+2026-06-11 16:16:26 [INFO] src.scraper.boss_scraper: 浏览器已启动
+2026-06-11 16:16:32 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/guangzhou/
+2026-06-11 16:16:35 [INFO] src.scraper.boss_scraper: 搜索关键词: Python
+2026-06-11 16:16:36 [INFO] src.scraper.boss_scraper: 采集完成: 15 条
+2026-06-11 16:16:37 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-11 16:16:38 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-11 16:16:38 [INFO] src.analyzer.agent: 开始评分: 共 15 个岗位, 并发 8, 缓存目录 C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-11 16:16:46 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:50 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:51 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:51 [INFO] src.analyzer.agent: 评分进度: 5/15 (13.5s)
+2026-06-11 16:16:53 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:54 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:57 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:58 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:59 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:16:59 [INFO] src.analyzer.agent: 评分进度: 10/15 (21.1s)
+2026-06-11 16:17:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:17:02 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:17:06 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:17:16 [INFO] openai._base_client: Retrying request to /chat/completions in 0.492437 seconds
+2026-06-11 16:17:19 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:17:25 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-11 16:17:25 [INFO] src.analyzer.agent: 评分进度: 15/15 (46.9s)
+2026-06-11 16:17:25 [INFO] src.analyzer.agent: 评分完成: 总计 15 个, 缓存命中 0, 请求 15, 耗时 46.9s, 平均 3.1s/请求
+2026-06-11 16:22:56 [INFO] src.scraper.boss_scraper: 浏览器已启动
+2026-06-11 16:23:25 [INFO] src.scraper.boss_scraper: 浏览器已关闭

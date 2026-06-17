@@ -67,7 +67,25 @@
       "Bash(rm -f src/migrate_data.py)",
       "Bash(rm -rf logs/)",
       "Bash(rm -rf src/parser/)",
-      "Bash(mkdir -p logs)"
+      "Bash(mkdir -p logs)",
+      "Bash(kill %1)",
+      "Bash(kill %2)",
+      "Bash(del fix_strings.py)",
+      "Bash(git checkout *)",
+      "Bash(awk '{print $2}')",
+      "Bash(xargs kill -9)",
+      "Bash(kill -9 31936 29792)",
+      "Bash(taskkill /F /PID 31936)",
+      "Bash(taskkill /F /PID 29792)",
+      "Bash(taskkill //F //PID 31936)",
+      "Bash(taskkill //F //PID 29792)",
+      "Bash(python3 *)",
+      "Bash(/c/Users/Administrator/AppData/Local/Programs/Python/Python39/python.exe *)",
+      "Bash(tasklist /FI \"IMAGENAME eq chrome.exe\")",
+      "Bash(wmic process *)",
+      "Bash(python -c \"from DrissionPage import ChromiumPage; p = ChromiumPage; print\\(hasattr\\(p, 'set'\\)\\); print\\([m for m in dir\\(p\\) if 'timeout' in m.lower\\(\\)]\\)\")",
+      "Bash(python3 -c \"from DrissionPage import ChromiumPage; p = ChromiumPage; print\\(hasattr\\(p, 'set'\\)\\); print\\([m for m in dir\\(p\\) if 'timeout' in m.lower\\(\\)]\\)\")",
+      "Read(//c/Users/Administrator/Desktop/JobSearch-Agent/jobhunter_ai/data/**)"
     ]
   }
 }

@@ -1,0 +1,27 @@
+[23:10:45] === 阶段1/2: 采集 BOSS直聘数据 ===
+关键词: Python  |  城市: 上海  |  页数: 3
+
+错误: 
+与页面的连接已断开。
+版本: 4.1.1.4
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\web_app.py", line 166, in _run_analysis
+    all_raw = scraper.search(keyword=keyword, city=city, page=pages, cancel_check=_is_cancelled)
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\scraper\boss_scraper.py", line 211, in search
+    if not self._goto_next_page(page_obj):
+  File "C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\src\scraper\boss_scraper.py", line 288, in _goto_next_page
+    page_obj.run_js('window.scrollTo(0,document.body.scrollHeight);')
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_pages\chromium_base.py", line 396, in run_js
+    return self._run_js(script, *args, as_expr=as_expr, timeout=timeout)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_pages\chromium_base.py", line 403, in _run_js
+    return run_js(self, script, as_expr, self.timeouts.script if timeout is None else timeout, args)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_elements\chromium_element.py", line 1229, in run_js
+    res = page._run_cdp('Runtime.callFunctionOn', functionDeclaration=script, objectId=obj_id,
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_pages\chromium_base.py", line 389, in _run_cdp
+    return r if __ERROR__ not in r else raise_error(r, self.browser, ignore)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python39\lib\site-packages\DrissionPage\_functions\tools.py", line 199, in raise_error
+    raise r
+DrissionPage.errors.PageDisconnectedError: 
+与页面的连接已断开。
+版本: 4.1.1.4
+

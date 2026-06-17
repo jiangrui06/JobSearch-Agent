@@ -1,0 +1,2245 @@
+
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8"><![endif]-->
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="standard"><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>「初级Python（线下面试）招聘」_上海速强信息招聘-BOSS直聘</title>
+<script src="https://static.zhipin.com/assets/sdk/apm/patas.2.0.2.min.js" crossorigin="anonymous"></script>
+<script>
+    try {
+        function getCookieValue(name) {
+            var match = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+            return match ? decodeURIComponent(match[1]) : '';
+        }
+
+        var __aValue = getCookieValue('__a');
+        var isProd = window.location.host.indexOf('.zhipin.com') !== -1 && window.location.host.indexOf('pre-www.zhipin.com') === -1;
+
+        window.APM &&window.APM.init({
+            appKey: isProd ? 'ObsSRskiryhn60pf' : '4Dcq7jBIr5VWWi1Q',
+            bizType: 'zhipin_web_geek_jsp',
+            isBizResponseError: (response,metrics) => false,
+            hasSkeleton: false,
+            extraData: {
+                buildVersion: '',
+                kaUid: localStorage.getItem('ka-uid'),
+                deviceId: __aValue,
+            },
+            ignoreErrors: [
+                'ResizeObserver',
+                'Script error',
+                'web-report.min',
+                '后羿采集器',
+                /program files/i,
+                /^(.*-extension:\/\/)/,
+                'geetest',
+                'cstaticdun',
+                'Unexpected token',
+            ],
+            ignoreConsoleErrorPatterns: [
+                '终止请求',
+                '拒绝访问。',
+                'Request aborted',
+                'Network Error',
+                'timeout of 60000ms exceeded',
+                'SecurityError',
+                'Request failed'
+            ],
+            ignoreUrls:[]
+        });
+    } catch (e) {}
+</script>
+
+<script>
+    window.kaConfig = {
+        openKaToWarlockAdaptor: true,
+        appname: 'zhipin_web_geek_jsp',
+        uid: (window._PAGE && (window._PAGE.uid || window._PAGE.userId)) || '',
+    }
+</script>
+
+<script>
+    function loadLastbackScript() {
+        var fallbackScript = document.createElement('script')
+        fallbackScript.src = 'https://logapi.zhipin.com/dap/jssdk/warlockdata.min.2.2.15.js'
+
+        fallbackScript.onerror = function () {
+            // 记录执行阶段
+            window.kaConfig.step = 'LAST_FAIL'
+        }
+        fallbackScript.onload = function () {
+            // 记录执行阶段
+            window.kaConfig.step = 'LAST_OK'
+            // 重新初始化
+            initWarlockData('LAST_OK')
+        }
+        // 将备用脚本插入<head>，开始加载
+        document.head.appendChild(fallbackScript)
+    }
+    function loadFallbackScript() {
+        // 记录执行阶段
+        window.kaConfig.step = 'MAIN_FAIL'
+        var fallbackScript = document.createElement('script')
+        fallbackScript.src = 'https://z.zhipin.com/assets/zhipin/sdk/datastar/warlockdata.min.2.2.15.js'
+
+        fallbackScript.onerror = function () {
+            // 记录执行阶段
+            window.kaConfig.step = 'FALLBACK_FAIL'
+            // 注意：此步骤为有必要时再加就行
+            loadLastbackScript()
+        }
+        fallbackScript.onload = function () {
+            // 记录执行阶段
+            window.kaConfig.step = 'FALLBACK_OK'
+            // 重新初始化
+            initWarlockData('FALLBACK_OK')
+        }
+        // 将备用脚本插入<head>，开始加载
+        document.head.appendChild(fallbackScript)
+    }
+
+    function initWarlockData(a) {
+        window.kaConfig.step = a || 'MAIN_OK'
+        var isProd = window.location.host.indexOf('.zhipin.com') !== -1 && window.location.host.indexOf('pre-www.zhipin.com') === -1;
+        var serverUrl = isProd
+            ? 'https://shink.zhipin.com/wapi/dapCommon/json'
+            : 'https://boss-m-qa.weizhipin.com/wapi/dapCommon/json'
+
+        // 初始化埋点信息测试
+        var props = {
+            server_url: serverUrl,
+            token: 'zhipin_geek_pc65A80B97CB4C27FA8F', // 埋点新干线页面查看应用信息获取
+            // app_ver: '1.0.0', // 项目版本，如果没有也可以不设置
+            app_name: 'zhipin_web_geek_jsp', // 项目名称
+            auto_track_page_view: false, // 收集PageView 事件
+            auto_track_web_click: false, // 收集WebClick事件
+            track_ka: true,
+            max_string_length: 10000,
+            env: isProd ? 'prod' : 'dev', // 项目所在环境 dev 或者 prod，默认值是：prod
+        }
+        try {
+            window.Warlock && window.Warlock.init(props)
+            console.log('%c数星埋点初始化成功', 'color: #00bebd')
+        } catch (e) {
+            console.log('数星埋点初始化失败', e)
+        }
+    }
+</script>
+
+<link id="warlock-script"
+        rel="preload"
+        as="script"
+        crossorigin="anonymous"
+        href="https://static.zhipin.com/assets/sdk/warlock/warlockdata.min.2.2.15.js"
+        onerror="loadFallbackScript()" />
+<script crossorigin="anonymous"
+        src="https://static.zhipin.com/assets/sdk/warlock/warlockdata.min.2.2.15.js"
+        onload="initWarlockData()">
+</script>    <meta name="keywords" content="初级Python（线下面试）,初级Python（线下面试）招聘,上海速强信息初级Python（线下面试）招聘"/>
+    <meta name="description" content="上海速强信息初级Python（线下面试）招聘，薪资：8-9K，地点：上海，要求：1-3年，学历：大专，福利：五险一金、定期体检、加班补助、年终奖、带薪年假、节日福利，人事刚刚在线，随时随地直接开聊。"/>
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.zhipin.com/job_detail/1f2b8453765df3490nBz2dq0E1pT.html">
+    <link rel="canonical" href="https://www.zhipin.com/job_detail/1f2b8453765df3490nBz2dq0E1pT.html">
+    <meta name="applicable-device" content="pc">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <link rel="shortcut icon" href="https://static.zhipin.com/favicon.ico">
+    <script src="https://img.bosszhipin.com/static/zhipin/geek/sdk/browser-check-v2.js" crossorigin="anonymous" async></script>
+    <link href="https://static.zhipin.com/zhipin-geek-seo/v5461/web/geek/css/main.css" crossorigin="anonymous" type="text/css" rel="stylesheet">
+    <script type="text/javascript">
+        var _userInfo = {
+            showTip: false,
+            text: '',
+            isLogin: true,
+            isPerfect: true,
+            hasKaAnotherS: false
+        };
+        var _reportData = {
+            reportedId: '4ddad5bc2a7a5fe01HJ43Nq6FVU~',
+            targetId: '549279383'
+        };
+        var _jobInfo = {
+            job_id: '1f2b8453765df3490nBz2dq0E1pT',
+            user_id: '4ddad5bc2a7a5fe01HJ43Nq6FVU~',
+            job_name: '初级Python（线下面试）',
+            job_salary: '8-9K',
+            company:'上海速强信息',
+            brand_logo:'https://img.bosszhipin.com/beijin/mcs/chatphoto/20180316/a2aa8ac112b5d43a546ebbf10bed4aceb357886add3789674af7a0658640b515.jpg',
+            securityId:'Zr_qn7AavSk7n-V1qqoJjfEGbv-rYImiLgfDkscflB0XPiR4VfQp9jponpKOH2w7u2dCZCIuqeGJ-ira-OCbylewZTY6LCiqZnzxjwlZdHJj-TvZYyohellW5qRgEJdn6Abz4Dp8vCTHa7NCyiu1E8ZEbv3ncTDcXhv06ViH7uLqxBC51g0DSgaWYzX_MOUoPZjkHG1DudJKzzKHhcYo-VyfRhnxMJv5AFoUDfOSq-5Hpt6tW48lcoSYfiXG5zGHZB8UjGNUa8iQeEvOw76BUT0_FdIknms710x81_g8nA~~',
+            position:'100109',
+        };
+        var _STGY = {
+            login_source:1
+        };
+    </script>
+    <meta property="bytedance:lrDate_time" content="2026-06-16T14:20:14+08:00"/>
+    <meta property="bytedance:updated_time" content="2026-06-16T14:20:14+08:00"/>
+</head>
+<body class="job-body-wrapper" data-pv="cpc_job_detail">
+<div id="wrap">
+<script>
+    var staticPath = 'https://static.zhipin.com/v2';
+    _PAGE = {
+        checkMobileUrl: "/registe/sendSms.json",
+        regMobileUrl: "/registe/save.json",
+        loginMobileUrl: "/login/phone.json",
+        loginAccountUrl: "/login/account.json",
+        getRandomKeyUrl: "/captcha/randkey.json",
+        verifyImgUrl: "/captcha/?randomKey={randomKey}",
+        getPositionUrl: "/user/position.json",
+        homeRedirectUrl: "",
+        citySiteName:"全国站",
+        citySiteCode:"100010000",
+        skillsUrl: "/common/data/positionSkill",
+        isLogin: true,
+        identity: 0
+            ,
+            uid:755632371,
+            name: "蒋睿",
+            face: "https://img.bosszhipin.com/boss/avatar/avatar_16.png",
+            token: "qGkG6Rt1khBhhBFo|0",
+            clientIP: "14.19.209.22",
+                ws: {
+                    useSSL: true,
+                    server: "ws6.zhipin.com",
+                    port: 443
+                }
+    }
+</script>
+<div id="header" class="header-v2" >
+    <style>
+        #header .header-login-btn{ position: relative; }
+        #header .header-login-btn:hover .header-login-desc{ display: block; }
+        #header .header-login-btn:hover:after{
+            content: ' ';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -12px;
+            height: 12px;
+            z-index: 1;
+            background: transparent;
+        }
+        #header .header-login-desc{
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 34px;
+            margin-left: -114px;
+            background: #FFFFFF;
+            box-shadow: 0px 16px 40px 0px rgba(153,153,153,0.3), 0px 2px 10px 0px rgba(0,0,0,0.08);
+            z-index: 2;
+            font-size: 14px;
+            text-align: left;
+            padding: 16px 18px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-weight: normal;
+        }
+        #header .header-login-desc:before{
+            content: ' ';
+            position: absolute;
+            left: 50%;
+            margin-left: -4px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-top: 4px solid transparent;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 4px solid #fff;
+        }
+        #header .header-login-desc .login-desc-title{
+            font-weight: 500;
+            color: #333333;
+            line-height: 20px;
+            display: block;
+        }
+        #header .header-login-desc .login-desc-list{
+            margin-top: 4px;
+        }
+        #header .header-login-desc .login-desc-list li{
+            margin: 8px 0 0 0;
+            display: block;
+            font-size: 13px;
+            color: #333333;
+            text-align: left;
+            height: 26px;
+            line-height: 26px;
+        }
+        #header .header-login-desc .login-desc-list .login-desc-icon{
+            display: inline-block;
+            height: 26px;
+            width: 26px;
+            margin-right: 8px;
+            vertical-align: middle;
+            background: url(https://img.bosszhipin.com/static/file/2022/7rf2cut4bc1669274264900.png) 0 0 / 26px auto no-repeat;
+        }
+        #header .header-login-desc .login-desc-list .login-desc-icon.desc-icon-chat{
+            background-position: 0 0;
+        }
+        #header .header-login-desc .login-desc-list .login-desc-icon.desc-icon-match{
+            background-position: 0 -26px;
+        }
+        #header .header-login-desc .login-desc-list .login-desc-icon.desc-icon-info{
+            background-position: 0 -52px;
+        }
+        #header .header-resume-new .header-resume-tip{
+            z-index: 2;
+            display: none;
+        }
+        #header .header-resume-new a:hover .header-resume-tip{
+            display: none;
+        }
+        #header .header-nav-group{
+            margin: 0 5px;
+            float: none;
+        }
+        #header .header-nav-group li{
+            margin: 0;
+            position: relative;
+        }
+        #header .header-nav-group .header-nav-dot{
+            display: inline-block;
+            width: 2px;
+            height: 2px;
+            border-radius: 100%;
+            background: #fff;
+            vertical-align: middle;
+        }
+        #header .user-nav .header-login-btn{
+            vertical-align: middle;
+        }
+        #header .user-nav .nav-resume-tools{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        #header .user-nav .nav-resume-tools > a{
+            display: inline-block;
+            font-weight: 500;
+            color: #FFFFFF;
+            line-height: 20px;
+            height: auto;
+            padding: 3px 7px;
+            vertical-align: middle;
+            border-radius: 4px;
+            margin-right: 8px;
+            border: 1px solid transparent;
+        }
+        #header .user-nav .nav-resume-tools > a:hover{
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        #header .user-nav .nav-resume-tools:hover .nav-resume-box{
+            display: block;
+        }
+        #header .user-nav .nav-resume-box{
+            display: none;
+            position: absolute;
+            top: 49px;
+            right: 0;
+            z-index: 1;
+            padding: 4px;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            border: 1px solid #EDEDED;
+        }
+        #header .user-nav .nav-resume-box ul{
+            overflow: hidden;
+        }
+        #header .user-nav .nav-resume-box li{
+            display: block;
+            float: left;
+            text-align: center;
+            width: 120px;
+            margin: 4px;
+            border-radius: 8px;
+        }
+        #header .user-nav .nav-resume-box li a{
+            border: 1px solid transparent;
+            transition: all 0.2s linear;
+            border-radius: 8px;
+        }
+        #header .user-nav .nav-resume-box li:hover a{
+            border: 1px solid transparent;
+            border: 1px solid rgba(0,190,189,0.5);
+        }
+        #header .user-nav .nav-resume-box li:hover span{
+            color: #00A6A7;
+        }
+        #header .user-nav .header-resume-new + .nav-resume-box .resume-box-update{
+            display: block;
+        }
+        #header .user-nav .nav-resume-box .resume-box-update{
+            display: none;
+
+        }
+
+        #header .user-nav .nav-resume-box li.resume-box-boss{
+            background: linear-gradient(180deg, #CCDDFF 0%, rgba(255,255,255,0) 100%);
+        }
+        #header .user-nav .nav-resume-box li.resume-box-geek{
+            background: linear-gradient(180deg, #FFE4C2 0%, rgba(255,255,255,0) 100%);
+        }
+        #header .user-nav .nav-resume-box li.resume-box-geek a:before{
+            background-position: 0 -60px;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-upload a:before{
+            background-position: 0 -120px;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-update{
+            position: relative;
+            background: linear-gradient(180deg, #CCDDFF 0%, rgba(255,255,255,0) 100%);
+        }
+        #header .user-nav .nav-resume-box li.resume-box-update:after{
+            content: '解析成功';
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            font-size: 12px;
+            background: rgba(0, 166, 167, 0.1);
+            display: inline-block;
+            padding: 2px 4px;
+            line-height: 16px;
+            background: #00BEBD;
+            border-radius: 0px 8px 0px 8px;
+            color: #fff;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-update a:before{
+            background-position: 0 -180px;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-template{
+            background: linear-gradient(179.99998deg, #BFFC81 0%, rgba(255, 255, 255, 0.00) 100%);
+        }
+        #header .user-nav .nav-resume-box li.resume-box-template a:before {
+            background-position: 0 -300px;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-resume{
+            background: linear-gradient(180deg, #A6FFE7 0%, rgba(255,255,255,0) 100%);
+        }
+        #header .user-nav .nav-resume-box li.resume-box-resume a:before{
+            background-position: 0 -240px;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-upload{
+            background: linear-gradient(180deg, #A4E5FF 0%, rgba(255,255,255,0) 100%);
+        }
+        #header .user-nav .nav-resume-box li a{
+            display: block;
+            padding: 20px 0 10px;
+        }
+        #header .user-nav .nav-resume-box li a:before{
+            content: ' ';
+            display: block;
+            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            background: url(https://img.bosszhipin.com/static/file/2024/39ljdu0g591731901179280.png.webp) 0 0 / 60px auto no-repeat;
+        }
+        #header .user-nav .nav-resume-box li span{
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #222222;
+            line-height: 20px;
+            margin-top: 12px;
+            transition: all 0.2s linear;
+        }
+        #header .user-nav .nav-resume-box li p{
+            font-size: 12px;
+            color: #999999;
+            line-height: 17px;
+            margin-top: 4px;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-ai{
+            position: relative;
+            background: url(https://img.bosszhipin.com/static/file/2024/vezhctu8m51724673254140.png.webp) 0 0 / 128px no-repeat;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-ai a {
+            padding-top: 80px;
+        }
+        #header .user-nav .nav-resume-box li.resume-box-ai a::before {
+            display: none;
+        }
+        #header.header-v2 {
+            background: url(https://img.bosszhipin.com/static/zhipin/geek/982401352937125536.png.webp) 0 0 / 100% 49px no-repeat #202329;
+        }
+    </style>
+    <div class="inner home-inner">
+        <div class="logo">
+            <a href="https://www.zhipin.com/" ka="header-home-logo" title="BOSS直聘"><span>BOSS直聘</span></a>
+        </div>
+        <div class="nav">
+            <ul>
+                <li class=""><a ka="header-home" href="https://www.zhipin.com/">首页</a></li>
+                    <li class=""><a ka="header-jobs" href="https://www.zhipin.com/web/geek/jobs">职位</a></li>
+                <ul class="header-nav-group">
+                    <li class=""><a ka="header_brand" href="https://www.zhipin.com/gongsi/">公司</a></li>
+                </ul>
+                <ul class="header-nav-group">
+                    <li class=""><a class="nav-school-new" ka="tab_school_recruit_click" href="https://www.zhipin.com/school/">校园</a></li>
+                    <span class="header-nav-dot"></span>
+                    <li class=""><a class="nav-overseas-new" ka="tab_overseas_click" data-overseas-ip="false" href="https://www.zhipin.com/returnee_jobs/">海归</a></li>
+                </ul>
+                <li class=""><a ka="header-app" href="https://app.zhipin.com/">APP</a></li>
+                <li class=""><a class="nav-find" ka="header-find" href="https://youle.zhipin.com/recommend/selected/">有了</a></li>
+                    <li class=""><a ka="header-overseas" href="https://www.zhipin.com/overseas/">海外</a></li>
+                <li class=""><a class="nav-barrier-free" ka="header-barrier-free" href="https://www.zhipin.com/accessible_job/">无障碍专区</a></li>
+            </ul>
+        </div>
+            <div class="nav-search search-box">
+                <form action="https://www.zhipin.com/job_detail/" method="get" target="_blank">
+                    <div class="search-form-con">
+                        <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" maxlength="50" placeholder="搜索职位、公司"/></p>
+                    </div>
+                    <input type="hidden" name="city" class="city-code" value="101020100"/>
+                    <input type="hidden" name="source" value="8">
+                    <button type="submit" ka="search-job-top" class="btn btn-search">搜索</button>
+                    <div class="suggest-result">
+                        <ul></ul>
+                    </div>
+                </form>
+            </div>
+        <div class="user-nav">
+                <ul>
+                    <li class=""><a ka="header-message" href="https://www.zhipin.com/web/geek/chat">消息<span class="nav-chat-num"></span></a></li>
+                    <span class="nav-resume-tools">
+                        <li class=""><a ka="header-resume" href="https://www.zhipin.com/web/geek/resume">简历</a></li>
+                        <div class="nav-resume-box">
+                            <ul>
+                                <li class="resume-box-ai">
+                                    <a href="https://cv.zhipin.com/smart-resume?from=3" rel="nofollow" ka="resume_box_resume_ai" target="_blank">
+                                        <span>AI简历</span>
+                                        <p>智能简历生成</p>
+                                    </a>
+                                </li>
+                                <li class="resume-box-update">
+                                    <a href="javascript:;" rel="nofollow">
+                                        <span>简历更新</span>
+                                        <p>自动识别新简历</p>
+                                    </a>
+                                </li>
+                                <li class="resume-box-resume">
+                                    <a href="https://www.zhipin.com/web/geek/resume" rel="nofollow" ka="resume_box_resume">
+                                        <span>在线编辑</span>
+                                        <p>匹配优质岗位</p>
+                                    </a>
+                                </li>
+                                <li class="resume-box-template">
+                                    <a href="https://cv.zhipin.com" rel="nofollow" ka="resume_box_template">
+                                        <span>附件简历制作</span>
+                                        <p>打动HR的专业简历</p>
+                                    </a>
+                                </li>
+                                <li class="resume-box-upload nav-up-file">
+                                    <a class="header-resume-upload" ka="header-resume-upload-2" href="javascript:;">
+                                        <span>附件上传</span>
+                                        <p>快速投递心仪职位</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </span>
+                    <li class="nav-figure">
+                        <a href="https://www.zhipin.com/web/geek/recommend" ka="header-username">
+                            <span class="label-text">蒋睿</span><img src="https://img.bosszhipin.com/boss/avatar/avatar_16.png" alt=""/>
+                        </a>
+                        <div class="dropdown">
+                            <a href="https://www.zhipin.com/web/geek/recommend" class="personal-center" ka="header-personal">个人中心<span>查看面试投递状态、编辑在线简历</span></a>
+                            <a href="https://www.zhipin.com/web/geek/rule-center" class="rule-center" ka="rule-center">规则中心</a>
+                            <a href="https://www.zhipin.com/web/geek/account?type=home" class="account-set" ka="account_manage">账号与安全中心</a>
+                            <a href="https://www.zhipin.com/web/geek/privacy-set?type=privacySet&from=1" class="privacy-set" ka="privacy_set">隐私保护</a>
+                            <a href="https://www.zhipin.com/web/geek/notify-set" class="notify-set" ka="notify-set">消息通知</a>
+                            <a href="javascript:;" class="link-recruit" ka="header-recruit">切换为招聘者</a>
+                            <a href="javascript:;" class="link-logout" ka="header-logout">退出登录</a>
+                            <p class="recruit-tip"><img src="https://static.zhipin.com/v2/web/geek/images/recruit-tip.gif" alt=""><span>在 APP 端“我的 - 设置”中切换为BOSS身份后，重新登录本页即可进行招聘</span></p>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+    </div>
+</div>    <div id="main">
+        <div class="job-banner">
+            <div class="inner home-inner">
+                <div class="job-primary detail-box">
+                    <div class="info-primary">
+                        <div class="job-status"><span>最新</span></div>
+                        <div class="name">
+                            <h1 title="初级Python（线下面试）">初级Python（线下面试）</h1>
+                            <span class="salary">8-9K</span>
+                        </div>
+                        <p><a class="text-desc text-city" href="/shanghai/">上海</a>        <span class="text-desc text-experiece">1-3年</span>
+<span class="text-desc text-degree">大专</span></p>
+                        <div class="job-op">
+                            <div class="btn-container">
+            <a class="btn btn-interest " ka="top_job_detail_like" href="javascript:;"
+               data-url="/wapi/zprelation/geekTag/job/interest?securityId=Zr_qn7AavSk7n-V1qqoJjfEGbv-rYImiLgfDkscflB0XPiR4VfQp9jponpKOH2w7u2dCZCIuqeGJ-ira-OCbylewZTY6LCiqZnzxjwlZdHJj-TvZYyohellW5qRgEJdn6Abz4Dp8vCTHa7NCyiu1E8ZEbv3ncTDcXhv06ViH7uLqxBC51g0DSgaWYzX_MOUoPZjkHG1DudJKzzKHhcYo-VyfRhnxMJv5AFoUDfOSq-5Hpt6tW48lcoSYfiXG5zGHZB8UjGNUa8iQeEvOw76BUT0_FdIknms710x81_g8nA~~&jobId=1f2b8453765df3490nBz2dq0E1pT&tag=4&lid=">感兴趣</a>
+
+
+                <div class="btn btn-startchat-wrap">
+                    <a class="btn btn-startchat" ka="go_chat_done_549279383" href="javascript:;" redirect-url="/web/geek/chat?id=4ddad5bc2a7a5fe01HJ43Nq6FVU~&jobId=1f2b8453765df3490nBz2dq0E1pT&securityId=Zr_qn7AavSk7n-V1qqoJjfEGbv-rYImiLgfDkscflB0XPiR4VfQp9jponpKOH2w7u2dCZCIuqeGJ-ira-OCbylewZTY6LCiqZnzxjwlZdHJj-TvZYyohellW5qRgEJdn6Abz4Dp8vCTHa7NCyiu1E8ZEbv3ncTDcXhv06ViH7uLqxBC51g0DSgaWYzX_MOUoPZjkHG1DudJKzzKHhcYo-VyfRhnxMJv5AFoUDfOSq-5Hpt6tW48lcoSYfiXG5zGHZB8UjGNUa8iQeEvOw76BUT0_FdIknms710x81_g8nA~~&lid="
+                       data-url="/wapi/zpgeek/friend/add.json?securityId=Zr_qn7AavSk7n-V1qqoJjfEGbv-rYImiLgfDkscflB0XPiR4VfQp9jponpKOH2w7u2dCZCIuqeGJ-ira-OCbylewZTY6LCiqZnzxjwlZdHJj-TvZYyohellW5qRgEJdn6Abz4Dp8vCTHa7NCyiu1E8ZEbv3ncTDcXhv06ViH7uLqxBC51g0DSgaWYzX_MOUoPZjkHG1DudJKzzKHhcYo-VyfRhnxMJv5AFoUDfOSq-5Hpt6tW48lcoSYfiXG5zGHZB8UjGNUa8iQeEvOw76BUT0_FdIknms710x81_g8nA~~&jobId=1f2b8453765df3490nBz2dq0E1pT" data-isfriend="false"
+                       >
+                        立即沟通
+                    </a>
+                </div>
+                            </div>
+                            <div class="op-container">
+                                        <a href="/web/geek/resume" class="fl icon-resume-login" ka="job_online_resume_1"><i class="icon"></i>完善在线简历</a>
+                                            <a href="javascript:;" class="fr icon-upload-login attachment-resume-upload" ka="job_attach_resume_1"><i class="icon"></i>新增附件简历</a>
+                            </div>
+                        </div>
+                    </div>
+        <div class="tag-container-new">
+            <div class="tag-more" style="opacity: 1;">
+                <span class="link-more">...</span>
+                <div class="tag-all job-tags">
+                    <span>五险一金</span><span>定期体检</span><span>加班补助</span><span>年终奖</span><span>带薪年假</span><span>节日福利</span>
+                </div>
+            </div>
+            <div class="job-tags">
+                <span>五险一金</span><span>定期体检</span><span>加班补助</span><span>年终奖</span><span>带薪年假</span><span>节日福利</span>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
+        <div class="smallbanner">
+            <div class="inner home-inner">
+                <div class="company-info">
+                    <div class="name">
+                        
+                        <span class="job-title">初级Python（线下面试）</span>
+                        <span class="badge">8-9K</span>
+                    </div>
+                </div>
+        <div class="tag-container-new">
+            <div class="tag-more" style="opacity: 1;">
+                <span class="link-more">...</span>
+                <div class="tag-all job-tags">
+                    <span>五险一金</span><span>定期体检</span><span>加班补助</span><span>年终奖</span><span>带薪年假</span><span>节日福利</span>
+                </div>
+            </div>
+            <div class="job-tags">
+                <span>五险一金</span><span>定期体检</span><span>加班补助</span><span>年终奖</span><span>带薪年假</span><span>节日福利</span>
+            </div>
+        </div>
+                <div class="detail-op">
+                    <div class="btns">
+            <a class="btn btn-interest " ka="ceiling_job_detail_like" href="javascript:;"
+               data-url="/wapi/zprelation/geekTag/job/interest?securityId=Zr_qn7AavSk7n-V1qqoJjfEGbv-rYImiLgfDkscflB0XPiR4VfQp9jponpKOH2w7u2dCZCIuqeGJ-ira-OCbylewZTY6LCiqZnzxjwlZdHJj-TvZYyohellW5qRgEJdn6Abz4Dp8vCTHa7NCyiu1E8ZEbv3ncTDcXhv06ViH7uLqxBC51g0DSgaWYzX_MOUoPZjkHG1DudJKzzKHhcYo-VyfRhnxMJv5AFoUDfOSq-5Hpt6tW48lcoSYfiXG5zGHZB8UjGNUa8iQeEvOw76BUT0_FdIknms710x81_g8nA~~&jobId=1f2b8453765df3490nBz2dq0E1pT&tag=4&lid=">感兴趣</a>
+
+
+                <div class="btn btn-startchat-wrap">
+                    <a class="btn btn-startchat" ka="ceiling_job_detail_gochat" href="javascript:;" redirect-url="/web/geek/chat?id=4ddad5bc2a7a5fe01HJ43Nq6FVU~&jobId=1f2b8453765df3490nBz2dq0E1pT&securityId=Zr_qn7AavSk7n-V1qqoJjfEGbv-rYImiLgfDkscflB0XPiR4VfQp9jponpKOH2w7u2dCZCIuqeGJ-ira-OCbylewZTY6LCiqZnzxjwlZdHJj-TvZYyohellW5qRgEJdn6Abz4Dp8vCTHa7NCyiu1E8ZEbv3ncTDcXhv06ViH7uLqxBC51g0DSgaWYzX_MOUoPZjkHG1DudJKzzKHhcYo-VyfRhnxMJv5AFoUDfOSq-5Hpt6tW48lcoSYfiXG5zGHZB8UjGNUa8iQeEvOw76BUT0_FdIknms710x81_g8nA~~&lid="
+                       data-url="/wapi/zpgeek/friend/add.json?securityId=Zr_qn7AavSk7n-V1qqoJjfEGbv-rYImiLgfDkscflB0XPiR4VfQp9jponpKOH2w7u2dCZCIuqeGJ-ira-OCbylewZTY6LCiqZnzxjwlZdHJj-TvZYyohellW5qRgEJdn6Abz4Dp8vCTHa7NCyiu1E8ZEbv3ncTDcXhv06ViH7uLqxBC51g0DSgaWYzX_MOUoPZjkHG1DudJKzzKHhcYo-VyfRhnxMJv5AFoUDfOSq-5Hpt6tW48lcoSYfiXG5zGHZB8UjGNUa8iQeEvOw76BUT0_FdIknms710x81_g8nA~~&jobId=1f2b8453765df3490nBz2dq0E1pT" data-isfriend="false"
+                       >
+                        立即沟通
+                    </a>
+                </div>
+                    </div>
+                    <div class="info">
+                        上海速强信息
+                        <a href="/gongsi/job/e7dd7903f2d63a311Xd82dW4.html" target="_blank" class="link-more" ka="look-all-position">查看所有职位</a>
+                            <div class="job-detail-guide-download-app">
+                                <div class="job-detail-guide-download-app-icon"></div>
+                                下载App, 不错过Boss每一条消息
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="job-box">
+            <div class="inner home-inner">
+                <div class="job-sider">
+                        <div class="sider-company">
+                            <p class="title">公司基本信息</p>
+                            <div class="company-info">
+                                <a ka="job-detail-company-logo_custompage" href="/gongsi/e7dd7903f2d63a311Xd82dW4.html" title="上海速强信息" target="_blank">
+                                        <img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20180316/a2aa8ac112b5d43a546ebbf10bed4aceb357886add3789674af7a0658640b515.jpg?x-oss-process=image/resize,w_120,limit_0" alt=""/>
+                                </a>
+                                <a ka="job-detail-company_custompage" href="/gongsi/e7dd7903f2d63a311Xd82dW4.html"  title="上海速强信息" target="_blank">
+                                    上海速强信息
+                                </a>
+                            </div>
+                                 <p><i class="icon-stage"></i>未融资</p>
+                                <p><i class="icon-scale"></i>100-499人</p>
+                                <p><i class="icon-industry"></i><a ka="job-detail-brandindustry" href="/i100020/">互联网</a></p>
+                            <a href="/gongsi/job/e7dd7903f2d63a311Xd82dW4.html" class="look-all" ka="more-similar-jobs1">查看全部职位</a>
+                        </div>
+
+        <div class="similar-job-wrapper">
+            <h3>相似职位<a href="/c101020100-p100109/e_104-y_3/" rel="nofollow" ka="more-similar-jobs2" target="_blank">更多相似职位</a></h3>
+            <ul class="similar-job-list">
+                    <li>
+                        <a ka="job_sug_1" href="/job_detail/7c279940f53ee1db0nd73NS7FVNX.html" target="_blank">
+                            <div class="similar-job-info">
+                                <span class="similar-job-name">python开发工程师</span>
+                                <span class="similar-job-salary">8-13K</span>
+                            </div>
+                            <p class="similar-job-attr">
+                                <span class="similar-job-company" data-url="/gongsi/job/fc2b1b9f27618fe6031_09W8EA~~.html" ka="job_sug_brandjob1_custompage">
+                                    <span class="job-company-logo" data-url="/gongsi/fc2b1b9f27618fe6031_09W8EA~~.html" ka="job_sug_brand1_custompage">
+                                        <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="">
+                                    </span>
+                                    <span class="company-name">图萨扬</span>
+                                </span>
+                                <span class="similar-job-location">上海</span>
+                            </p>
+                        </a>
+                        <a href="/job_pk/1f2b8453765df3490nBz2dq0E1pT/7c279940f53ee1db0nd73NS7FVNX.html" target="_blank" class="job_pk" data-id="1f2b8453765df3490nBz2dq0E1pT" data-subid="7c279940f53ee1db0nd73NS7FVNX">
+                            职位对比
+                        </a>
+                    </li>
+                    <li>
+                        <a ka="job_sug_2" href="/job_detail/03df1b7ddc180f4a0nd439q7EFRX.html" target="_blank">
+                            <div class="similar-job-info">
+                                <span class="similar-job-name">端侧软件研发工程师</span>
+                                <span class="similar-job-salary">9-14K·13薪</span>
+                            </div>
+                            <p class="similar-job-attr">
+                                <span class="similar-job-company" data-url="/gongsi/job/6951d670e3f98bc61n1z2dy0Flo~.html" ka="job_sug_brandjob2_custompage">
+                                    <span class="job-company-logo" data-url="/gongsi/6951d670e3f98bc61n1z2dy0Flo~.html" ka="job_sug_brand2_custompage">
+                                        <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20221214/7bf6f160950405e991dc191603f17101846bffb236f600eb5293c6f2b544893fb75546cd6e32d36f.jpg?x-oss-process=image/resize,w_100,limit_0" alt="">
+                                    </span>
+                                    <span class="company-name">炙云科技</span>
+                                </span>
+                                <span class="similar-job-location">上海</span>
+                            </p>
+                        </a>
+                        <a href="/job_pk/1f2b8453765df3490nBz2dq0E1pT/03df1b7ddc180f4a0nd439q7EFRX.html" target="_blank" class="job_pk" data-id="1f2b8453765df3490nBz2dq0E1pT" data-subid="03df1b7ddc180f4a0nd439q7EFRX">
+                            职位对比
+                        </a>
+                    </li>
+                    <li>
+                        <a ka="job_sug_3" href="/job_detail/dd96bd25399162d90nd62tS0FVdV.html" target="_blank">
+                            <div class="similar-job-info">
+                                <span class="similar-job-name">AI智能体开发工程师</span>
+                                <span class="similar-job-salary">8-13K</span>
+                            </div>
+                            <p class="similar-job-attr">
+                                <span class="similar-job-company" data-url="/gongsi/job/05491849deea361b1XZ_0966Flc~.html" ka="job_sug_brandjob3_custompage">
+                                    <span class="job-company-logo" data-url="/gongsi/05491849deea361b1XZ_0966Flc~.html" ka="job_sug_brand3_custompage">
+                                        <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20230718/7bf6f160950405e92c29c1d7a946c18cfe861cbbb7c5c3ef70e229a406e6b6b8c354c02b5940cb89.png?x-oss-process=image/resize,w_100,limit_0" alt="">
+                                    </span>
+                                    <span class="company-name">中安质环</span>
+                                </span>
+                                <span class="similar-job-location">上海</span>
+                            </p>
+                        </a>
+                        <a href="/job_pk/1f2b8453765df3490nBz2dq0E1pT/dd96bd25399162d90nd62tS0FVdV.html" target="_blank" class="job_pk" data-id="1f2b8453765df3490nBz2dq0E1pT" data-subid="dd96bd25399162d90nd62tS0FVdV">
+                            职位对比
+                        </a>
+                    </li>
+                    <li>
+                        <a ka="job_sug_4" href="/job_detail/6ccfc3f389a60e910nd70ty0FVdS.html" target="_blank">
+                            <div class="similar-job-info">
+                                <span class="similar-job-name">Coding Agent Developer</span>
+                                <span class="similar-job-salary">9-14K</span>
+                            </div>
+                            <p class="similar-job-attr">
+                                <span class="similar-job-company" data-url="/gongsi/job/fcba810407ae1a1403F83ti4FVQ~.html" ka="job_sug_brandjob4_custompage">
+                                    <span class="job-company-logo" data-url="/gongsi/fcba810407ae1a1403F83ti4FVQ~.html" ka="job_sug_brand4_custompage">
+                                        <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20260119/7bf6f160950405e92d760228e2f5341220eacd84e438c77e3792edefa458885cec1051fbf73a4058.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="">
+                                    </span>
+                                    <span class="company-name">胜算云</span>
+                                </span>
+                                <span class="similar-job-location">上海</span>
+                            </p>
+                        </a>
+                        <a href="/job_pk/1f2b8453765df3490nBz2dq0E1pT/6ccfc3f389a60e910nd70ty0FVdS.html" target="_blank" class="job_pk" data-id="1f2b8453765df3490nBz2dq0E1pT" data-subid="6ccfc3f389a60e910nd70ty0FVdS">
+                            职位对比
+                        </a>
+                    </li>
+                    <li>
+                        <a ka="job_sug_5" href="/job_detail/40c2f12af4a59fb80nZy2dS5E1NS.html" target="_blank">
+                            <div class="similar-job-info">
+                                <span class="similar-job-name">python开发</span>
+                                <span class="similar-job-salary">8-13K</span>
+                            </div>
+                            <p class="similar-job-attr">
+                                <span class="similar-job-company" data-url="/gongsi/job/cb35617cb1987f4e1HJ-2tu-.html" ka="job_sug_brandjob5_custompage">
+                                    <span class="job-company-logo" data-url="/gongsi/cb35617cb1987f4e1HJ-2tu-.html" ka="job_sug_brand5_custompage">
+                                        <img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20201218/235d5510d738b647efc071bfcc1d7c294a9030b06443dd251481e2ffd1bbe029_s.jpg?x-oss-process=image/resize,w_100,limit_0" alt="">
+                                    </span>
+                                    <span class="company-name">杰奕</span>
+                                </span>
+                                <span class="similar-job-location">上海</span>
+                            </p>
+                        </a>
+                        <a href="/job_pk/1f2b8453765df3490nBz2dq0E1pT/40c2f12af4a59fb80nZy2dS5E1NS.html" target="_blank" class="job_pk" data-id="1f2b8453765df3490nBz2dq0E1pT" data-subid="40c2f12af4a59fb80nZy2dS5E1NS">
+                            职位对比
+                        </a>
+                    </li>
+            </ul>
+                <a class="look-all" href="/c101020100-p100109/e_104-y_3/" rel="nofollow" target="_blank" ka="more-similar-jobs3">查看全部职位</a>
+        </div>
+
+                    <div class="promotion-img"><a href="https://app.zhipin.com/" ka="job-detail-app" target="_blank"><img src="https://img.bosszhipin.com/static/file/2022/wf8r5vlj1y1653961013785.png" alt=""></a></div>
+                </div>
+
+                <div class="job-detail">
+                    
+
+                    <div class="job-detail-section">
+                        <div class="detail-section-operate">
+                            <div class="op-links">
+                                <a ka="job_detail_wechat_share" href="javascript:;" class="link-wechat-share" data-url="/wapi/zpgeek/job/share/qr.json?jobId=1f2b8453765df3490nBz2dq0E1pT&source=2">微信扫码分享</a>
+                                <a ka="job_detail_report" href="javascript:;" class="link-report">举报</a>
+                            </div>
+                        </div>
+                        <div class="detail-content-header">
+                            <h3>职位描述</h3>
+                        </div>
+                            <ul class="job-keyword-list">
+                                    <li>Python</li>
+                            </ul>
+                            <div class="job-sec-text">岗位职责：<br/>1、负责相关系统的开发、维护；<br/>2、保证项目的质量和进度；<br/>3、线上问题重现及解决。<br/>任职要求：<br/>1、熟悉Python开发并有一年以上实际开发经验；<br/>2、具备AI Coding开发思维和经验，对AI大模型有一定的认识和理解；<br/>3、独⽴承担系统功能的需求分析和重要功能模块的设计；<br/>4、可负责核⼼模块的代码编写、测试；<br/>5、学习能⼒强，具有良好的沟通能力，有强烈的责任心和团队合作精神；<br/>6、严谨细致、踏实的⼯作作风，较好的问题分析和处理能力，工作态度端正，抗压能力强。</div>
+                        <div class="job-boss-info">
+                            <div class="detail-figure">
+                                    <img src="https://img.bosszhipin.com/beijin/upload/avatar/20240904/607f1f3d68754fd05459ec5bef82afe442d86888d4cb93a76d6b1069d54d516c0289ec8ef3531564_s.jpg.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                            </div>
+                            <h2 class="name">占女士<i class="icon-vip"></i>
+                                    
+                                    <span class="boss-online-tag">在线</span>
+                            </h2>
+                            <div class="boss-info-attr">
+                                上海速强信息<em class="vdot">·</em>人事
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="job-detail-section prop-item">
+                        <h3>竞争力分析</h3>
+                        <div class="prop-default">
+                            <div class="prop-detail">
+                                <div class="pull-right">加载中...</div>
+                                <div>个人综合排名：<span>在<img src="https://img.bosszhipin.com/static/file/2022/4jo15bijai1661828091546.png">人中排名第<img src="https://img.bosszhipin.com/static/file/2022/4jo15bijai1661828091546.png"></span></div>
+                            </div>
+                            <div class="prop-container">
+                                <span class="level-1"></span>
+                                <span class="level-2"><em>一般</em></span>
+                                <span class="level-3"><em>良好</em></span>
+                                <span class="level-4"><em>优秀</em></span>
+                                <span class="level-5"><em>极好</em></span>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="job-detail-section security-box">
+                            <h3>BOSS 安全提示</h3>
+                            <p>BOSS直聘严禁用人单位和招聘者用户做出任何损害求职者合法权益的违法违规行为，包括但不限于扣押求职者证件、收取求职者财物、向求职者集资、让求职者入股、诱导求职者异地入职、异地参加培训、违法违规使用求职者简历等，您一旦发现此类行为，
+                                <a href="javascript:;" class="link-report">请立即举报</a>
+                            </p>
+                            
+                        </div>
+
+                        <div class="job-detail-section job-detail-company">
+                                    <div class="detail-section-item company-info-box">
+                                        <h3>公司介绍</h3>
+                                        <div class="job-sec-text fold-text">上海速强信息技术有限公司成立于2005年，是一家以全新软件开发理念为主导，致力于建立软件生产新模式的新兴IT公司。<br/>&nbsp;&nbsp;&nbsp;&nbsp; 目前公司的主要客户涵盖金融保险、电子商务等行业。<br/>&nbsp;<br/>&nbsp;&nbsp;&nbsp;&nbsp; 公司核心技术、管理团队是由具有多年IT行业背景和管理经验的职业经理人组成，具有多年行业应用实施经验。凭借自身多年的软件实施经验，速强信息已形成完善的技术应用体系。<br/>        速强信息顺应网络社会、知识经济、人性文化、数字生存的时代潮流，满足人类追求成功、渴求友谊、享受自由、勇于探索、彰显个性的内在需求，以灵活的软件产品和人性的服务，使客户实现工作上的&lsquo;智能化、网络化、个性化&rsquo;；同时，速强更注重人才对软件发展的作用，秉承&lsquo;以人为本&rsquo;的思想，为员工营造和谐、愉快的工作环境，努力为软件产业培养人才。</div>
+                                        <a ka="job-comintroduce" href="/gongsi/e7dd7903f2d63a311Xd82dW4.html" target="_blank" class="look-all">查看全部</a>
+                                    </div>
+                                    <div class="detail-section-item business-info-box">
+                                        <h3>工商信息</h3>
+                                        <div class="level-list-box">
+                                            <ul class="level-list">
+                                                <li class="company-name"><span>公司名称</span>上海速强信息技术有限公司</li>
+                                                <li class="company-user"><span>法定代表人</span>刘建宏</li>
+                                                <li class="res-time"><span>成立日期</span>2005-08-01</li>
+                                                <li class="company-type"><span>企业类型</span>有限责任公司（自然人投资或控股）</li>
+                                                <li class="manage-state"><span>经营状态</span>存续</li>
+                                                <li class="company-fund"><span>注册资金</span>3000万</li>
+                                            </ul>
+                                            <a ka="job-cominfo" href="/gongsi/e7dd7903f2d63a311Xd82dW4.html" target="_blank" class="look-all">查看全部</a>
+                                        </div>
+                                    </div>
+                            <div class="detail-section-item company-address">
+                                <h3>工作地址</h3>
+                                    <div class="job-location">
+                                        <div class="location-address">上海浦东新区金领之都</div>
+                                        <div class="job-location-map js-open-map" data-content="上海浦东新区金领之都" data-addressid="64eb1cf2dddfb6d71nBy2t61GFZVxoW-WPOc" data-lat="121.620996,31.261295"
+                                                 data-gray="1" >
+                                                <img src="https://img.bosszhipin.com/beijin/amap/staticMap/9fbb228f413eb2df0a56023f65b2aca8" alt="公司地址">
+                                                <p>点击查看地图</p>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="job-detail-section more-job-section">
+                            <div class="look-job-box">
+                                <h3><a href="/c101020100-p100109/e_104-y_3/" rel="nofollow" ka="more-similar-jobs4" class="look-job-more" target="_blank">更多职位</a>看过该职位的人还看了</h3>
+                                <ul class="look-job-list">
+                                        <li>
+                                            <a ka="job_sug_6" href="/job_detail/d509c820b860deaa0nd40tq5EFRV.html" target="_blank">
+                                                <div class="info-job">
+                                                    <div class="name">AI应用专员</div>
+                                                    <p class="salary">10-15K·13薪</p>
+                                                </div>
+                                                <div class="info-company">
+                                                    <div class="info-company-logo" data-url="/gongsi/job/665098e418f51f3b1XJ42dS9FVE~.html">
+                                                        <span class="company-logo-image" data-url="/gongsi/665098e418f51f3b1XJ42dS9FVE~.html">
+                                                                <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20230331/7bf6f160950405e9c1faa31267edc145e21fde165bcb555cdb7fc2f1123d2d34df938fd706ce89f7.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                        </span>
+                                                        <span class="company-logo-name">上海英可斯企业管...</span>
+                                                    </div>
+                                                    <div class="company-location">上海</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ka="job_sug_7" href="/job_detail/dd5eea014631f4d60nd70tW8ElRS.html" target="_blank">
+                                                <div class="info-job">
+                                                    <div class="name">数据平台后端开发工程师</div>
+                                                    <p class="salary">10-14K</p>
+                                                </div>
+                                                <div class="info-company">
+                                                    <div class="info-company-logo" data-url="/gongsi/job/ba35e9cbe0e5ba9d0XZ62dq0Fg~~.html">
+                                                        <span class="company-logo-image" data-url="/gongsi/ba35e9cbe0e5ba9d0XZ62dq0Fg~~.html">
+                                                                <img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20210420/ba371e85d9037e78a026a7e372e05ecfcf6a0a7172300535600dc383bca6b106_s.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                        </span>
+                                                        <span class="company-logo-name">仁竹信息科技</span>
+                                                    </div>
+                                                    <div class="company-location">上海</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ka="job_sug_8" href="/job_detail/8d2c8ea15e653c8b0nZy3Nq5EVJX.html" target="_blank">
+                                                <div class="info-job">
+                                                    <div class="name">rpa工程师</div>
+                                                    <p class="salary">8-13K</p>
+                                                </div>
+                                                <div class="info-company">
+                                                    <div class="info-company-logo" data-url="/gongsi/job/76c54695226741cb1XN83dq6GFA~.html">
+                                                        <span class="company-logo-image" data-url="/gongsi/76c54695226741cb1XN83dq6GFA~.html">
+                                                                <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                        </span>
+                                                        <span class="company-logo-name">纪得</span>
+                                                    </div>
+                                                    <div class="company-location">上海</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ka="job_sug_9" href="/job_detail/07748a43b30dea330nd73969F1RY.html" target="_blank">
+                                                <div class="info-job">
+                                                    <div class="name">ai人工智能工程师</div>
+                                                    <p class="salary">10-15K</p>
+                                                </div>
+                                                <div class="info-company">
+                                                    <div class="info-company-logo" data-url="/gongsi/job/463d3ff2598684ee1X1y296_F1Q~.html">
+                                                        <span class="company-logo-image" data-url="/gongsi/463d3ff2598684ee1X1y296_F1Q~.html">
+                                                                <img src="https://img.bosszhipin.com/beijin/upload/com/logo/20230826/7b5b554d84f9729c63f78367257acc47fa1d2d6be3b06506b695aab1aacab4267bc6a8d42f1a0c40.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                        </span>
+                                                        <span class="company-logo-name">上海好多才信息服务</span>
+                                                    </div>
+                                                    <div class="company-location">上海</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ka="job_sug_10" href="/job_detail/6656589555e5be040nd429m_FVFQ.html" target="_blank">
+                                                <div class="info-job">
+                                                    <div class="name">可视化开发工程师</div>
+                                                    <p class="salary">10-15K</p>
+                                                </div>
+                                                <div class="info-company">
+                                                    <div class="info-company-logo" data-url="/gongsi/job/a8da0ab7172a82c51XBz29m5FFA~.html">
+                                                        <span class="company-logo-image" data-url="/gongsi/a8da0ab7172a82c51XBz29m5FFA~.html">
+                                                                <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20230209/7bf6f160950405e94d0bd48cb8c88b83854071e286fba6af8738b46702e45117673e60e657c8b8d2.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                        </span>
+                                                        <span class="company-logo-name">辅海科技</span>
+                                                    </div>
+                                                    <div class="company-location">上海</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a ka="job_sug_11" href="/job_detail/71ee794a49184dfa0nd429S1E1JQ.html" target="_blank">
+                                                <div class="info-job">
+                                                    <div class="name">Python开发岗位</div>
+                                                    <p class="salary">10-15K</p>
+                                                </div>
+                                                <div class="info-company">
+                                                    <div class="info-company-logo" data-url="/gongsi/job/f9a3238bfba6b98c1XR809m7EFQ~.html">
+                                                        <span class="company-logo-image" data-url="/gongsi/f9a3238bfba6b98c1XR809m7EFQ~.html">
+                                                                <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                        </span>
+                                                        <span class="company-logo-name">上海琦焕科技有限公司</span>
+                                                    </div>
+                                                    <div class="company-location">上海</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    <div class="job-detail-section more-job-section">
+                            <div class="omnibus-job-box">
+                                <h3>精选职位</h3>
+                                <div class="omnibus-slider-main">
+                                    <ul>
+                                                <li class="cur">
+                                                <ul class="look-job-list">
+                                            <li>
+                                                <a ka="job_recommend_1" href="/job_detail/c3cea2a90c55ac030nd439y5FVNW.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python开发</div>
+                                                        <p class="salary">11-18K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/51908dd4f788210f1HRz0tW8FVc~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/51908dd4f788210f1HRz0tW8FVc~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">沐式科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_2" href="/job_detail/d5ef94940427da5e0nZ_09W4FFdV.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">WD系统开发工程师</div>
+                                                        <p class="salary">8-12K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/5630ea18e1fc1c551XF40ty-EFI~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/5630ea18e1fc1c551XF40ty-EFI~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/logo/20230504/7b5b554d84f9729cc321f8e5d6f8e71ec60b488444c0458a6dafc452bad96751ef1088d4c53aadf0.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">优层智能科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_3" href="/job_detail/efbc75e05fa47a8f0nd73Nq_EFNR.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">Python开发工程师(外包)</div>
+                                                        <p class="salary">11-18K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/31516c423ed259dc1nJ92Nq4.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/31516c423ed259dc1nJ92Nq4.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20160824/f8a94d1786a13212fe57c32f2e4eafd7cd6e43382a9beb8ba0e3fb43d21c4352.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">天翼征信</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_4" href="/job_detail/f29f5ed955561b770nZ93dS9FVZR.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">Python软件工程师</div>
+                                                        <p class="salary">9-14K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/6951d670e3f98bc61n1z2dy0Flo~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/6951d670e3f98bc61n1z2dy0Flo~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20221214/7bf6f160950405e991dc191603f17101846bffb236f600eb5293c6f2b544893fb75546cd6e32d36f.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">炙云科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_5" href="/job_detail/a2b3c1113b4182480nd43Ni6FlNT.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python全栈工程师</div>
+                                                        <p class="salary">12-18K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/df3e7b5fbbd338c41XF52N20GA~~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/df3e7b5fbbd338c41XF52N20GA~~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/logo/20190930/b8346c39ff0ace6b93514ac93d704ed4c84f02390a2042a28975f76cd59180ba.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">上海鉴智</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_6" href="/job_detail/8572bbd6117ad76b0nZz2tu0EVZT.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">Python（上海）</div>
+                                                        <p class="salary">10-13K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/a53ddf3edd8970c41HF629-_ElU~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/a53ddf3edd8970c41HF629-_ElU~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">旭日天泓</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                                </ul>
+                                                </li>
+                                                <li class="">
+                                                <ul class="look-job-list">
+                                            <li>
+                                                <a ka="job_recommend_7" href="/job_detail/8293c30511e7c8410nZy096_GVZU.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python开发工程师</div>
+                                                        <p class="salary">10-14K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/f7c41892953469e81n1z3Nu_FQ~~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/f7c41892953469e81n1z3Nu_FQ~~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20240222/7bf6f160950405e93f239d966f7ae03bd403275d848d41477ffd846c52f228792d36b02b9dca23f5.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">嘉为科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_8" href="/job_detail/d57c3dd0c06d6d770nZ93Ni9FFNZ.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">技术优化师</div>
+                                                        <p class="salary">7-10K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/ae49e7d0382b91cc1XR52tq1GVI~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/ae49e7d0382b91cc1XR52tq1GVI~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20250922/7bf6f160950405e96ee1a12d37515352e752ed6cb0484ad92addd1bfbdd02426aa1d877ae2338da6.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">魔眼艺术科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_9" href="/job_detail/6e44793fac0ded0e0nd63Ni7EVZQ.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">AI原生工程师/极客型程序员</div>
+                                                        <p class="salary">6-10K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/c6f73bd33f9f673a0nx43967EA~~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/c6f73bd33f9f673a0nx43967EA~~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20200604/96473956d8f56ecca1f98f44a71e1dc1006d6fb888dfc02c6392b797018e01f2_s.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">海乂知</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_10" href="/job_detail/9f1e7c6caf3617010nd60926ElpT.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">ai全栈工程师</div>
+                                                        <p class="salary">12-21K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/25c288dec22fec7c1nV8296_.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/25c288dec22fec7c1nV8296_.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/logo/20190804/20a1b1485bdbc391c5cd8a152e99da2fc596bb72f30ef2f74800368b4239f599.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">阿里云</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_11" href="/job_detail/903b08757dcfd9bb0nZ42tq5GVZU.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python</div>
+                                                        <p class="salary">8-12K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/f491a5f6d9d4477f03B829S1FFU~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/f491a5f6d9d4477f03B829S1FFU~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">广连软件</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_12" href="/job_detail/c9fe02a68d0d11a10nZ909-0EVdT.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">Python 开发工程师</div>
+                                                        <p class="salary">10-15K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/531e8bc83e1a045a03Z93Nm0FFM~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/531e8bc83e1a045a03Z93Nm0FFM~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">擎脑科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                                </ul>
+                                                </li>
+                                                <li class="">
+                                                <ul class="look-job-list">
+                                            <li>
+                                                <a ka="job_recommend_13" href="/job_detail/857f4db54c05a0f10nZ53di9F1FZ.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python开发工程师</div>
+                                                        <p class="salary">9-14K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/4d3dfd5a51c4420b03d-2Ny7EVU~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/4d3dfd5a51c4420b03d-2Ny7EVU~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">北京软通动力云计...</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_14" href="/job_detail/92945682537bd6fc0nZ-3NW8EFtS.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">运维开发</div>
+                                                        <p class="salary">9-14K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/51908dd4f788210f1HRz0tW8FVc~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/51908dd4f788210f1HRz0tW8FVc~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">沐式科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_15" href="/job_detail/3051d27e7eea00800nZ53tu_E1FY.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python工程师</div>
+                                                        <p class="salary">8-12K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/808f24ff0999a0601XZ90ti1FFQ~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/808f24ff0999a0601XZ90ti1FFQ~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20260210/7bf6f160950405e9b3e4cbbfeab404434f0837b4e59043c5454d443bc8e2afce399d285e2a1e3f31.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">红薯派</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_16" href="/job_detail/58a5f6f312e2e0b10nZ60tW6GVdV.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">影刀搭建工程师-电商方向</div>
+                                                        <p class="salary">8-10K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/12ee48e776dfec940Hd629u_Fw~~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/12ee48e776dfec940Hd629u_Fw~~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/admin/20241009/7a57a5a743894a0e61db0c9f94e55da3789b92c168491f5575a8c6cfd5eed090fc41aa91be88d106.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">梦蜜</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_17" href="/job_detail/1635cc041e126c860nd42du6F1VR.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">高级后端工程师</div>
+                                                        <p class="salary">12-13K·13薪</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/d29808b65ab64a6803R93dm4GVE~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/d29808b65ab64a6803R93dm4GVE~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20250408/7bf6f160950405e91cd75b96323fba9bfb34a6d73a85c0e80736268e778f88a38ee87c843b9933d1.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">上海米可瑞思智能</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_18" href="/job_detail/27dfad359e02321b0nZ929W1FVpQ.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">云计算高级研发工程师</div>
+                                                        <p class="salary">10-15K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/f2a4fea354a85f671Hxz09W_GFs~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/f2a4fea354a85f671Hxz09W_GFs~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20241219/7bf6f160950405e934725c7c487436ee7b40c7e8888d32cd23426fab6a7dbf0de6fcd94503044186.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">上海源兹生物科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                                </ul>
+                                                </li>
+                                                <li class="">
+                                                <ul class="look-job-list">
+                                            <li>
+                                                <a ka="job_recommend_19" href="/job_detail/aa1982454cd0ad470nZy3Nm8EFNX.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python全栈工程师</div>
+                                                        <p class="salary">10-12K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/d79059ea7f489ed503Vz2tW_.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/d79059ea7f489ed503Vz2tW_.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/logo/20220104/7b5b554d84f9729cf0f319289746e1404ec674dc02235bc3055972acd02bd42f3281931616f96085.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">绵烁资产</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_20" href="/job_detail/3d668b25c8cd2f7b0nZ93NS-GVVY.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">AI智能体研发专员/工程师</div>
+                                                        <p class="salary">10-15K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/257a0f794c17bf7a33N_3dg~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/257a0f794c17bf7a33N_3dg~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20180319/92b59104b675081fb8737c90eb31a52cc0d136c7d03a3c46ead0bc6dba4cdf10.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">梅斯医学</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_21" href="/job_detail/8b4b409d50c298140nZ82dW9EFJY.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">后端工程师</div>
+                                                        <p class="salary">10-13K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/083946b609afe9da03J73t67F1s~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/083946b609afe9da03J73t67F1s~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20260212/7bf6f160950405e9e1f44cc62dee785184b533d79c29ce3d329d5a40a925a61ed98195e1e86aa59f.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">伯镭科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_22" href="/job_detail/67223d0a17405ed70nZy292-EltW.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">Al研发工程师(Python/Golang方向)</div>
+                                                        <p class="salary">10-15K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/a0b3a05f20927b4c1nZ82Nq6Fg~~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/a0b3a05f20927b4c1nZ82Nq6Fg~~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/admin/20241009/7a57a5a743894a0e61db0c9f94e55da3789b92c168491f5575a8c6cfd5eed090fc41aa91be88d106.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">祐云信息</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_23" href="/job_detail/20b4c5ef1d53d5260nZz0tu9ElFX.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">数据解决方案工程师(J10100)</div>
+                                                        <p class="salary">12-18K·14薪</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/faa855501c8f20610XZ80tS1.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/faa855501c8f20610XZ80tS1.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20250805/7bf6f160950405e9888d4aca0f788ff98c663f21a39c9c9bf8c8e98e0115caffa68b334f1c594ee1.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">理工数传</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_24" href="/job_detail/37e5b352b357fe040nZz2d28FVtW.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">ai工程师</div>
+                                                        <p class="salary">6-9K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/47c64d78263656da33x43NS0.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/47c64d78263656da33x43NS0.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/mcs/chatphoto/20170818/2561bd26dcb60a9320326def29feb4818c7dd922ad47494fc02c388e12c00eac.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">上海申新律师事务所</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                                </ul>
+                                                </li>
+                                                <li class="">
+                                                <ul class="look-job-list">
+                                            <li>
+                                                <a ka="job_recommend_25" href="/job_detail/c9ad8c44540c249f0nZy2964FFdY.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">初级Python程序员</div>
+                                                        <p class="salary">10-15K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/75f2d4b7c551093f1HFz09W9FlA~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/75f2d4b7c551093f1HFz09W9FlA~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">上海宇迭</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_26" href="/job_detail/82fea9e71f925af90nZ-3t-5EldS.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">运维开发</div>
+                                                        <p class="salary">9-14K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/51908dd4f788210f1HRz0tW8FVc~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/51908dd4f788210f1HRz0tW8FVc~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">沐式科技</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_27" href="/job_detail/8b5b30c1dd726e1e0nd62Ni1EFtS.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">Agent 工程师（初级）</div>
+                                                        <p class="salary">13-20K·15薪</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/64226d5e8c94fc331nx40tS1GVM~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/64226d5e8c94fc331nx40tS1GVM~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20211231/7bf6f160950405e9446cd7b3b855ed975159d5ef69dbfb2b5c7d480a40146cbe1e7446231df0097c.jpg?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">久尺网络科技有限公司</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_28" href="/job_detail/d48d4b15f670c4bb0nZ829m1FVdQ.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">AI应用开发工程师</div>
+                                                        <p class="salary">10-15K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/6101bc8639573ec61XRy39W_.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/6101bc8639573ec61XRy39W_.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/workfeel/20250831/7bf6f160950405e9475708bb9143f12f0d0cd1bb2220bc4405f70c01a6708c46d59ab86b2b68fb1e.png.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">播阳</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_29" href="/job_detail/2ebd77c784dc65460nZy2ti7FldY.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">python工程师</div>
+                                                        <p class="salary">6-8K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/07efd7f6da11e2a903V929q9GVY~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/07efd7f6da11e2a903V929q9GVY~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/upload/com/logo/20250802/7b5b554d84f9729c2b00f94692d5a359695c8c83e00fbc222f74860d9670415cef3e5bf933bddd2e.jpg.webp?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">智云方舟</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ka="job_recommend_30" href="/job_detail/fd76c7df7892b58a0nd729y6FVtY.html" target="_blank">
+                                                    <div class="info-job">
+                                                        <div class="name">AI自动化工程师（多Agent与企业系统集成）</div>
+                                                        <p class="salary">12-24K</p>
+                                                    </div>
+                                                    <div class="info-company">
+                                                        <div class="info-company-logo" data-url="/gongsi/job/4c024c3484db2b061H153N-4EFE~.html">
+                                                                    <span class="company-logo-image" data-url="/gongsi/4c024c3484db2b061H153N-4EFE~.html">
+                                                                            <img src="https://img.bosszhipin.com/beijin/icon/894ce6fa7e58d64d57e7f22d2f3a9d18afa7fcceaa24b8ea28f56f1bb14732c0.png?x-oss-process=image/resize,w_100,limit_0" alt="" />
+                                                                    </span>
+                                                            <span class="company-logo-name">上海六信合投资</span>
+                                                        </div>
+                                                        <div class="company-location">上海</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                                </ul>
+                                                </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        <div class="detail-search-box search-box">
+                            <div class="search-form">
+                                <form action="/web/geek/jobs" method="get" target="_blank">
+                                    <div class="search-form-con">
+                                        <div class="city-sel" ka="search-select-city">
+                                            <span class="label-text cur"><b data-val="101020100">上海</b><i class="icon-arrow-down"></i></span>
+                                        </div>
+                                        <p class="ipt-wrap"><input ka="search-job-query" name="query" type="text" class="ipt-search" autocomplete="off" placeholder="搜索职位、公司" value="Python"></p>
+                                    </div>
+                                    <input type="hidden" name="city" class="city-code" value="101020100">
+                                    <input type="hidden" name="source" value="9">
+                                    <button type="submit" ka="search-job" class="btn btn-search">搜索</button>
+                                    <div class="suggest-result" style="display: none;">
+                                        <ul></ul>
+                                    </div>
+                                    <div class="city-box">
+                                        <ul class="dorpdown-province">
+                                        </ul>
+                                        <div class="dorpdown-city">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+<div class="job-detail-section links-container links-container-new">
+    <div class="links-box">
+        <div class="title-box">
+            <span class="title-item cur">城市招聘</span>
+            <span class="title-item">热门职位</span>
+            <span class="title-item">推荐公司</span>
+            <span class="title-item">热门企业</span>
+        </div>
+        <div class="links-wrapper">
+            <div class="links-content cur">
+                                            <a href="/c101161100/" target="_blank" ka="seo-city-1">陇南招聘</a>
+                            <a href="/c101051200/" target="_blank" ka="seo-city-2">双鸭山招聘</a>
+                            <a href="/c101250500/" target="_blank" ka="seo-city-3">郴州招聘</a>
+                            <a href="/c101130800/" target="_blank" ka="seo-city-4">吐鲁番招聘</a>
+                            <a href="/c101160300/" target="_blank" ka="seo-city-5">平凉招聘</a>
+                            <a href="/c101051000/" target="_blank" ka="seo-city-6">鸡西招聘</a>
+                            <a href="/c101071200/" target="_blank" ka="seo-city-7">朝阳招聘</a>
+                            <a href="/c101221400/" target="_blank" ka="seo-city-8">六安招聘</a>
+                            <a href="/c101282100/" target="_blank" ka="seo-city-9">汕尾招聘</a>
+                            <a href="/c101281900/" target="_blank" ka="seo-city-10">揭阳招聘</a>
+            </div>
+            <div class="links-content">
+                <a href="/p100704/" target="_blank" ka="seo-position-1">架构师招聘</a>
+                <a href="/p101008/" target="_blank" ka="seo-position-2">无线/天线工程师招聘</a>
+                <a href="/p100807/" target="_blank" ka="seo-position-3">系统集成招聘</a>
+                <a href="/p100409/" target="_blank" ka="seo-position-4">DBA招聘</a>
+                <a href="/p100507/" target="_blank" ka="seo-position-5">数据仓库招聘</a>
+                <a href="/p101010/" target="_blank" ka="seo-position-6">通信标准化工程师招聘</a>
+                <a href="/p100508/" target="_blank" ka="seo-position-7">数据开发招聘</a>
+                <a href="/p100820/" target="_blank" ka="seo-position-8">电声工程师招聘</a>
+                <a href="/p100401/" target="_blank" ka="seo-position-9">运维工程师招聘</a>
+                <a href="/p100209/" target="_blank" ka="seo-position-10">U3D招聘</a>
+                <a href="/p100511/" target="_blank" ka="seo-position-11">数据分析师招聘</a>
+                <a href="/p100608/" target="_blank" ka="seo-position-12">软件项目经理招聘</a>
+                <a href="/p100109/" target="_blank" ka="seo-position-13">Python招聘</a>
+                <a href="/p300801/" target="_blank" ka="seo-position-14">电池工程师招聘</a>
+                <a href="/p100117/" target="_blank" ka="seo-position-15">自然语言处理算法招聘</a>
+                <a href="/p100307/" target="_blank" ka="seo-position-16">游戏测试招聘</a>
+                <a href="/p101101/" target="_blank" ka="seo-position-17">其他技术职位招聘</a>
+                <a href="/p101301/" target="_blank" ka="seo-position-18">机器学习招聘</a>
+                <a href="/p100106/" target="_blank" ka="seo-position-19">C#招聘</a>
+                <a href="/p101408/" target="_blank" ka="seo-position-20">电子维修技术员招聘</a>
+                <a href="/p100512/" target="_blank" ka="seo-position-21">数据架构师招聘</a>
+                <a href="/p101313/" target="_blank" ka="seo-position-22">高性能计算工程师招聘</a>
+                <a href="/p100124/" target="_blank" ka="seo-position-23">GIS工程师招聘</a>
+                <a href="/p100211/" target="_blank" ka="seo-position-24">UE4招聘</a>
+                <a href="/p101403/" target="_blank" ka="seo-position-25">FAE招聘</a>
+                <a href="/p101412/" target="_blank" ka="seo-position-26">数字后端工程师招聘</a>
+                <a href="/p100801/" target="_blank" ka="seo-position-27">硬件工程师招聘</a>
+                <a href="/p100104/" target="_blank" ka="seo-position-28">数据挖掘招聘</a>
+                <a href="/p101309/" target="_blank" ka="seo-position-29">风控算法招聘</a>
+                <a href="/p101310/" target="_blank" ka="seo-position-30">大模型算法招聘</a>
+            </div>
+            <div class="links-content">
+                <a href="/gongsi/1f5640142608e6d71Xd82N24.html" target="_blank" ka="seo-brand-1">消费宝集团</a>
+                <a href="/gongsi/fbb3431c7fcadfe61Xd82dW7.html" target="_blank" ka="seo-brand-2">荣亨鑫富</a>
+                <a href="/gongsi/d28902f98f9e0f2f1Xd82N25.html" target="_blank" ka="seo-brand-3">美乐乐家具网</a>
+                <a href="/companys/34e28da9d59423121XR739-_Eg~~.html" target="_blank" ka="seo-brand-4">锦京普达（北京）贸易有限责任公司招聘</a>
+                <a href="/gongsis/753c3a6c62a4cf68i3V82d-5ElFV.html" target="_blank" ka="seo-brand-5">佛山市佳承裕贸易有限公司</a>
+                <a href="/zhaopin/a03ad2af1e8aa3c11XV539-6GQ~~/" target="_blank" ka="seo-brand-6">北京丝颂行轩美容美发招聘</a>
+                <a href="/gongsis/23cde94232d7c98bi3V42dy5FlZXxw~~.html" target="_blank" ka="seo-brand-7">重庆浪中沙文化传播有限公司</a>
+                <a href="/gongsis/6d896ef413cc26efi3V73ti8GVRVxg~~.html" target="_blank" ka="seo-brand-8">南京亚力成百货贸易有限公司</a>
+                <a href="/gongsis/e43b2044fd7bb3d4i3Vy2921F1tX.html" target="_blank" ka="seo-brand-9">宝鸡紫颜春广告有限公司</a>
+                <a href="/companys/554f75bd885f71631nZ_2du4Fg~~.html" target="_blank" ka="seo-brand-10">广西强力巨彩光电科技有限公司招聘</a>
+                <a href="/gongsis/a64b99ca3a514ea8i3V-39S-FFVYxQ~~.html" target="_blank" ka="seo-brand-11">云浮市国盈科技有限公司</a>
+                <a href="/gongsis/89e61300f0d96ee1i3V_092_E1pY.html" target="_blank" ka="seo-brand-12">天津征程医药科技有限公司</a>
+                <a href="/gongsis/8cbfe3b3d26a8106i3V729y5F1BZxA~~.html" target="_blank" ka="seo-brand-13">长沙绿雅休闲农庄有限公司</a>
+                <a href="/gongsis/a685e518f15abda0i3V729W6FVVWxg~~.html" target="_blank" ka="seo-brand-14">昆山青成旺物资贸易有限公司</a>
+                <a href="/gongsis/9a75072436de259ai3V429u8FFtSwQ~~.html" target="_blank" ka="seo-brand-15">北京盛光智慧科技有限公司</a>
+                <a href="/c101110600-p130308/" target="_blank" ka="seo-brand-16">商洛电话客服招聘</a>
+                <a href="/zhaopin/b33045be747c0ada03B_39W9FQ~~/" target="_blank" ka="seo-brand-17">非梵艺术培训中心钢琴老师全职招聘</a>
+                <a href="/zhaopin/92700b77caa9fe191nV62tm7Fg~~/" target="_blank" ka="seo-brand-18">地铁一号线安检招聘</a>
+                <a href="/zhaopin/e2724e15cf540ea603x63d0~/" target="_blank" ka="seo-brand-19">理赔师招聘</a>
+                <a href="/gongsis/585407463155ec95i3V72dy9EFpXwA~~.html" target="_blank" ka="seo-brand-20">汉寿昊晖太阳能发电有限公司</a>
+                <a href="/gongsis/d3748c889ed60126i3V709S9FFJQxw~~.html" target="_blank" ka="seo-brand-21">深圳市晟睦科技有限公司</a>
+                <a href="/gongsis/cf53a60676e766e7i3V93dy4ElpT.html" target="_blank" ka="seo-brand-22">河南司丰硕商贸有限公司</a>
+                <a href="/gongsis/da7822f8c596154fi3V42dS1GVNQwA~~.html" target="_blank" ka="seo-brand-23">秦安县新源养殖有限责任公司</a>
+                <a href="/gongsis/83f6ffbd5d032820i3V73NS-EFpR.html" target="_blank" ka="seo-brand-24">宿迁市交通产业发展有限公司</a>
+                <a href="/gongsis/47be8c21e1e1aaaci3V-3ti8ElBQxA~~.html" target="_blank" ka="seo-brand-25">厦门悦燕锦贸易有限公司</a>
+                <a href="/gongsis/377a3d3782621775i3V-3dq4FlM~.html" target="_blank" ka="seo-brand-26">青岛海泰隆国际物流有限公司</a>
+                <a href="/zhaopin/da2b0dc6388d8a6303N43921GA~~/" target="_blank" ka="seo-brand-27">莱昂游泳健身会所健身教练招聘</a>
+                <a href="/gongsis/ae9e9827e29b8f01i3V-2dS_FlRV.html" target="_blank" ka="seo-brand-28">贵州旭日峰科技有限公司</a>
+                <a href="/gongsis/6efd0eb780f1df84i3V92d-7EFpU.html" target="_blank" ka="seo-brand-29">南京远亦杰商贸有限公司</a>
+                <a href="/c101300900-p150204/" target="_blank" ka="seo-brand-30">玉林行政主管招聘</a>
+            </div>
+            <div class="links-content">
+                <a href="/gongsi/02cd05cce753437e33V50w~~.html" target="_blank" ka="seo-company-1">华为</a>
+                <a href="/gongsi/ae1ff0467cbd29ea1nZ-3ts~.html" target="_blank" ka="seo-company-2">bilibili</a>
+                <a href="/gongsi/c61d023bc6632dd91XZy2dQ~.html" target="_blank" ka="seo-company-3">NIO蔚来</a>
+                <a href="/gongsi/12e92393bff967950HNy3w~~.html" target="_blank" ka="seo-company-4">淘宝闪购</a>
+                <a href="/gongsi/5d627415a46b4a750nJ9.html" target="_blank" ka="seo-company-5">阿里巴巴集团</a>
+                <a href="/gongsi/0a308a3daebd7e550nJ_3g~~.html" target="_blank" ka="seo-company-6">太平洋房屋</a>
+                <a href="/gongsi/8d038826246b5fb31nV83d4~.html" target="_blank" ka="seo-company-7">泛微网络</a>
+                <a href="/gongsi/6f1aa1d6b1d033ad33B43N0~.html" target="_blank" ka="seo-company-8">小米</a>
+                <a href="/gongsi/ab9fdc6f043679990HY~.html" target="_blank" ka="seo-company-9">百度</a>
+                <a href="/gongsi/59341de861462bc31X1-0tk~.html" target="_blank" ka="seo-company-10">宝尊电商</a>
+                <a href="/gongsi/26dca32699a82eb01XR4.html" target="_blank" ka="seo-company-11">途虎养车</a>
+                <a href="/gongsi/479e410ee2aff0d21nx8294~.html" target="_blank" ka="seo-company-12">SenseTime</a>
+                <a href="/gongsi/38bd5c757efa4ab6331z.html" target="_blank" ka="seo-company-13">网易</a>
+                <a href="/gongsi/79c5fb1547ee2c221HZz098~.html" target="_blank" ka="seo-company-14">慧博云通</a>
+                <a href="/gongsi/5f40daa1ff44eae81H182to~.html" target="_blank" ka="seo-company-15">药明康德</a>
+                <a href="/gongsi/d980ad0ea954a0421HV43t4~.html" target="_blank" ka="seo-company-16">信也科技</a>
+                <a href="/gongsi/139ba6a6fa587b411nd629w~.html" target="_blank" ka="seo-company-17">完美世界</a>
+                <a href="/gongsi/5deff2bcf24813cd1XJ629s~.html" target="_blank" ka="seo-company-18">龙创股份</a>
+                <a href="/gongsi/b9271010bd6697123nR6294~.html" target="_blank" ka="seo-company-19">斗象科技</a>
+                <a href="/gongsi/7fa57fb8722b16261XV_.html" target="_blank" ka="seo-company-20">心动</a>
+                <a href="/gongsi/9906da49e91990831nV73tk~.html" target="_blank" ka="seo-company-21">地平线</a>
+                <a href="/gongsi/dd257aa60cb04d6e1XF-3N0~.html" target="_blank" ka="seo-company-22">嘉银科技</a>
+                <a href="/gongsi/0810a0f85e31859b33Zy2tU~.html" target="_blank" ka="seo-company-23">微软中国</a>
+                <a href="/gongsi/6e888338434f2e891nR52t-0.html" target="_blank" ka="seo-company-24">泡泡玛特POP MART</a>
+                <a href="/gongsi/65a5bfde7f5bad391nR729S5.html" target="_blank" ka="seo-company-25">北京三快</a>
+                <a href="/gongsi/980f48937a13792b1nd63d0~.html" target="_blank" ka="seo-company-26">滴滴出行</a>
+                <a href="/gongsi/2e64a887a110ea9f1nRz.html" target="_blank" ka="seo-company-27">腾讯</a>
+                <a href="/gongsi/20169de4584f4fda33R_3w~~.html" target="_blank" ka="seo-company-28">行动教育</a>
+                <a href="/gongsi/754b2fa05c5e813e3n15294~.html" target="_blank" ka="seo-company-29">吉利控股集团</a>
+                <a href="/gongsi/f2059100e6b406d21HN52Nk~.html" target="_blank" ka="seo-company-30">维宏股份</a>
+                <a href="/gongsi/b3b788a71aceed831XZy3Nk~.html" target="_blank" ka="seo-company-31">七牛云</a>
+                <a href="/gongsi/b01839ea2a062a5c1n1_3dU~.html" target="_blank" ka="seo-company-32">科大讯飞</a>
+                <a href="/gongsi/0ad54882c70985481n1z2dQ~.html" target="_blank" ka="seo-company-33">青木科技</a>
+                <a href="/gongsi/6289e701090a10463nZ7.html" target="_blank" ka="seo-company-34">东软集团</a>
+                <a href="/gongsi/091129815dc444bc1nR429u-.html" target="_blank" ka="seo-company-35">万达信息</a>
+                <a href="/gongsi/1ced7b46b61a59be1n180to~.html" target="_blank" ka="seo-company-36">上海有色网</a>
+                <a href="/gongsi/6bbd40d7e54414e41nJ73t4~.html" target="_blank" ka="seo-company-37">斯芬克</a>
+                <a href="/gongsi/4a723a5a71a44d740XZz3g~~.html" target="_blank" ka="seo-company-38">智慧芽</a>
+                <a href="/gongsi/0979070fc97e501a0nx7.html" target="_blank" ka="seo-company-39">美团网</a>
+                <a href="/gongsi/b72f700dda59df7b33B90tU~.html" target="_blank" ka="seo-company-40">唯品会</a>
+            </div>
+        </div>
+        <div class="expand-btn"><a href="javascript:;" class="more-view"><span>展开</span><i class="fz fz-slidedown"></i></a></div>
+    </div>
+</div>
+                    <div class="pos-bread city-job-guide">
+                        <a href="/" ka="job-breadcrumb-bottom1">首页</a><span class="link-collect"><a href="/c101020100/" ka="job-breadcrumb-bottom2">上海招聘</a>·<a href="/p100109/" ka="job-breadcrumb-bottom21">Python招聘</a></span><a href="/c101020100-p100109/" ka="job-breadcrumb-bottom3">上海Python招聘</a><a href="/job_detail/1f2b8453765df3490nBz2dq0E1pT.html" ka="job-breadcrumb-bottom4">上海速强信息Python招聘</a>
+                    </div>
+                    <p class="gray">页面更新时间：2026-06-16</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="inner home-inner">
+        <div class="footer-social">
+            <img src="https://static.zhipin.com/v2/web/geek/images/footer-logo.png" alt="">
+            <p>企业服务热线和算法/未成年人等举报渠道 <span>400 065 5799</span></p>
+            <p>老年人直连热线<span>400 661 6030</span></p >
+            <p>工作日 <span>8:00 - 22:00</span></p>
+            <p>休息日 <span>8:00 - 22:00</span></p>
+            <p class="footer-icon">
+                <a href="https://www.weibo.com/bosszhipin" rel="nofollow" ka="link-weibo" target="_blank" class="icon-weibo"><span>官方微博</span></a>
+                <a href="javascript:;" class="icon-weixin" ka="link-weixin"><span>微信公众号</span><img src="https://static.zhipin.com/v2/web/geek/images/we_chat_qr.jpg" class="qrcode-weixin" /></a>
+                <a href="https://app.zhipin.com" class="icon-app" ka="link-downloadapp"><span>下载</span></a>
+                <a href="https://www.zhipin.com/desktop/" class="icon-client-app" title="boss直聘电脑端下载" data-source="3" ka="bosszp_desktop_bottom_click" target="_blank">
+                    <img class="icon-image" src="https://img.bosszhipin.com/static/file/2021/dppx09luaq1637052502211.png" alt="">
+                    <span class="download-app-tip">PC桌面版下载</span>
+                </a>
+            </p>
+        </div>
+        <div class="footer-about clear-fix">
+            <dl>
+                <dt>企业服务</dt>
+                <dd>
+                    <a href="https://www.zhipin.com/job_detail/" ka="link-search">职位搜索</a>
+                    <a href="https://app.zhipin.com/" ka="link-app">BOSS直聘APP</a>
+                    <a href="https://ir.zhipin.com/" target="_blank" ka="link-ir">投资者关系 Investor Relations</a>
+                    <a href="https://gongyi.zhipin.com/home" target="_blank" ka="link-gongyi">直品公益基金会</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>使用与帮助</dt>
+                <dd>
+                    <a href="https://about.zhipin.com/agreement" rel="nofollow" ka="link-privacy" target="_blank">协议与规则</a>
+                    <a href="https://about.zhipin.com/agreement?id=personalinfopro" rel="nofollow" ka="link-privacy" target="_blank">隐私政策</a>
+                    <a href="https://www.zhipin.com/web/common/protocol/cheat-guide.html" rel="nofollow" ka="link-anticheatguide" target="_blank">防骗指南</a>
+                    <a href="https://www.zhipin.com/web/common/protocol/use-help.html" rel="nofollow" ka="link-usehelp" target="_blank">使用帮助</a>
+                </dd>
+            </dl>
+            <dl>
+                <dt>联系BOSS直聘</dt>
+                <dd>
+                    <p>北京华品博睿网络技术有限公司</p>
+                    <p>公司地址 北京市朝阳区太阳宫中路16号院1号楼18层1801内09</p>
+                    <p>违法和不良信息举报邮箱/未成年人举报渠道 <a class="report-mail" href="mailto:jubao@kanzhun.com" rel="nofollow">jubao@kanzhun.com</a></p>
+                </dd>
+            </dl>
+        </div>
+        <div class="copyright">
+            <p>
+                <span>Copyright © 2026 BOSS直聘</span><span><a href="https://beian.miit.gov.cn/" rel="nofollow" ka="link-icp" target="_blank">京ICP备14013441号-5</a></span><span>京ICP证150923号</span>
+                <span>
+                     <a href="https://www.zhipin.com/web/common/protocol/business-license.html" rel="nofollow" ka="link-businesslicense" target="_blank">
+                         <img src="https://static.zhipin.com/v2/web/geek/images/icon-badge-1.png" alt=""/>
+                         电子营业执照
+                     </a>
+                </span>
+                <span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502032801" rel="nofollow" ka="link-beian" target="_blank"><img src="https://static.zhipin.com/v2/web/geek/images/icon-beian.png" alt=""/> 京公网安备11010502032801</a></span>
+                <span><a href="https://sdwj.zhipin.com/web/index.html" rel="nofollow" ka="link-sdwj" target="_blank">朝阳网警</a></span>
+                <span><a href="https://www.zhipin.com/web/common/protocol/hr-service.html" rel="nofollow" ka="link-hr-service" target="_blank">人力资源服务许可证</a></span>
+                <span><a href="https://www.12377.cn" rel="nofollow" ka="link-12377" target="_blank">网上有害信息举报专区</a></span>
+                <span class="renshe-phone">朝阳区人社局监督电话：(010)57596212，(010)65099938</span>
+                <span><a href="https://about.zhipin.com/agreement?id=b9f73536711c4928bde84337cb53aa91" rel="nofollow" ka="link-algo-beian" target="_blank">算法备案信息</a></span>
+            </p>
+        </div>
+    </div>
+</div>
+    <!-- 通用侧边栏start -->
+    <div id="side-bar-box">
+        <div class="side-bar-wrapper">
+            <a class="back-top" href="javascript:;" title="返回顶部"></a>
+            <ul class="side-bar-bottom">
+                <li class="side-feedback">
+                    <a href="javascript:;"></a>
+                    <span class="side-attr">反馈</span>
+                </li>
+            </ul>
+            <ul class="side-bar-top">
+                <li class="side-interest" data-value="interest">
+                    <a href="javascript:;" ka="side_interest"></a>
+                    <span class="side-popper">感兴趣</span>
+                </li>
+                <li class="side-chat" data-value="contact">
+                    <a href="javascript:;" ka="side_chat"></a>
+                    <span class="side-popper">沟通过</span>
+                </li>
+                <li class="side-deliver" data-value="deliver">
+                    <a href="javascript:;" ka="side_deliver"></a>
+                    <span class="side-popper">已投递</span>
+                </li>
+                <li class="side-interview" data-value="interview">
+                    <a href="javascript:;" ka="side_interview"></a>
+                    <span class="side-popper">面试</span>
+                </li>
+                    <li class="side-service">
+                        <a href="javascript:;"></a>
+                        <span class="side-popper">客服</span>
+                    </li>
+                <li class="side-other">
+                    <a href="javascript:;"></a>
+                    <ul class="other-list">
+                            <li>
+                                <a class="siderbar-app" href="javascript:;">APP
+                                    <div class="qrcode-layer"><i></i><img src="/wflow/zpgeek/qrcode/generate.json?content=https%3A%2F%2Fwww.zhipin.com%2Fwapi%2FzpCommon%2Fdownload%2Findex%3Ftype%3Dqr%26pkn%3Dmain-m%26sid%3Dmoren_14&w=200&h=200" alt="">下载BOSS直聘APP</div>
+                                </a>
+                            </li>
+                        <li>
+                            <a class="siderbar-wechat" href="javascript:;">微信
+                                <div class="qrcode-layer"><i></i><img src="https://static.zhipin.com/v2/web/geek/images/wechat-qrcode-2.jpg" alt="">关注BOSS直聘微信服务号</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="siderbar" href="https://weibo.com/bosszhipin" target="_blank">微博</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 通用侧边栏end -->
+
+    <!--通用注册登录-->
+    <div class="sign-wrap sign-wrap-v2" style="display: none">
+
+
+
+
+
+<!--密码登录-->
+
+<!--短信登录-->
+<div class="sign-form sign-sms" style="display:none;">
+    <div class="sign-slide-box">
+        <a class="logo" href="https://www.zhipin.com/" ka="header-logo">
+            <img src="https://static.zhipin.com/v2/web/geek/images/logo.png">
+            <div>
+                <p>找工作</p >
+                <p>BOSS直聘直接谈</p >
+            </div>
+        </a>
+        <ul>
+            <li>
+                <i class="icon"></i>
+                <span>沟通</span>
+                <span>在线职位及时沟通</span>
+            </li>
+            <li>
+                <i class="icon"></i>
+                <span>任性选</span>
+                <span>各大行业职位任你选</span>
+            </li>
+        </ul>
+    </div>
+    <div class="sign-content">
+        <div class="inner-box">
+            <h3 class="title">登录BOSS直聘</h3>
+            <form action="/wapi/zppassport/login/phone" method="post">
+                <div class="sign-tab"><span class="link-sms cur">短信登录</span><span class="link-scan">扫码登录</span></div>
+                <div class="tip-error tip-error-form"></div>
+                <div class="form-row row-select">
+                    <span class="dropdown-select"><i class="icon-select-arrow"></i><em class="text-select">+86</em><input type="hidden" name="regionCode" value="+86"/></span>
+                    <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="tel" class="ipt ipt-phone required" ka="signin-account" placeholder="手机号" name="phone"/></span>
+                    <div class="dropdown-menu">
+<ul>
+    <li data-val="+86"><span class="num">+86</span>中国大陆</li>
+    <li data-val="+852"><span class="num">+852</span>中国香港</li>
+    <li data-val="+853"><span class="num">+853</span>中国澳门</li>
+    <li data-val="+886"><span class="num">+886</span>中国台湾</li>
+    <li data-val="+1"><span class="num">+1</span>美国</li>
+    <li data-val="+81"><span class="num">+81</span>日本</li>
+    <li data-val="+44"><span class="num">+44</span>英国</li>
+    <li data-val="+82"><span class="num">+82</span>韩国</li>
+    <li data-val="+33"><span class="num">+33</span>法国</li>
+    <li data-val="+7"><span class="num">+7</span>俄罗斯</li>
+    <li data-val="+39"><span class="num">+39</span>意大利</li>
+    <li data-val="+65"><span class="num">+65</span>新加坡</li>
+    <li data-val="+63"><span class="num">+63</span>菲律宾</li>
+    <li data-val="+60"><span class="num">+60</span>马来西亚</li>
+    <li data-val="+64"><span class="num">+64</span>新西兰</li>
+    <li data-val="+34"><span class="num">+34</span>西班牙</li>
+    <li data-val="+95"><span class="num">+95</span>缅甸</li>
+    <li data-val="+230"><span class="num">+230</span>毛里求斯</li>
+    <li data-val="+263"><span class="num">+263</span>津巴布韦</li>
+    <li data-val="+20"><span class="num">+20</span>埃及</li>
+    <li data-val="+92"><span class="num">+92</span>巴基斯坦</li>
+    <li data-val="+880"><span class="num">+880</span>孟加拉国</li>
+</ul>                    </div>
+                    <div class="tip-error"></div>
+                </div>
+                <div class="form-row">
+                    <div class="row-code" id="loginVerrifyCode">
+                    </div>
+                    <div class="tip-error"></div>
+                </div>
+                <div class="form-row">
+                        <span class="ipt-wrap"><i class="icon-sign-sms"></i><input type="text" class="ipt ipt-sms required" ka="signup-sms" placeholder="短信验证码" name="phoneCode" maxlength="6"/><input
+                                type="hidden" name="smsType" value="1"/><button type="button" class="btn btn-sms" data-url="/wapi/zppassport/send/smsCode">发送验证码</button></span>
+                    <div class="tip-error"></div>
+                </div>
+                <div class="form-btn">
+                    <button type="submit" class="btn">登录</button>
+                </div>
+                    <div class="text-tip">没有账号 <a href="javascript:;" class="link-signup">立即注册</a></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--扫码登录-->
+<div class="sign-form sign-scan" style="display:none;">
+    <div class="sign-slide-box">
+        <a class="logo" href="https://www.zhipin.com/" ka="header-logo">
+            <img src="https://static.zhipin.com/v2/web/geek/images/logo.png">
+            <div>
+                <p>找工作</p >
+                <p>BOSS直聘直接谈</p >
+            </div>
+        </a>
+        <ul>
+            <li>
+                <i class="icon"></i>
+                <span>沟通</span>
+                <span>在线职位及时沟通</span>
+            </li>
+            <li>
+                <i class="icon"></i>
+                <span>任性选</span>
+                <span>各大行业职位任你选</span>
+            </li>
+        </ul>
+    </div>
+    <div class="sign-content">
+        <div class="inner-box">
+            <div class="tip-error tip-error-form"></div>
+            <div class="sign-tab"><span class="link-sms">短信登录</span><span class="link-scan cur">扫码登录</span></div>
+            <div class="qrcode-box">
+                <input type="hidden" class="uuid" value=""/>
+                <p><span>使用 BOSS直聘 APP 扫码登录</span><em>扫码帮助</em></p>
+                <div class="qrcodeimg-box">
+                    <div class="invalid-box">
+                        <p>请重新刷新二维码</p>
+                        <button class="btn">点击刷新</button>
+                    </div>
+                    <img src="" data-url="https://www.zhipin.com/wapi/zppassport/qrcode/dispatcher?qrId="/>
+                </div>
+                <div class="qrcode-tip"><span class="gray">知道了</span>Boss现在也可以使用密码和短信登录了</div>
+                <div class="hover-range-left"></div>
+                <div class="hover-range-right"></div>
+                <div class="sign-scan-help animation">
+                    <h4>扫码帮助</h4>
+                    <ul class="scan-help-tab">
+                        <li class="active">我是BOSS</li>
+                        <li>我是牛人</li>
+                    </ul>
+                    <div class="sub-title">我的&nbsp;&gt;&nbsp;登录网页版</div>
+                    <ul class="scan-help-content">
+                        <li class="help-boss active"></li>
+                        <li class="help-geek"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-tip">没有账号 <a href="javascript:;" class="link-signup">立即注册</a></div>
+            <div class="login-step-box" >
+                <div class="user-photo">
+                    <img src="">
+                </div>
+                <div class="login-step-text">
+                    <h3 class="login-step-title">扫描成功</h3>
+                    <p class="login-step-detail">请在App端确认登录</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--注册-->
+<div class="sign-form sign-register" style="display:block;">
+    <div class="sign-slide-box">
+        <a class="logo" href="https://www.zhipin.com/" ka="header-logo">
+            <img src="https://static.zhipin.com/v2/web/geek/images/logo.png">
+            <div>
+                <p>找工作</p >
+                <p>BOSS直聘直接谈</p>
+            </div>
+        </a>
+        <ul class="geek-slide ">
+            <li>
+                <i class="icon"></i>
+                <span>沟通</span>
+                <span>在线职位及时沟通</span>
+            </li>
+            <li>
+                <i class="icon"></i>
+                <span>任性选</span>
+                <span>各大行业职位任你选</span>
+            </li>
+        </ul>
+        <ul class="boss-slide hide">
+            <li>
+                <i class="icon"></i>
+                <span>招聘效果好</span>
+                <span>与职场牛人在线开聊</span>
+            </li>
+            <li>
+                <i class="icon"></i>
+                <span>更多在线牛人</span>
+                <span>入职速度快</span>
+            </li>
+            <li>
+                <i class="icon"></i>
+                <span>人才匹配度高</span>
+                <span>获取更精准的牛人</span>
+            </li>
+        </ul>
+    </div>
+    <div class="sign-content">
+        <div class="inner-box">
+            <h3 class="title">注册BOSS直聘</h3>
+            <form action="/wapi/zppassport/user/registered" method="post">
+                <input type="hidden" name="act" value="">
+                <input type="hidden" name="purpose" value="">
+                <h4></h4>
+                <div class="tip-error tip-error-form"></div>
+                <div class="form-row row-select">
+                    <span class="dropdown-select"><i class="icon-select-arrow"></i><em class="text-select">+86</em><input type="hidden" name="regionCode" value="+86"/></span>
+                    <span class="ipt-wrap"><i class="icon-sign-phone"></i><input type="tel" class="ipt ipt-phone required" ka="signin-account" placeholder="手机号" name="phone"/></span>
+                    <div class="dropdown-menu">
+<ul>
+    <li data-val="+86"><span class="num">+86</span>中国大陆</li>
+    <li data-val="+852"><span class="num">+852</span>中国香港</li>
+    <li data-val="+853"><span class="num">+853</span>中国澳门</li>
+    <li data-val="+886"><span class="num">+886</span>中国台湾</li>
+    <li data-val="+1"><span class="num">+1</span>美国</li>
+    <li data-val="+81"><span class="num">+81</span>日本</li>
+    <li data-val="+44"><span class="num">+44</span>英国</li>
+    <li data-val="+82"><span class="num">+82</span>韩国</li>
+    <li data-val="+33"><span class="num">+33</span>法国</li>
+    <li data-val="+7"><span class="num">+7</span>俄罗斯</li>
+    <li data-val="+39"><span class="num">+39</span>意大利</li>
+    <li data-val="+65"><span class="num">+65</span>新加坡</li>
+    <li data-val="+63"><span class="num">+63</span>菲律宾</li>
+    <li data-val="+60"><span class="num">+60</span>马来西亚</li>
+    <li data-val="+64"><span class="num">+64</span>新西兰</li>
+    <li data-val="+34"><span class="num">+34</span>西班牙</li>
+    <li data-val="+95"><span class="num">+95</span>缅甸</li>
+    <li data-val="+230"><span class="num">+230</span>毛里求斯</li>
+    <li data-val="+263"><span class="num">+263</span>津巴布韦</li>
+    <li data-val="+20"><span class="num">+20</span>埃及</li>
+    <li data-val="+92"><span class="num">+92</span>巴基斯坦</li>
+    <li data-val="+880"><span class="num">+880</span>孟加拉国</li>
+</ul>                    </div>
+                    <div class="tip-error"></div>
+                </div>
+                <div class="form-row">
+                    <div class="row-code" id="regVerrifyCode"></div>
+                    <div class="tip-error"></div>
+                </div>
+
+                <div class="form-row">
+                  <span class="ipt-wrap"><i class="icon-sign-sms"></i>
+                      <input type="text" class="ipt ipt-sms required" ka="signup-sms" placeholder="短信验证码" name="phoneCode" maxlength="6"/>
+                      <input type="hidden" name="smsType" value="2"/>
+                      <button type="button" class="btn btn-sms" data-url="/wapi/zppassport/send/smsCode">发送验证码</button>
+                  </span>
+                    <div class="tip-error"></div>
+                </div>
+                <div class="form-btn">
+                    <button type="submit" class="btn">登录/注册</button>
+                </div>
+                <div class="text-tip">
+                    <div class="tip-error"></div>
+                    <input type="checkbox" class="agree-policy" name="policy">已阅读并同意BOSS直聘<a href="https://about.zhipin.com/agreement?id=registerprotocol" ka="link-privacy1" class="user-agreement" target="_blank">《用户协议》</a>
+                    <a href="https://about.zhipin.com/agreement?id=personalinfopro" ka="link-privacy2" class="user-agreement" target="_blank">《隐私政策》</a>，允许BOSS直聘统一管理本人账号信息<br/>
+                    已有账号<a href="javascript:;" class="link-signin">直接登录</a>
+                </div>
+            </form>
+        </div>
+        <div class="btn-switch ewm-switch">
+            <div class="switch-tip">微信极速注册<i class="icon-triangle"></i></div>
+        </div>
+    </div>
+</div>
+
+<!--扫码小程序注册-->
+<div class="sign-form sign-miniapp" style="display: none;">
+    <div class="sign-slide-box">
+        <a class="logo" href="https://www.zhipin.com/" ka="header-logo">
+            <img src="https://static.zhipin.com/v2/web/geek/images/logo.png">
+            <div>
+                <p>找工作</p >
+                <p>BOSS直聘直接谈</p >
+            </div>
+        </a>
+        <ul>
+            <li>
+                <i class="icon"></i>
+                <span>沟通</span>
+                <span>在线职位及时沟通</span>
+            </li>
+            <li>
+                <i class="icon"></i>
+                <span>任性选</span>
+                <span>各大行业职位任你选</span>
+            </li>
+        </ul>
+    </div>
+    <div class="sign-content">
+        <div class="inner-box">
+            <input type="hidden" class="scene" value="653b868d6df54822858696603d6623bf"/>
+            <h4>微信快速注册</h4>
+            <div class="qrcodeimg-box">
+                <div class="invalid-box">
+                    <p>请重新刷新二维码</p>
+                    <button class="btn">点击刷新</button>
+                </div>
+                <img src="" data-url="https://www.zhipin.com/wapi/zppassport/qrcode/dispatcher?qrId=653b868d6df54822858696603d6623bf">
+            </div>
+            <p class="sign-tip">请用微信“扫一扫”扫描上方二维码<br/>进入快捷注册</p>
+            <div class="text-tip">已有账号 <a href="javascript:;" class="link-signin">立即登录</a></div>
+        </div>
+        <div class="btn-switch phone-switch">
+            <div class="switch-tip">手机号注册在这里<i class="icon-triangle"></i></div>
+        </div>
+    </div>
+</div>
+
+<!--扫码小程序注册成功-->
+<div class="sign-form sign-succ">
+    <h3 class="title">注册BOSS直聘</h3>
+    <img class="img-succ" src="https://static.zhipin.com/zhipin-geek-seo/v5461/web/geek/images/success.png"/>
+    <p>注册成功，即将跳转完善流程</p>
+    <div class="btn-switch phone-switch"></div>
+</div>
+
+<!--注册成功完善简历-->
+<div class="sign-form sign-welcome">
+    <h3 class="title">欢迎来到BOSS直聘</h3>
+    <div class="welcome-box">
+        <div class="welcome-text">
+            <b>快速完善简历</b>
+            <p>做好与Boss对话前的准备吧。</p>
+        </div>
+        <img src="https://static.zhipin.com/v2/web/geek/images/icon-sign-welcome.png" alt=""/>
+        <div class="form-btn"><a ka="registe-complete" href="/web/geek/guide" class="btn">开始完善</a>
+        </div>
+        <div class="count-down"><em class="num">3s</em> 后自动跳转</div>
+    </div>
+</div>    </div>
+
+<div class="container-mes">
+    <ul class="message">
+        <li><span class="text">你好</span></li>
+        <li><span class="text">可以聊聊吗</span></li>
+        <li><span class="text">我是谁谁谁我是谁谁谁</span></li>
+    </ul>
+    <div class="avatar">
+            <img src="https://img.bosszhipin.com/beijin/upload/avatar/20240904/607f1f3d68754fd05459ec5bef82afe442d86888d4cb93a76d6b1069d54d516c0289ec8ef3531564_s.jpg.webp?x-oss-process=image/resize,w_100,limit_0" />
+    </div>
+</div>
+<div class="container-tip">
+    <div class="tip-box">
+        <p class="tit">快速完善简历，与Boss开聊</p>
+        <p>与在线Boss直接聊，最快当天拿offer</p>
+        <a ka="job-detail-complete" href="javascript:;">快速完善信息</a>
+        <i class="trangle"></i>
+    </div>
+    <div class="tip-bot"><a href="javascript:;" class="close"></a></div>
+</div>
+<div class="aladingtip">
+    <img src="https://static.zhipin.com/zhipin-geek-seo/v5461/web/geek/images/tip.png">
+</div>
+
+<script src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js" crossorigin="anonymous"></script>
+<script src="https://static.zhipin.com/zhipin-geek-seo/v5461/web/geek/js/main.js"></script>
+</body>
+<input type="hidden" id="page_key_name" value="cpc_job_detail" />
+<script>
+    function get_share_datas_from_html_inapp() {
+        var shid = "shdefault",
+                urlShid,
+                urlSid,
+                pk = "pkdefault",
+                pp = "ppdefault",
+                pkn = (typeof _PK != 'undefined' ? _PK : document.getElementById("page_key_name")),
+                getQueryString = function(name) {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"),
+                            r = window.location.search.substr(1).match(reg);
+                    if (r != null) {
+                        return unescape(r[2])
+                    }
+                    return null;
+                };
+        urlShid = getQueryString("shid");
+        urlSid = getQueryString("sid");
+        if (urlShid) {
+            shid = urlShid;
+        } else if (urlSid) {
+            shid = urlSid;
+        }
+        if (pkn) {
+            var pknVal = pkn.value;
+            if (pknVal) {
+                var pkArray = pknVal.split("|");
+                if (pkArray.length == 1) {
+                    pk = pkArray[0];
+                } else if (pkArray.length >= 2) {
+                    pk = pkArray[0];
+                    pp = pkArray[1];
+                }
+            }
+        }
+        var ret = [];
+        ret["shid"] = shid;
+        ret["pk"] = pk;
+        ret["pp"] = pp;
+        return ret;
+    }
+    function getQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?194df3105ad7148dcf2b98a91b5e727a";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script>
+    var _T = _T || []
+    ;(function () {
+        var e = document.createElement('script')
+        e.crossOrigin = 'Anonymous'
+        e.src = 'https://static.zhipin.com/assets/sdk/ka/ka.v1.min.js?v=20251218'
+        var t = document.getElementsByTagName('script')[0]
+        t.parentNode.insertBefore(e, t)
+    })()
+</script><script type="application/ld+json">
+    {
+        "@context": "https://zhanzhang.baidu.com/contexts/cambrian.jsonld",
+        "@id": "https://www.zhipin.com/job_detail/1f2b8453765df3490nBz2dq0E1pT.html",
+        "title": "「初级Python（线下面试）招聘」_上海速强信息招聘-BOSS直聘",
+        "description": "上海速强信息初级Python（线下面试）招聘，薪资：8-9K，地点：上海，要求：1-3年，学历：大专，福利：五险一金、定期体检、加班补助、年终奖、带薪年假、节日福利，人事刚刚在线，随时随地直接开聊。",
+        "upDate":  "2026-06-16T14:20:14"
+    }
+</script>
+</html>
