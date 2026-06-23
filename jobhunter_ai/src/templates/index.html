@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JobHunter AI - BOSS直聘智能求职系统</title>
 <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <style>
 :root {
@@ -195,6 +196,14 @@ body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "Pi
 .text-link:hover { text-decoration: underline; }
 
 #logBox .highlight { color: #4cc9f0; }
+
+/* Edit modal */
+.modal-edit .modal-content { border: none; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.15); }
+.modal-edit .modal-header { border-bottom: 1px solid #f0f0f0; padding: 18px 24px; }
+.modal-edit .modal-body { padding: 24px; }
+.modal-edit .modal-footer { border-top: 1px solid #f0f0f0; padding: 14px 24px; }
+.modal-edit .form-label { font-size: 13px; font-weight: 600; color: #555; margin-bottom: 4px; }
+.modal-edit .form-check-label { font-size: 14px; }
 </style>
 </head>
 <body>
@@ -558,6 +567,103 @@ body { background: var(--bg); font-family: -apple-system, "Microsoft YaHei", "Pi
 </div>
 
 </div><!-- /container -->
+
+<!-- Edit Task Modal -->
+<div class="modal fade modal-edit" id="editTaskModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold"><i class="fas fa-edit me-2"></i>编辑定时任务</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editTaskId">
+        <div class="mb-3">
+          <label class="form-label">任务名称</label>
+          <input type="text" class="form-control" id="editName" placeholder="例如：每日自动投递">
+        </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">关键词</label>
+              <input type="text" class="form-control" id="editKeyword" placeholder="多个用逗号分隔">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">城市</label>
+              <input type="text" class="form-control" id="editCity" placeholder="城市名">
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label class="form-label">采集页数</label>
+              <input type="number" class="form-control" id="editPages" min="1" max="10">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label class="form-label">执行方式</label>
+              <select class="form-select" id="editType">
+                <option value="daily">每天执行</option>
+                <option value="once">仅执行一次</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="mb-3">
+              <label class="form-label">执行时间</label>
+              <input type="time" class="form-control" id="editTime">
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">选择简历</label>
+          <select class="form-select" id="editResumeSelect">
+            <option value="">不使用简历</option>
+          </select>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">最低匹配度</label>
+              <input type="number" class="form-control" id="editMinScore" min="0" max="100">
+            </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <div class="form-check form-switch mt-4">
+              <input class="form-check-input" type="checkbox" id="editAutoSend" checked>
+              <label class="form-check-label" for="editAutoSend">自动投递</label>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">可投递等级</label>
+          <div class="d-flex gap-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="editRec1" checked value="强烈推荐">
+              <label class="form-check-label" for="editRec1">强烈推荐</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="editRec2" checked value="建议投递">
+              <label class="form-check-label" for="editRec2">建议投递</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="editRec3" value="可以考虑">
+              <label class="form-check-label" for="editRec3">可以考虑</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary btn-primary-custom" id="saveEditBtn"><i class="fas fa-save me-1"></i>保存修改</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -1113,6 +1219,7 @@ try {
 
   // ---- Schedule ----
   let resumeMap = {}; // id -> name mapping
+  let scheduleTasks = []; // cache for edit modal
 
   async function loadSchedule() {
     try {
@@ -1139,6 +1246,7 @@ try {
   }
 
   function renderScheduleList(tasks) {
+    scheduleTasks = tasks;
     const list = $('scheduleList');
     if (tasks.length === 0) {
       list.innerHTML = '<div class="empty-state"><div class="big-icon"><i class="fas fa-clock"></i></div><p>暂无定时任务<br>在左侧创建新任务</p></div>';
@@ -1170,6 +1278,7 @@ try {
         ${resumeName ? '<div class="mt-1 small"><i class="fas fa-file-alt me-1" style="color:var(--primary)"></i>' + resumeName + '</div>' : ''}
         <div class="mt-2">
           <button class="btn btn-sm btn-outline-primary me-2" onclick="window._runTaskNow('${t.id}')"><i class="fas fa-play me-1"></i>立即执行</button>
+          <button class="btn btn-sm btn-outline-secondary me-2" onclick="window._editTask('${t.id}')"><i class="fas fa-edit me-1"></i>编辑</button>
           <button class="btn btn-sm btn-outline-danger" onclick="window._deleteTask('${t.id}')"><i class="fas fa-trash me-1"></i>删除</button>
         </div>
       </div>`;
@@ -1305,12 +1414,100 @@ try {
     }
   };
 
+  window._editTask = function(taskId) {
+    const task = scheduleTasks.find(t => t.id === taskId);
+    if (!task) { alert('任务不存在'); return; }
+
+    // Resume select is already populated by populateResumeSelect
+    $('editTaskId').value = task.id;
+    $('editName').value = task.name || '';
+    $('editKeyword').value = task.keyword || '';
+    $('editCity').value = task.city || '';
+    $('editPages').value = task.pages || 3;
+    $('editType').value = task.schedule_type || 'daily';
+    $('editTime').value = task.schedule_time || '09:00';
+    $('editMinScore').value = task.min_score || 70;
+    $('editAutoSend').checked = task.auto_send !== false;
+
+    // Recommendations
+    const recs = task.recommendations || ['强烈推荐', '建议投递'];
+    $('editRec1').checked = recs.includes('强烈推荐');
+    $('editRec2').checked = recs.includes('建议投递');
+    $('editRec3').checked = recs.includes('可以考虑');
+
+    // Resume selection
+    if (task.resume_id) {
+      $('editResumeSelect').value = task.resume_id;
+    }
+
+    // Show modal using Bootstrap
+    const modal = new bootstrap.Modal($('editTaskModal'));
+    modal.show();
+  };
+
+  window._saveEditTask = async function() {
+    const taskId = $('editTaskId').value;
+    if (!taskId) return;
+
+    const name = $('editName').value.trim();
+    const keyword = $('editKeyword').value.trim();
+    const city = $('editCity').value.trim();
+    const pages = parseInt($('editPages').value) || 3;
+    const schedule_type = $('editType').value;
+    const schedule_time = $('editTime').value;
+    const min_score = parseInt($('editMinScore').value) || 70;
+    const auto_send = $('editAutoSend').checked;
+    const resume_id = $('editResumeSelect').value;
+    const recommendations = [];
+    if ($('editRec1').checked) recommendations.push($('editRec1').value);
+    if ($('editRec2').checked) recommendations.push($('editRec2').value);
+    if ($('editRec3').checked) recommendations.push($('editRec3').value);
+
+    if (!name || !keyword || !city || !schedule_time) {
+      alert('请填写完整信息');
+      return;
+    }
+
+    const btn = $('saveEditBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>保存中...';
+
+    try {
+      const resp = await fetch('/api/schedule/' + taskId, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ name, keyword, city, pages, schedule_type, schedule_time, resume_id, min_score, auto_send, recommendations }),
+      });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      await loadSchedule();
+      bootstrap.Modal.getInstance($('editTaskModal')).hide();
+    } catch (e) {
+      alert('保存失败: ' + e.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-save me-1"></i>保存修改';
+    }
+  };
+
+  // Store resumes globally for edit modal
+  const _origPopulate = populateResumeSelect;
+  populateResumeSelect = function(resumes) {
+    _origPopulate(resumes);
+    // Also populate edit modal select
+    const sel = $('editResumeSelect');
+    sel.innerHTML = '<option value="">不使用简历</option>';
+    resumes.forEach(r => {
+      sel.innerHTML += '<option value="' + r.id + '">' + escapeHtml(r.name) + '</option>';
+    });
+  };
+
   // Expose for inline onclick
   window._viewRun = viewRun;
   window._histGo = function(p) { loadHistory(p); };
 
   // Schedule init
   $('schCreateBtn').addEventListener('click', createTask);
+  $('saveEditBtn').addEventListener('click', window._saveEditTask);
 
   // Schedule resume upload
   const schDz = $('schDropZone');

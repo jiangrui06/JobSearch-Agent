@@ -413,13 +413,73 @@ class BossZhipinScraper:
             })
         return jobs
 
+    def _type_and_send_greeting(self, page, greeting: str) -> bool:
+        """找聊天输入框，输入招呼语并发送。返回是否成功发送。"""
+        if not greeting:
+            return False
+
+        # 先等页面加载稳定
+        page.wait(1)
+        current_url = page.url
+        logger.info(f"当前页面URL: {current_url}")
+
+        input_area = None
+        for sel in (
+            'css:[class*="chat-input"] textarea',
+            'css:[class*="chat-input"] [contenteditable]',
+            'css:[contenteditable="true"]',
+            'css:[placeholder*="输入"]',
+            'xpath://div[@contenteditable="true"]',
+            'css:textarea',
+        ):
+            for _ in range(5):
+                try:
+                    ia = page.ele(sel, timeout=1)
+                    if ia and ia.tag.lower() in ('textarea', 'div', 'input'):
+                        input_area = ia
+                        logger.info(f"找到输入框: {sel}")
+                        break
+                except Exception:
+                    page.wait(1)
+            if input_area:
+                break
+
+        if not input_area:
+            logger.warning(f"未找到聊天输入框 (URL: {current_url})")
+            return False
+
+        try:
+            input_area.click()
+            page.wait(0.3)
+            page.run_js("""
+                var el=arguments[0];
+                el.value ? el.value='' : el.innerHTML='';
+            """, input_area)
+            page.wait(0.2)
+            for ch in greeting:
+                input_area.input(ch, clear=False)
+                page.wait(0.03)
+            page.wait(0.5)
+
+            # 用 Enter 发送（比点击按钮更可靠，避免误点上传附件按钮）
+            page.wait(0.3)
+            input_area.input('\n', clear=False)
+            page.wait(0.5)
+            logger.info("已按 Enter 发送招呼语")
+            page.wait(1)
+            logger.info("招呼语已发送")
+            return True
+        except Exception as e:
+            logger.warning(f"招呼语输入/发送异常: {e}")
+            return False
+
     def _send_greeting_for_job(self, page, job: dict, idx: int, total: int) -> dict:
-        """对单个岗位执行投递。逻辑：
+        """对单个岗位执行智能投递。逻辑：
         1. 打开岗位链接
-        2. 找"立即沟通"按钮，找到就点击
-        3. 出现"已向BOSS发送消息" → 成功
-        4. 否则找聊天输入框 → 输入招呼语 → 发送
-        5. 继续下一个
+        2. 找"立即沟通"按钮并点击
+        3. 弹窗"已向BOSS发送消息"出现 → 点"继续沟通"进入聊天页 → 发送 AI 个性化招呼语
+        4. 无弹窗但找到聊天框 → 直接发送 AI 招呼语
+        5. 都不行 → 默认已沟通
         """
         from datetime import datetime
 
@@ -481,93 +541,77 @@ class BossZhipinScraper:
             return {"title": title, "company": company, "status": "失败", "error": f"点击失败: {e}"}
 
         # ===== 检查"已向BOSS发送消息"弹窗 =====
+        popup_found = False
         for _ in range(3):
             try:
                 if page.ele('xpath://*[contains(text(),"已向BOSS发送消息")]', timeout=1):
-                    # 关闭弹窗
-                    for close_sel in (
-                        'xpath://*[contains(text(),"继续沟通")]',
-                        'xpath://*[contains(text(),"留在此页")]',
-                        'css:.dialog-close',
-                        'css:[class*="close"]',
-                    ):
-                        try:
-                            close_btn = page.ele(close_sel, timeout=0.5)
-                            if close_btn:
-                                close_btn.click()
-                                page.wait(1)
-                                break
-                        except Exception:
-                            continue
-                    print("已投递")
-                    return {"title": title, "company": company, "status": "成功", "error": ""}
-            except Exception:
-                page.wait(1)
-
-        # ===== 没有自动弹窗 → 找聊天框输入招呼语 =====
-        input_area = None
-        for sel in (
-            'css:.chat-input textarea',
-            'css:[class*="chat-input"] [contenteditable]',
-            'css:[contenteditable="true"]',
-            'css:[placeholder*="输入"]',
-            'xpath://div[@contenteditable="true"]',
-        ):
-            try:
-                ia = page.ele(sel, timeout=1)
-                if ia:
-                    input_area = ia
+                    popup_found = True
                     break
             except Exception:
-                continue
-
-        if input_area and greeting:
-            try:
-                input_area.click()
-                page.wait(0.3)
-                # 清空
-                page.run_js("""
-                    var el=arguments[0];
-                    el.value ? el.value='' : el.innerHTML='';
-                """, input_area)
-                page.wait(0.2)
-                # 输入
-                for ch in greeting:
-                    input_area.input(ch, clear=False)
-                    page.wait(0.03)
-                page.wait(0.5)
-
-                # 发送
-                sent = False
-                for send_sel in (
-                    'css:[class*="send-btn"]',
-                    'css:[class*="btn-send"]',
-                    'css:[aria-label*="发送"]',
-                    'xpath://*[contains(text(),"发送")]',
-                ):
-                    try:
-                        btn = page.ele(send_sel, timeout=0.5)
-                        if btn:
-                            btn.click()
-                            sent = True
-                            break
-                    except Exception:
-                        continue
-                if not sent:
-                    page.run_js("""
-                        arguments[0].dispatchEvent(new KeyboardEvent('keydown',{
-                            key:'Enter',code:'Enter',keyCode:13,bubbles:true
-                        }));
-                    """, input_area)
-
                 page.wait(1)
-                print("已发送招呼")
-                return {"title": title, "company": company, "status": "成功", "error": ""}
-            except Exception as e:
-                print(f"招呼异常: {e}")
-                return {"title": title, "company": company, "status": "成功", "error": f"招呼可能未发送: {e}"}
 
-        # 没有输入框但已经点击了"立即沟通"→ 可能已发送默认招呼
+        if popup_found:
+            if greeting:
+                try:
+                    # 精准定位弹窗中的「继续沟通」按钮（只匹配 button 标签）
+                    continue_btn = page.ele('xpath://button[contains(.,"继续沟通")]', timeout=2)
+                    if not continue_btn:
+                        continue_btn = page.ele('xpath://a[contains(.,"继续沟通")]', timeout=1)
+                    if not continue_btn:
+                        # 兜底：弹窗底部的第一个按钮
+                        continue_btn = page.ele('xpath://div[contains(@class,"dialog")]//div[contains(@class,"footer")]//button[1]', timeout=1)
+
+                    if continue_btn:
+                        logger.info(f"[投递 {title}] 点击「继续沟通」")
+                        # 优先用 JS click，比 DrissionPage 的 .click() 更可靠
+                        try:
+                            page.run_js("arguments[0].click();", continue_btn)
+                        except Exception:
+                            continue_btn.click()
+
+                        # 等待跳转到聊天页（URL 包含 /chat/）
+                        for _ in range(10):
+                            page.wait(1)
+                            if "/chat/" in page.url or "/geek/chat/" in page.url:
+                                logger.info(f"[投递 {title}] 已跳转到聊天页")
+                                break
+                        else:
+                            logger.warning(f"[投递 {title}] 点击后未跳转，当前URL: {page.url}")
+
+                        if self._type_and_send_greeting(page, greeting):
+                            logger.info(f"[投递 {title}] AI 招呼语发送成功")
+                            print("已发送AI招呼")
+                            return {"title": title, "company": company, "status": "成功", "error": ""}
+                        else:
+                            logger.warning(f"[投递 {title}] 进入聊天页但未找到输入框")
+                    else:
+                        logger.warning(f"[投递 {title}] 未找到「继续沟通」按钮")
+                except Exception as e:
+                    logger.warning(f"[投递 {title}] 继续沟通异常: {e}")
+
+            # 回退：关闭弹窗（使用 BOSS 默认招呼）
+            for close_sel in (
+                'xpath://*[contains(text(),"留在此页")]',
+                'css:.dialog-close',
+                'css:[class*="close"]',
+            ):
+                try:
+                    close_btn = page.ele(close_sel, timeout=0.5)
+                    if close_btn:
+                        close_btn.click()
+                        page.wait(1)
+                        break
+                except Exception:
+                    continue
+            print("已投递（默认招呼）")
+            return {"title": title, "company": company, "status": "成功", "error": ""}
+
+        # ===== 没有弹窗 → 找聊天框发送 AI 招呼语 =====
+        if self._type_and_send_greeting(page, greeting):
+            print("已发送招呼")
+            return {"title": title, "company": company, "status": "成功", "error": ""}
+
+        # 没有输入框但已经点击了"立即沟通"
         print("已沟通（默认）")
         return {"title": title, "company": company, "status": "成功", "error": "已点击立即沟通"}
 

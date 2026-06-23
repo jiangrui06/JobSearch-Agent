@@ -1,0 +1,41 @@
+2026-06-23 15:33:15 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-23 15:33:15 [INFO] src.scheduler: 定时任务调度器已启动
+2026-06-23 15:33:15 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:33:15 [INFO] src.scheduler: 已恢复定时任务: 611 (daily 17:35)
+2026-06-23 15:33:15 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:33:15 [INFO] src.scheduler: 已恢复定时任务: 每日12：00 (daily 00:01)
+2026-06-23 15:33:15 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:33:15 [INFO] src.scheduler: 已恢复定时任务: 612 (daily 01:00)
+2026-06-23 15:33:15 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:33:15 [INFO] src.scheduler: 已恢复定时任务: 每天执行 (daily 02:00)
+2026-06-23 15:33:15 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:33:15 [INFO] src.scheduler: 已恢复定时任务: 617 (daily 09:00)
+2026-06-23 15:33:30 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: E:\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-23 15:33:30 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-23 15:33:36 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-23 15:33:36 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/guangzhou/
+2026-06-23 15:33:39 [INFO] src.scraper.boss_scraper: 搜索关键词: Python
+2026-06-23 15:33:41 [INFO] src.scraper.boss_scraper: 正在采集第 1 页...
+2026-06-23 15:33:41 [INFO] src.scraper.boss_scraper: 采集完成: 15 条
+2026-06-23 15:33:41 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-23 15:33:42 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-23 15:33:42 [INFO] src.utils.resume_parser: 成功解析简历 DOCX（26 段落，1181 字符）
+2026-06-23 15:33:42 [INFO] src.analyzer.agent: 开始评分: 共 15 个岗位, 并发 3, 缓存目录 E:\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-23 15:33:42 [INFO] src.analyzer.agent: 评分完成: 总计 15 个, 缓存命中 15, 请求 0, 耗时 0.0s, 平均 0.0s/请求
+2026-06-23 15:33:46 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: E:\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-23 15:33:46 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-23 15:33:52 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-23 15:34:00 [INFO] src.scraper.boss_scraper: [投递 Python] 点击「继续沟通」
+2026-06-23 15:34:10 [WARNING] src.scraper.boss_scraper: [投递 Python] 点击后未跳转，当前URL: https://www.zhipin.com/web/geek/chat
+2026-06-23 15:34:11 [INFO] src.scraper.boss_scraper: 当前页面URL: https://www.zhipin.com/web/geek/chat
+2026-06-23 15:34:21 [INFO] src.scraper.boss_scraper: 找到输入框: css:[contenteditable="true"]
+2026-06-23 15:34:27 [INFO] src.scraper.boss_scraper: 招呼语已发送
+2026-06-23 15:34:27 [INFO] src.scraper.boss_scraper: [投递 Python] AI 招呼语发送成功
+2026-06-23 15:34:27 [INFO] src.scraper.boss_scraper: 等待 7.1s...
+2026-06-23 15:34:42 [INFO] src.scraper.boss_scraper: [投递 python] 点击「继续沟通」
+2026-06-23 15:34:52 [WARNING] src.scraper.boss_scraper: [投递 python] 点击后未跳转，当前URL: https://www.zhipin.com/web/geek/chat
+2026-06-23 15:34:53 [INFO] src.scraper.boss_scraper: 当前页面URL: https://www.zhipin.com/web/geek/chat
+2026-06-23 15:35:04 [INFO] src.scraper.boss_scraper: 找到输入框: css:[contenteditable="true"]
+2026-06-23 15:35:09 [INFO] src.scraper.boss_scraper: 招呼语已发送
+2026-06-23 15:35:09 [INFO] src.scraper.boss_scraper: [投递 python] AI 招呼语发送成功
+2026-06-23 15:35:10 [INFO] src.scraper.boss_scraper: 浏览器已关闭

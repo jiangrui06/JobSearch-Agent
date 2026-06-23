@@ -1,0 +1,55 @@
+2026-06-23 15:40:21 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-23 15:40:21 [INFO] src.scheduler: 定时任务调度器已启动
+2026-06-23 15:40:21 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:40:21 [INFO] src.scheduler: 已恢复定时任务: 611 (daily 17:35)
+2026-06-23 15:40:21 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:40:21 [INFO] src.scheduler: 已恢复定时任务: 每日12：00 (daily 00:01)
+2026-06-23 15:40:21 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:40:21 [INFO] src.scheduler: 已恢复定时任务: 612 (daily 01:00)
+2026-06-23 15:40:21 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:40:21 [INFO] src.scheduler: 已恢复定时任务: 每天执行 (daily 02:00)
+2026-06-23 15:40:21 [INFO] apscheduler.scheduler: Added job "_run_scheduled_task" to job store "default"
+2026-06-23 15:40:21 [INFO] src.scheduler: 已恢复定时任务: 617 (daily 09:00)
+2026-06-23 15:40:35 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: E:\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-23 15:40:35 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-23 15:40:41 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-23 15:40:41 [INFO] src.scraper.boss_scraper: 正在访问: https://www.zhipin.com/guangzhou/
+2026-06-23 15:40:43 [INFO] src.scraper.boss_scraper: 搜索关键词: Python
+2026-06-23 15:40:45 [INFO] src.scraper.boss_scraper: 正在采集第 1 页...
+2026-06-23 15:40:45 [INFO] src.scraper.boss_scraper: 采集完成: 15 条
+2026-06-23 15:40:46 [INFO] src.scraper.boss_scraper: 浏览器已关闭
+2026-06-23 15:40:46 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
+2026-06-23 15:40:46 [INFO] src.utils.resume_parser: 成功解析简历 DOCX（26 段落，1181 字符）
+2026-06-23 15:40:46 [INFO] src.analyzer.agent: 开始评分: 共 15 个岗位, 并发 3, 缓存目录 E:\JobSearch-Agent\jobhunter_ai\data\score_cache
+2026-06-23 15:40:54 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:40:55 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:40:55 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:01 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:01 [INFO] src.analyzer.agent: 评分进度: 5/15 (14.7s)
+2026-06-23 15:41:02 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:09 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:09 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:17 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:24 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:24 [INFO] src.analyzer.agent: 评分进度: 10/15 (37.4s)
+2026-06-23 15:41:31 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:36 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:41:49 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:42:01 [INFO] openai._base_client: Retrying request to /chat/completions in 0.426665 seconds
+2026-06-23 15:42:09 [INFO] openai._base_client: Retrying request to /chat/completions in 0.438922 seconds
+2026-06-23 15:42:15 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:43:01 [INFO] openai._base_client: Retrying request to /chat/completions in 0.985786 seconds
+2026-06-23 15:43:08 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-23 15:43:08 [INFO] src.analyzer.agent: 评分进度: 15/15 (142.0s)
+2026-06-23 15:43:08 [INFO] src.analyzer.agent: 评分完成: 总计 15 个, 缓存命中 0, 请求 15, 耗时 142.0s, 平均 9.5s/请求
+2026-06-23 15:43:19 [INFO] src.scraper.boss_scraper: 浏览器已启动 (profile: E:\JobSearch-Agent\jobhunter_ai\data\browser_profile)
+2026-06-23 15:43:19 [INFO] src.scraper.boss_scraper: 正在检测登录状态...
+2026-06-23 15:43:25 [INFO] src.scraper.boss_scraper: 检测到登录态
+2026-06-23 15:43:33 [INFO] src.scraper.boss_scraper: [投递 python助教] 点击「继续沟通」
+2026-06-23 15:43:43 [WARNING] src.scraper.boss_scraper: [投递 python助教] 点击后未跳转，当前URL: https://www.zhipin.com/web/geek/chat
+2026-06-23 15:43:44 [INFO] src.scraper.boss_scraper: 当前页面URL: https://www.zhipin.com/web/geek/chat
+2026-06-23 15:43:54 [INFO] src.scraper.boss_scraper: 找到输入框: css:[contenteditable="true"]
+2026-06-23 15:44:02 [INFO] src.scraper.boss_scraper: 招呼语已发送
+2026-06-23 15:44:02 [INFO] src.scraper.boss_scraper: [投递 python助教] AI 招呼语发送成功
+2026-06-23 15:44:02 [INFO] src.scraper.boss_scraper: 等待 6.7s...

@@ -1,127 +1,278 @@
 # JobHunter AI — BOSS直聘智能求职系统
 
-自动采集 BOSS直聘岗位数据，通过 AI Agent 进行简历匹配度评分，生成个性化推荐报告。
+> 自动采集 BOSS直聘 岗位数据，通过 AI Agent 对简历与岗位进行多维度匹配评分，生成个性化推荐报告，并支持自动投递。帮你从海量职位中快速定位最值得投递的机会。
 
-## 架构概览
+## ✨ 功能特性
 
-```
-你
- │
- ├─ CLI  (python -m src.main)
- ├─ Web  (FastAPI + Bootstrap)
- └─ UI  (Gradio)
- │
- └─── JobHunter AI ───┬── Scraper ─── BOSS直聘
-                      │
-                      ├── AI Agent ─── DeepSeek / 通义千问
-                      │
-                      ├── Resume Parser ─── PDF / DOCX / TXT
-                      │
-                      └── Database ─── SQLite (分析历史)
-```
+- **岗位采集** — 基于 DrissionPage 自动化浏览器，模拟真实用户搜索，支持分页抓取
+- **AI 多维评分** — 从技能匹配、经验相关性、薪资期望、发展前景四个维度评分，加权计算综合匹配度
+- **推荐分级** — 强烈推荐 / 建议投递 / 可以考虑 / 不推荐，一目了然
+- **简历解析** — 支持 PDF、DOCX、TXT 格式，自动提取关键信息
+- **结果可视化** — 匹配度分布直方图 + Top 10 横向柱状图，直观对比
+- **AI 个性化招呼** — 根据你的简历和岗位要求，自动生成差异化招呼语，直接发送给 HR
+- **定时执行** — APScheduler 驱动，支持每天定时 / 单次执行，上班前自动获取最新岗位推荐
+- **定时任务管理** — 支持创建、编辑、启用/禁用、立即执行、删除，灵活调整任务配置
+- **自动投递** — 评分后自动向高匹配岗位发送 AI 个性化招呼语，无需手动操作
+- **历史记录** — SQLite 持久化存储，支持查询、详情查看、删除
+- **多使用方式** — FastAPI Web / CLI / 定时任务 三种入口，灵活切换
 
-## 功能
+## 🚀 快速开始
 
-- **岗位采集** — 基于 DrissionPage 自动化浏览器，支持分页抓取 BOSS直聘 岗位
-- **AI 评分** — 从技能匹配、经验相关性、薪资期望、发展前景四个维度评分
-- **推荐分级** — 强烈推荐 / 建议投递 / 可以考虑 / 不推荐
-- **简历解析** — 支持 PDF、DOCX、TXT 格式
-- **结果可视化** — 匹配度分布直方图 + Top 10 横向柱状图
-- **历史记录** — SQLite 持久化，支持查询、详情、删除
-- **多出口** — CLI / FastAPI Web / Gradio 三种使用方式
-
-## 快速开始
-
-### 1. 配置环境变量
-
-复制 `.env` 文件，配置 API Key：
+### 1. 克隆项目
 
 ```bash
-# AI API（至少配置一个）
-DEEPSEEK_API_KEY="your-api-key"
-DEEPSEEK_API_BASE="https://dashscope.aliyuncs.com/compatible-mode/v1"
-AI_MODEL="qwen-plus"         # qwen-plus / qwen-max / qwen-turbo
-
-# 求职偏好
-SEARCH_KEYWORDS="Python开发,机器学习,数据挖掘"
-SEARCH_CITY="上海"
+git clone <repo-url> JobSearch-Agent
+cd JobSearch-Agent/jobhunter_ai
 ```
-
-项目使用阿里云百炼平台的 OpenAI 兼容接口，`qwen-plus` 模型性价比最高。
 
 ### 2. 安装依赖
 
 ```bash
-cd jobhunter_ai
 pip install -r requirements.txt
 ```
 
-### 3. 运行
+### 3. 配置环境变量
 
-**CLI 模式：**
+复制 `jobhunter_ai/.env` 文件，填入以下关键配置：
 
 ```bash
-python -m src.main --keyword "Python" --city 上海 --resume resume.txt
+# ---- AI API 配置 ----
+# 支持任何 OpenAI 兼容接口
+DEEPSEEK_API_KEY="sk-你的API密钥"
+DEEPSEEK_API_BASE="https://token.sensenova.cn/v1"
+AI_PROVIDER="sensenova"
+AI_MODEL="sensenova-6.7-flash-lite"
+
+# ---- 简历路径 ----
+RESUME_PATH="E:/你的路径/data/resumes/你的简历.docx"
+
+# ---- 求职偏好 ----
+SEARCH_KEYWORDS="Python开发,机器学习,数据挖掘"
+SEARCH_CITY="上海"
+
+# ---- 浏览器模式 ----
+SHOW_BROWSER=true   # true=弹出浏览器窗口（可手动验证码）；false=静默无界面
+
+# ---- 性能调优 ----
+MAX_WORKERS=3       # AI 评分并发数，根据 API 限速调整
 ```
 
-**Web 模式 (FastAPI)：**
+> 支持任何 OpenAI 兼容的 API 服务：DeepSeek、通义千问（阿里云百炼）、SenseNova（先声科技）等。
+
+### 4. 运行
+
+**Web 模式（推荐）**
 
 ```bash
 python -m src.web_app
 # 访问 http://127.0.0.1:7860
 ```
 
-**Gradio 模式：**
+**CLI 模式**
 
 ```bash
-python -m src.app
-# 访问 http://127.0.0.1:7860
+python -m src.main --keyword "Python" --city 上海 --pages 3
 ```
 
-## 项目结构
+## 📖 详细使用指南
+
+### Web 界面
+
+启动 Web 服务后，浏览器打开 `http://127.0.0.1:7860`，界面包含：
+
+| 功能 | 说明 |
+|------|------|
+| **岗位分析** | 输入关键词、城市、页数，上传简历，一键启动分析 |
+| **历史记录** | 查看所有历史分析结果、详情、日志 |
+| **定时任务** | 创建、编辑、启用/禁用、立即执行、删除定时采集任务 |
+| **简历管理** | 上传、删除简历文件，绑定到定时任务 |
+
+### 定时任务
+
+定时任务功能让系统在指定时间自动执行采集+评分+投递全流程。
+
+1. 在 Web 界面「定时任务」选项卡中创建任务
+2. 设置关键词、城市、执行时间、匹配度阈值等参数
+3. 绑定已上传的简历，开启自动投递
+4. 创建后可随时**编辑**参数、**启用/禁用**、**立即执行**或**删除**任务
+
+任务执行后，结果会自动保存到历史记录中，可在「历史记录」页查看详情。
+
+也可通过 API 手动触发：
+
+```bash
+curl -X POST http://127.0.0.1:7860/api/schedule/{task_id}/run
+```
+
+### 自动投递
+
+评分完成后，系统会自动对「强烈推荐」和「建议投递」的岗位执行以下流程：
 
 ```
-jobhunter_ai/
-├── .env                      # 环境变量（API Key、求职偏好）
-├── requirements.txt          # Python 依赖
-├── resume.txt                # 示例简历
-├── config/
-│   └── settings.py           # 配置加载
-├── data/
-│   ├── jobhunter.db          # SQLite 历史数据库
-│   └── browser_profile/      # 浏览器缓存（自动生成）
-├── src/
-│   ├── main.py               # CLI 入口
-│   ├── app.py                # Gradio Web UI
-│   ├── web_app.py            # FastAPI Web 应用
-│   ├── database.py           # SQLite 持久化层
-│   ├── analyzer/
-│   │   └── agent.py          # AI Agent 评分引擎
-│   ├── scraper/
-│   │   └── boss_scraper.py   # BOSS直聘爬虫
-│   ├── utils/
-│   │   └── resume_parser.py  # 简历解析（PDF/DOCX/TXT）
-│   └── templates/
-│       └── index.html        # FastAPI 前端页面
-└── logs/                     # 运行日志（自动生成）
+打开岗位详情 → 点击"立即沟通"
+    → 弹窗出现 → 点击"继续沟通"进入聊天页
+    → AI 根据你的简历和岗位要求生成个性化招呼语
+    → 输入招呼语 → Enter 发送
+    → 进入下一个岗位
 ```
 
-## AI 评分维度
+招呼语由 AI 动态生成，每个岗位不同，包含：
+- 为什么投递该岗位（体现你是认真考虑的，不是海投）
+- 与岗位最相关的 1-2 个技能亮点
+- 公司名和岗位名（拒绝模板化）
+
+### 评分加速
+
+Web 界面「岗位分析」页可选并发数和模型。评分速度与并发数和 API 响应速度相关：
+
+| MAX_WORKERS | 150 个岗位预估耗时 |
+|-------------|-------------------|
+| 1 | 25-45 分钟 |
+| 3 | 8-15 分钟 |
+| 5 | 5-10 分钟 |
+
+> 注意：提高并发数可能触发 API 限速，请根据你的 API 套餐 RPM 调整。
+
+## 🏗 架构概览
+
+```
+                        ┌─────────────────────────────────────────────┐
+                        │              JobHunter AI                   │
+                        │                                             │
+ 用户 ── Web / CLI ────┤  ┌─────────┐    ┌──────────────────────┐   │
+                        │  │ Scraper │───▶│  BOSS直聘 岗位数据    │   │
+                        │  └─────────┘    └──────────────────────┘   │
+                        │  ┌──────────────┐  ┌──────────────────┐    │
+                        │  │ AI 评分引擎   │──▶  DeepSeek / Qwen  │    │
+                        │  │ (4维评分+招呼)│  │  SenseNova       │    │
+                        │  └──────────────┘  └──────────────────┘    │
+                        │  ┌──────────────┐  ┌──────────────────┐    │
+                        │  │ 简历解析器    │──▶ PDF / DOCX / TXT  │    │
+                        │  └──────────────┘  └──────────────────┘    │
+                        │  ┌──────────┐                             │
+                        │  │ SQLite   │ ◀── 历史记录持久化           │
+                        │  └──────────┘                             │
+                        │  ┌──────────────┐                         │
+                        │  │ 定时任务调度器 │─── APScheduler           │
+                        │  └──────────────┘                         │
+                        │  ┌──────────────┐                         │
+                        │  │ 自动投递引擎   │─── 浏览器自动化           │
+                        │  └──────────────┘                         │
+                        └─────────────────────────────────────────────┘
+```
+
+## 🤖 AI 评分维度
 
 | 维度 | 权重 | 说明 |
 |------|------|------|
 | 技能匹配度 | 0-100 | 技能与岗位要求的匹配程度 |
 | 经验相关性 | 0-100 | 过往经验与岗位核心职责的相关性 |
-| 薪资期望 | 0-100 | 薪资期望是否在岗位范围内 |
-| 发展前景 | 0-100 | 该岗位的职业成长空间 |
+| 薪资期望 | 0-100 | 薪资期望是否在岗位薪酬范围内 |
+| 发展前景 | 0-100 | 该岗位的职业成长空间与晋升路径 |
 
-最终综合评分后，系统自动给出推荐等级。
+四维度加权计算后得到综合评分，系统自动划分推荐等级：
 
-## 技术栈
+| 等级 | 分数区间 | 说明 |
+|------|----------|------|
+| 强烈推荐 | ≥ 85 | 高度匹配，建议优先投递 |
+| 建议投递 | 70-84 | 匹配度较高，值得申请 |
+| 可以考虑 | 50-69 | 部分匹配，可作为备选 |
+| 不推荐 | < 50 | 匹配度低，不建议浪费精力 |
 
-- **爬虫** — DrissionPage（自动化浏览器）、jsonpath-ng
-- **AI** — OpenAI SDK（兼容 DeepSeek / 通义千问 / Claude）
-- **后端** — FastAPI + Uvicorn / Gradio
-- **前端** — Bootstrap 5 + Font Awesome
-- **数据库** — SQLite（WAL 模式）
-- **数据处理** — Pandas + Matplotlib
+AI 还会根据评分结果生成：
+- **匹配理由** — 为什么匹配/不匹配（2-3 句中文）
+- **推荐理由** — 为什么给出这个推荐等级
+- **投递招呼语** — 30-60 字个性化招呼文案，发送给 HR
+
+## 🔧 配置说明
+
+### .env 完整配置项
+
+| 配置项 | 说明 | 默认值 |
+|--------|------|--------|
+| `DEEPSEEK_API_KEY` | API 密钥（必填） | — |
+| `DEEPSEEK_API_BASE` | API 地址 | `https://token.sensenova.cn/v1` |
+| `AI_PROVIDER` | 供应商标识 | `sensenova` |
+| `AI_MODEL` | 模型名 | `sensenova-6.7-flash-lite` |
+| `RESUME_PATH` | 简历文件路径 | — |
+| `SEARCH_KEYWORDS` | 搜索关键词（逗号分隔） | `Python开发,机器学习,数据挖掘` |
+| `SEARCH_CITY` | 目标城市 | `上海` |
+| `SALARY_EXPECTATION` | 期望薪资 | — |
+| `SHOW_BROWSER` | 是否显示浏览器窗口 | `true` |
+| `MAX_WORKERS` | AI 评分并发数 | `3` |
+| `REQUEST_TIMEOUT` | API 请求超时（秒） | `30` |
+| `LOG_LEVEL` | 日志级别 | `INFO` |
+
+> 路径支持正斜杠（`/`）和反斜杠（`\`），建议使用正斜杠避免转义问题。
+
+## ❗ 常见问题
+
+### 简历加载失败
+
+- 检查 `.env` 中 `RESUME_PATH` 指向的文件是否存在
+- 支持格式：`.pdf`、`.docx`、`.txt`
+- 路径建议使用绝对路径，如 `E:/project/data/resume.docx`
+
+### 登录会话过期
+
+- 浏览器窗口弹出后，手动扫码登录
+- 登录态会持久化保存，下次自动复用
+- 如果持续提示登录，清除 `data/browser_profile/` 目录后重试
+
+### API 限速
+
+- 如果遇到 429 错误，降低 `MAX_WORKERS` 的值
+- SenseNova 免费套餐 RPM 较低，建议设为 1-3
+- 评分缓存会自动避免重复请求相同岗位
+
+### 任务状态 404
+
+- 服务重启后，运行中的任务记录会丢失
+- 重新发起一次分析即可获得新的 task_id
+
+### 招呼语发送失败
+
+- 确保已登录 BOSS直聘
+- `SHOW_BROWSER=true` 可以看到浏览器操作过程，便于排查
+- 检查日志中是否有 `未找到聊天输入框` 等提示
+
+## 📁 项目结构
+
+```
+jobhunter_ai/
+├── .env                       # 环境变量（API Key、求职偏好）
+├── requirements.txt           # Python 依赖
+├── config/
+│   └── settings.py            # 配置加载
+├── src/
+│   ├── web_app.py             # FastAPI Web 应用（主入口）
+│   ├── main.py                # CLI 入口
+│   ├── app.py                 # Gradio Web UI
+│   ├── scheduler.py           # APScheduler 定时任务
+│   ├── database.py            # SQLite 持久化层
+│   ├── analyzer/
+│   │   └── agent.py           # AI Agent 评分引擎
+│   ├── scraper/
+│   │   └── boss_scraper.py    # BOSS直聘爬虫 + 自动投递
+│   ├── utils/
+│   │   └── resume_parser.py   # 简历解析（PDF/DOCX/TXT）
+│   └── templates/
+│       └── index.html         # FastAPI 前端页面
+├── data/
+│   ├── jobhunter.db           # SQLite 历史数据库
+│   ├── resumes/               # 上传的简历文件
+│   └── browser_profile/       # 浏览器用户数据（自动生成）
+└── logs/                      # 运行日志（自动生成）
+```
+
+## 🛠 技术栈
+
+| 类别 | 技术 |
+|------|------|
+| 爬虫 | DrissionPage（Chromium 自动化）、jsonpath-ng |
+| AI | OpenAI SDK（兼容 DeepSeek / 通义千问 / SenseNova） |
+| 后端 | FastAPI + Uvicorn |
+| 前端 | Bootstrap 5 + Font Awesome |
+| 定时调度 | APScheduler |
+| 数据库 | SQLite（WAL 模式） |
+| 数据处理 | Pandas + Matplotlib |

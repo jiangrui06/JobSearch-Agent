@@ -24,7 +24,7 @@ _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from config.settings import DATA_DIR, LOG_DIR, AI_MODEL
+from config.settings import DATA_DIR, LOG_DIR, AI_MODEL, DEEPSEEK_API_KEY, RESUME_PATH, SEARCH_CITY
 from src.analyzer.agent import JobAgent
 from src.scraper.boss_scraper import BossZhipinScraper
 
@@ -590,7 +590,7 @@ async def get_status(task_id: str):
     """查询任务状态和结果。"""
     task = tasks.get(task_id)
     if task is None:
-        return JSONResponse({"status": "not_found"}, status_code=404)
+        return JSONResponse({"status": "not_found", "progress": 0, "log": "", "result": None, "error": "任务不存在或已过期（服务重启后内存中的任务记录会丢失）"})
     return JSONResponse({
         "status": task["status"],
         "progress": task["progress"],
@@ -734,6 +734,45 @@ async def delete_scheduled_task(task_id: str):
     return JSONResponse({"success": True})
 
 
+@app.put("/api/schedule/{task_id}")
+async def update_scheduled_task(task_id: str, request: dict):
+    """更新定时任务配置。
+
+    请求体示例（只传要修改的字段即可）：
+    {
+        "name": "每日投递",
+        "keyword": "Python",
+        "city": "上海",
+        "pages": 5,
+        "schedule_type": "daily",
+        "schedule_time": "09:00",
+        "resume_path": "xxx.docx",
+        "resume_id": "abc123",
+        "auto_send": true,
+        "min_score": 70,
+        "recommendations": ["强烈推荐", "建议投递"]
+    }
+    """
+    from src.scheduler import update_task
+
+    # 如果传了 resume_id 但没有 resume_path，自动解析路径
+    resume_path = request.get("resume_path", "")
+    resume_id = request.get("resume_id", "")
+    if resume_id and not resume_path:
+        resumes = _load_resumes()
+        match = next((r for r in resumes if r.get("id") == resume_id), None)
+        if match:
+            resume_path = match.get("path", "")
+        else:
+            return JSONResponse({"error": f"简历不存在: {resume_id}"}, status_code=400)
+        request["resume_path"] = resume_path
+
+    updated = update_task(task_id, request)
+    if updated is None:
+        return JSONResponse({"error": "not_found"}, status_code=404)
+    return JSONResponse({"task": updated})
+
+
 @app.post("/api/schedule/{task_id}/run")
 async def run_scheduled_task_now(task_id: str):
     """立即执行一次定时任务。"""
@@ -755,8 +794,28 @@ async def run_scheduled_task_now(task_id: str):
 
 # ---------- 启动 ----------
 
+
+def _check_config():
+    """启动时校验关键配置，缺失项打印警告但不阻止启动。"""
+    warnings = []
+    if not DEEPSEEK_API_KEY:
+        warnings.append("DEEPSEEK_API_KEY 未配置，AI 评分功能不可用")
+    if RESUME_PATH and not Path(RESUME_PATH).exists():
+        warnings.append(f"RESUME_PATH 文件不存在: {RESUME_PATH}")
+    for name, val in [("AI_MODEL", AI_MODEL), ("SEARCH_CITY", SEARCH_CITY)]:
+        if not val:
+            warnings.append(f"{name} 未配置")
+    if warnings:
+        logger.warning("配置检查发现以下问题：")
+        for w in warnings:
+            logger.warning(f"  ⚠ {w}")
+    else:
+        logger.info("配置检查通过")
+
+
 if __name__ == "__main__":
     setup_web_logging()
+    _check_config()
     from src.database import init_db
     init_db(DATA_DIR)
 

@@ -1,1 +1,0 @@
-{"skill_match": 50, "experience_match": 40, "salary_match": 80, "growth_potential": 75, "match_score": 60, "match_reason": "简历信息缺失导致技能匹配度无法准确评估（50分），经验年限未明确但岗位需1-3年（40分），薪资范围符合岗位预期（80分）。", "recommendation": "可以考虑", "recommendation_reason": "因简历信息不完整，仅能基于岗位薪资范围和发展空间给出中等推荐，建议补充完整简历后重新评估。", "greeting": "您好，我对贵司软件研发岗感兴趣，具备Java/Python开发基础，熟悉微服务架构，期待能进一步沟通技术细节。"}

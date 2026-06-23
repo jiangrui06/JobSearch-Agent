@@ -13,7 +13,10 @@ AI_PROVIDER = os.getenv("AI_PROVIDER", "deepseek").lower()
 AI_MODEL = os.getenv("AI_MODEL", "deepseek-chat")
 
 # ==================== 简历路径 ====================
-RESUME_PATH = os.getenv("RESUME_PATH", "")
+_raw_resume_path = os.getenv("RESUME_PATH", "")
+if _raw_resume_path and not os.path.isabs(_raw_resume_path):
+    _raw_resume_path = str(Path(__file__).resolve().parent.parent / _raw_resume_path)
+RESUME_PATH = _raw_resume_path
 
 # ==================== 求职偏好 ====================
 SEARCH_KEYWORDS = os.getenv("SEARCH_KEYWORDS", "Python开发,机器学习,数据挖掘")

@@ -18,15 +18,12 @@ from config.settings import (
     DEEPSEEK_API_BASE,
     DEEPSEEK_API_KEY,
     SALARY_EXPECTATION,
+    MAX_WORKERS,
 )
 from src.utils.resume_parser import parse_resume
 
 logger = logging.getLogger(__name__)
 
-# 并发 worker 数量（可根据 API 限速调整）
-MAX_WORKERS = 1
-# API 请求间隔（秒），防止触发限速
-API_DELAY = 3.0
 # 请求超时（秒）
 REQUEST_TIMEOUT = 60
 
@@ -49,7 +46,12 @@ SYSTEM_PROMPT = """你是一名顶级的 HR 专家和职业顾问，擅长分析
    - "可以考虑"：部分匹配，可作为备选
    - "不推荐"：匹配度低，不建议浪费精力
 7. **推荐理由**：简要说明为什么给出这个推荐等级。
-	8. **投递招呼语**：生成一段 20-50 字的个性化打招呼文案，用于 BOSS直聘 投递时发送给 HR。要求：简洁有力、结合岗位和简历亮点，不要只用套话。
+	8. **投递招呼语**：生成一段 30-60 字的个性化打招呼文案，用于 BOSS直聘 投递时发送给 HR。
+	   要求：① 必须提到**具体公司名和岗位名称**，让 HR 感觉你不是海投的；
+	   ② 说明为什么投递这个岗位（结合你的背景和岗位需求，让人感受到你是认真考虑过的）；
+	   ③ 突出 1-2 个与岗位最相关的技能或经验亮点，让 HR 一眼看到你的价值；
+	   ④ 语气自然真诚，像是在和一个真实的人对话，拒绝"您好，我对贵岗位很感兴趣"这种套话；
+	   ⑤ 每个岗位的招呼语都要有差异化，不要用固定模板。
 
 **必须输出严格的 JSON 格式**（不要包含 markdown 代码块标记）：
 {
@@ -61,7 +63,7 @@ SYSTEM_PROMPT = """你是一名顶级的 HR 专家和职业顾问，擅长分析
   "match_reason": "您的 Python 技能与岗位高度匹配（85分），...",
   "recommendation": "建议投递",
   "recommendation_reason": "技能匹配度高，薪资在期望范围内，建议投递。",
-  "greeting": "您好，我有3年Python后端开发经验，熟悉微服务架构和Redis，对贵岗位很感兴趣，期待进一步沟通。"
+  "greeting": "您好，看到贵团队在招Python后端。我3年Python经验，主力语言就是Python，之前负责过日活百万的API系统，正好和岗位要求匹配。想了解一下这个机会，期待您的回复！"
 }
 """
 
@@ -215,6 +217,15 @@ class JobAgent:
             df["recommendation_reason"] = "系统配置错误，无法进行分析"
             return df
 
+        if not resume_text or len(resume_text.strip()) < 50:
+            logger.warning("简历内容为空或过短，跳过 LLM 评分，全部标记为不推荐（防止缓存污染）")
+            df["match_score"] = 0
+            df["match_reason"] = "未配置简历或简历内容为空，无法进行匹配度评分"
+            df["recommendation"] = "不推荐"
+            df["recommendation_reason"] = "请先在设置中上传简历并绑定到定时任务"
+            df["greeting"] = ""
+            return df
+
         total = len(df)
         logger.info(f"开始评分: 共 {total} 个岗位, 并发 {MAX_WORKERS}, 缓存目录 {self._cache._dir}")
         start_time = time.time()
@@ -308,10 +319,8 @@ class JobAgent:
         return df
 
     def _throttle(self):
-        """限流：确保不超出 API 的 RPM 限制。"""
+        """限流：滑动窗口 RPM 控制，超出时主动等待。"""
         self._rate_limiter.acquire()
-        # 基础的固定间隔保障
-        time.sleep(API_DELAY)
 
     def _analyze_single_with_cache(
         self, idx: int, job_description: str, resume_content: str, cache_key: str
@@ -338,7 +347,7 @@ class JobAgent:
             try:
                 response = self._client.chat.completions.create(
                     model=AI_MODEL if AI_MODEL else "deepseek-chat",
-                    temperature=0.3,
+                    temperature=0.5,
                     messages=[
                         {"role": "system", "content": SYSTEM_PROMPT},
                         {"role": "user", "content": user_prompt},

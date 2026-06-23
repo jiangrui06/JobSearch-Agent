@@ -99,11 +99,22 @@ def _run_scheduled_task(task_id: str, config: dict) -> None:
         # 2. 评分
         agent = JobAgent()
         resume_text = ""
+
+        # 任务优先使用自身配置的简历，若为空则尝试 .env 的默认简历路径
+        if not resume_path or not Path(resume_path).exists():
+            from config.settings import RESUME_PATH as default_resume
+            if default_resume and Path(default_resume).exists():
+                resume_path = default_resume
+                logger.info(f"[定时任务 {task_id}] 使用 .env 默认简历: {default_resume}")
+
         if resume_path and Path(resume_path).exists():
             try:
                 resume_text = parse_resume(resume_path)
+                logger.info(f"[定时任务 {task_id}] 简历加载成功 ({len(resume_text)} 字符)")
             except Exception as e:
                 logger.warning(f"[定时任务 {task_id}] 简历解析失败: {e}")
+        else:
+            logger.warning(f"[定时任务 {task_id}] 未配置简历，所有岗位将被标记为不推荐")
 
         import pandas as pd
         df = pd.DataFrame(jobs)
@@ -344,6 +355,72 @@ def toggle_task(task_id: str, enabled: bool) -> bool:
         pass
 
     return True
+
+
+def update_task(task_id: str, updates: dict) -> Optional[dict]:
+    """更新定时任务配置。
+
+    Args:
+        task_id: 任务 ID
+        updates: 要更新的字段（name, keyword, city, pages, schedule_type,
+                 schedule_time, resume_path, resume_id, auto_send, min_score, recommendations）
+
+    Returns:
+        更新后的任务 dict，任务不存在返回 None
+    """
+    tasks = _load_tasks()
+    task = None
+    for t in tasks:
+        if t.get("id") == task_id:
+            task = t
+            break
+
+    if task is None:
+        logger.warning(f"更新任务失败，不存在: {task_id}")
+        return None
+
+    # 允许更新的字段
+    allowed_fields = {
+        "name", "keyword", "city", "pages", "schedule_type",
+        "schedule_time", "resume_path", "resume_id", "auto_send",
+        "min_score", "recommendations",
+    }
+    for key, value in updates.items():
+        if key in allowed_fields:
+            task[key] = value
+
+    _save_tasks(tasks)
+
+    # 重新注册调度任务（可能改了时间/类型）
+    scheduler = get_scheduler()
+    try:
+        scheduler.remove_job(task_id)
+    except Exception:
+        pass
+
+    schedule_type = task.get("schedule_type", "daily")
+    schedule_time = task.get("schedule_time", "09:00")
+    hour, minute = map(int, schedule_time.split(":"))
+
+    if schedule_type == "daily":
+        trigger = CronTrigger(hour=hour, minute=minute)
+    else:
+        now = datetime.now()
+        run_time = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+        if run_time <= now:
+            from datetime import timedelta
+            run_time += timedelta(days=1)
+        trigger = DateTrigger(run_date=run_time)
+
+    scheduler.add_job(
+        func=_run_scheduled_task,
+        trigger=trigger,
+        id=task_id,
+        args=[task_id, task],
+        replace_existing=True,
+    )
+    logger.info(f"定时任务已更新: {task.get('name')} ({schedule_type} {schedule_time})")
+    return task
 
 
 def list_tasks() -> list[dict]:
