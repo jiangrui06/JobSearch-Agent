@@ -1,0 +1,50 @@
+# 环境变量（含 API Key、本地路径）
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 项目运行时自动生成的数据（跨机不需要携带）
+jobhunter_ai/data/browser_profile/
+jobhunter_ai/data/logs/
+jobhunter_ai/logs/
+jobhunter_ai/data/*.csv
+jobhunter_ai/data/*.png
+jobhunter_ai/data/*.jpg
+jobhunter_ai/data/*.jpeg
+jobhunter_ai/data/*.gif
+jobhunter_ai/data/*.webp
+jobhunter_ai/data/*.db
+jobhunter_ai/data/*.db-shm
+jobhunter_ai/data/*.db-wal
+jobhunter_ai/data/screenshots/
+jobhunter_ai/data/score_cache/
+jobhunter_ai/data/resumes/*.docx
+jobhunter_ai/data/resumes/*.pdf
+jobhunter_ai/data/resumes/*.txt
+jobhunter_ai/data/resumes/*.doc
+
+# 保留目录结构用占位文件可保留
+!jobhunter_ai/data/resumes/.gitkeep
+
+# 本地 Claude / Trae 配置
+.claude/
+.trae/

@@ -461,14 +461,62 @@ class BossZhipinScraper:
                 page.wait(0.03)
             page.wait(0.5)
 
-            # 用 Enter 发送（比点击按钮更可靠，避免误点上传附件按钮）
+            # 用 Enter 发送
             page.wait(0.3)
             input_area.input('\n', clear=False)
-            page.wait(0.5)
-            logger.info("已按 Enter 发送招呼语")
-            page.wait(1)
-            logger.info("招呼语已发送")
-            return True
+
+            # ===== 确认消息真实发送成功（防网络慢导致转圈未完成就跳转） =====
+            logger.info("[发送] 已按 Enter，正在确认消息是否发出...")
+            greeting_head = greeting[:20].strip()
+
+            send_ok = False
+            confirm_start = time.time()
+            for i in range(30):  # 最多等 15 秒 (30 × 0.5s)
+                page.wait(0.5)
+                try:
+                    # 方法1：聊天记录中出现刚发的消息气泡
+                    msg_sent = page.ele(
+                        f'xpath://*[contains(@class,"message") or contains(@class,"chat")]'
+                        f'//*[contains(text(),"{greeting_head}")]',
+                        timeout=0.2,
+                    )
+                    if msg_sent:
+                        send_ok = True
+                        break
+
+                    # 方法2：输入框已清空（消息已发出）
+                    cur_text = (input_area.text or "").strip()
+                    if not cur_text:
+                        send_ok = True
+                        break
+                except Exception:
+                    continue
+
+            elapsed = time.time() - confirm_start
+            if send_ok:
+                logger.info(f"[发送] 消息确认发送 (耗时 {elapsed:.1f}s)")
+                page.wait(0.5)
+                return True
+            else:
+                logger.warning(f"[发送] {elapsed:.1f}s 超时未确认，尝试重发...")
+                try:
+                    page.wait(0.5)
+                    input_area.click()
+                    page.wait(0.2)
+                    # 清空输入框
+                    page.run_js("arguments[0].textContent = ''; arguments[0].value = '';", input_area)
+                    page.wait(0.2)
+                    for ch in greeting:
+                        input_area.input(ch, clear=False)
+                        page.wait(0.02)
+                    page.wait(0.3)
+                    input_area.input('\n', clear=False)
+                    page.wait(3)
+                    logger.info("[发送] 重发完成")
+                    return True
+                except Exception as e2:
+                    logger.warning(f"[发送] 重发失败: {e2}")
+                    return False
         except Exception as e:
             logger.warning(f"招呼语输入/发送异常: {e}")
             return False
@@ -504,8 +552,8 @@ class BossZhipinScraper:
         # 检查是否被重定向到登录页
         try:
             if any(kw in page.url.lower() for kw in ('login', 'passport', 'web/user')):
-                print("会话过期")
-                return {"title": title, "company": company, "status": "跳过", "error": "登录会话已过期"}
+                logger.warning(f"会话过期（URL重定向到登录页）: {page.url}")
+                return {"title": title, "company": company, "status": "登录过期", "error": "登录会话已过期"}
         except Exception:
             pass
 
@@ -540,15 +588,79 @@ class BossZhipinScraper:
             print(f"点击失败: {e}")
             return {"title": title, "company": company, "status": "失败", "error": f"点击失败: {e}"}
 
-        # ===== 检查"已向BOSS发送消息"弹窗 =====
+        # ===== 检测弹窗：上限/频繁/继续沟通 =====
         popup_found = False
-        for _ in range(3):
+        limit_closed = False
+
+        for _ in range(6):
             try:
-                if page.ele('xpath://*[contains(text(),"已向BOSS发送消息")]', timeout=1):
+                # ===== 全页文本搜索上限弹窗（不依赖CSS类名） =====
+                try:
+                    js_clicked = page.run_js("""
+                        var kws=['无法进行沟通','休息一下','明天再来','已与','150'];
+                        var btns=['好的','知道了','确定','确认','嗯','关闭'];
+                        var all=document.querySelectorAll('body *');
+                        var hit=null;
+                        for(var i=0;i<all.length;i++){
+                            var e=all[i];
+                            if(e.offsetParent===null)continue;
+                            var t=(e.textContent||'').trim();
+                            var match=false;
+                            for(var k=0;k<kws.length;k++){if(t.indexOf(kws[k])!==-1){match=true;break;}}
+                            if(!match)continue;
+                            var p=e;
+                            for(var d=0;d<10&&p&&p!==document.body;d++){
+                                var cs=p.querySelectorAll('button,[class*=\"btn\"],a,div[role=\"button\"]');
+                                for(var c=0;c<cs.length;c++){
+                                    var b=cs[c];
+                                    if(b.offsetParent===null)continue;
+                                    var bt=(b.textContent||'').trim();
+                                    if(btns.indexOf(bt)!==-1){
+                                        b.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true}));
+                                        hit=bt;break;
+                                    }
+                                }
+                                if(hit)break;
+                                p=p.parentElement;
+                            }
+                            if(hit)break;
+                        }
+                        return hit||'';
+                    """)
+                    if js_clicked:
+                        logger.info(f"[投递 {title}] 检测到上限弹窗，已点击「{js_clicked}」")
+                        print("\n!!! 已达每日上限，停止投递 !!!")
+                        page.wait(2)
+                        return {"title": title, "company": company, "status": "上限", "error": "已达每日沟通上限"}
+                except Exception:
+                    pass
+
+                # ===== 检测"已向BOSS发送消息"弹窗 =====
+                msg_popup = page.ele('xpath://*[contains(text(),"已向BOSS发送消息")]', timeout=0.5)
+                if msg_popup:
                     popup_found = True
                     break
+
+                # ===== 检测登录过期浮窗（非URL跳转，页面弹窗overlay） =====
+                try:
+                    qr_login = page.ele('xpath://*[contains(text(),"扫码登录")]', timeout=0.3)
+                    if qr_login:
+                        # 确认在弹窗/对话框内（不是页面底部footer的登录入口）
+                        try:
+                            dialog = qr_login.parent().parent()
+                            d_class = (dialog.attr("class") or "").lower()
+                            if any(k in d_class for k in ("dialog", "modal", "popup", "overlay")):
+                                logger.warning(f"[投递 {title}] 检测到登录过期弹窗")
+                                print("\n!!! 登录会话已过期，请重新扫码登录 !!!")
+                                self._logged_in = False
+                                return {"title": title, "company": company, "status": "登录过期", "error": "登录会话已过期"}
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
             except Exception:
-                page.wait(1)
+                pass
+            page.wait(1)
 
         if popup_found:
             if greeting:
@@ -612,8 +724,13 @@ class BossZhipinScraper:
             return {"title": title, "company": company, "status": "成功", "error": ""}
 
         # 没有输入框但已经点击了"立即沟通"
-        print("已沟通（默认）")
-        return {"title": title, "company": company, "status": "成功", "error": "已点击立即沟通"}
+        current_url = page.url
+        if "/chat/" in current_url or "/geek/chat/" in current_url:
+            logger.info(f"已沟通过（重复）: {title} @ {company}")
+            return {"title": title, "company": company, "status": "跳过", "error": "已沟通过"}
+        else:
+            logger.warning(f"点击「立即沟通」后页面未跳转到聊天页 (URL: {current_url})")
+            return {"title": title, "company": company, "status": "跳过", "error": f"页面未跳转"}
 
     def send_greetings(self, jobs: list[dict]) -> list[dict]:
         """批量投递：对每个岗位打开详情页发送招呼语。"""
@@ -633,6 +750,22 @@ class BossZhipinScraper:
         for idx, job in enumerate(jobs):
             result = self._send_greeting_for_job(page, job, idx, len(jobs))
             results.append(result)
+
+            # 检测到上限或登录过期时立即停止后续投递
+            if result.get("status") in ("上限", "登录过期"):
+                remaining = len(jobs) - idx - 1
+                reason = "已达每日上限" if result["status"] == "上限" else "登录会话已过期"
+                if remaining > 0:
+                    print(f"  {reason}，跳过剩余 {remaining} 个岗位")
+                    for j in jobs[idx + 1:]:
+                        results.append({
+                            "title": j.get("title", ""),
+                            "company": j.get("company", ""),
+                            "status": "跳过",
+                            "error": f"{reason}，停止投递",
+                        })
+                break
+
             if idx < len(jobs) - 1:
                 delay = random.uniform(5, 10)
                 logger.info(f"等待 {delay:.1f}s...")
@@ -641,7 +774,7 @@ class BossZhipinScraper:
         success = sum(1 for r in results if r["status"] == "成功")
         skipped = sum(1 for r in results if r["status"] == "跳过")
         failed = sum(1 for r in results if r["status"] == "失败")
-        print(f"\n投递完成: 成功 {success} 个, 跳过 {skipped} 个, 失败 {failed} 个")
+        logger.info(f"投递完成: 成功 {success} 个, 跳过 {skipped} 个, 失败 {failed} 个")
         return results
 
     def close(self):

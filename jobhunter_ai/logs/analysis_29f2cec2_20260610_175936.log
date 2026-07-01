@@ -1,9 +1,0 @@
-[17:57:34] === 阶段1/2: 采集 BOSS直聘数据 ===
-关键词: Python  |  城市: 广州  |  页数: 1
-正在访问: https://www.zhipin.com/guangzhou/
-搜索关键词: Python
-采集完成: 15 条岗位数据
-
-[17:57:41] === 阶段2/2: AI Agent 评分 ===
-评分完成: 15 个岗位
-结果已保存: C:\Users\Administrator\Desktop\JobSearch-Agent\jobhunter_ai\data\boss_jobs_20260610_175936.csv

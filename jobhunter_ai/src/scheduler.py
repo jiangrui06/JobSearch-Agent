@@ -72,7 +72,20 @@ def _save_tasks(tasks: list[dict]) -> None:
 
 def _run_scheduled_task(task_id: str, config: dict) -> None:
     """执行定时任务：爬取 -> 评分 -> 自动投递。"""
+    import io
+
     logger.info(f"[定时任务 {task_id}] 开始执行")
+
+    # 捕获本任务的日志到内存
+    log_buf = io.StringIO()
+    buf_handler = logging.StreamHandler(log_buf)
+    buf_handler.setLevel(logging.INFO)
+    buf_handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s"))
+    logger.addHandler(buf_handler)
+    db_run_id = None
+
+    def _get_log_text() -> str:
+        return log_buf.getvalue()
 
     try:
         from src.scraper.boss_scraper import BossZhipinScraper
@@ -140,7 +153,9 @@ def _run_scheduled_task(task_id: str, config: dict) -> None:
                             results = scraper.send_greetings(sendable)
                             send_stats["success"] = sum(1 for r in results if r["status"] == "成功")
                             send_stats["total"] = len(results)
-                            logger.info(f"[定时任务 {task_id}] 投递完成: 成功 {send_stats['success']}/{send_stats['total']}")
+                            skipped = sum(1 for r in results if r["status"] == "跳过")
+                            failed = sum(1 for r in results if r["status"] == "失败")
+                            logger.info(f"[定时任务 {task_id}] 投递完成: 成功 {send_stats['success']}/{send_stats['total']} (跳过 {skipped}, 失败 {failed})")
                 except Exception as e:
                     logger.exception(f"[定时任务 {task_id}] 自动投递异常: {e}")
             else:
@@ -221,6 +236,27 @@ def _run_scheduled_task(task_id: str, config: dict) -> None:
     except Exception as e:
         logger.exception(f"[定时任务 {task_id}] 执行失败: {e}")
         _update_task_status(task_id, "error", str(e))
+    finally:
+        # 保存日志文件
+        try:
+            log_text = _get_log_text()
+            if log_text.strip():
+                LOG_DIR.mkdir(parents=True, exist_ok=True)
+                ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+                log_path = LOG_DIR / f"scheduled_{task_id}_{ts}.log"
+                with open(log_path, "w", encoding="utf-8") as f:
+                    f.write(log_text)
+                # 把 log_path 更新到数据库记录
+                if db_run_id is not None:
+                    try:
+                        from src.database import update_run
+                        update_run(db_run_id, log_path=str(log_path))
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+        # 移除日志缓冲 handler
+        logger.removeHandler(buf_handler)
 
 
 def _update_task_status(task_id: str, status: str, message: str = "") -> None:

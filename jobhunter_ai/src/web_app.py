@@ -53,12 +53,14 @@ app = FastAPI(title="JobHunter AI", description="BOSS直聘智能求职系统")
 # 任务存储
 tasks: dict[str, dict[str, Any]] = {}
 
-# 可用模型
+# 可用模型（与前端 index.html 保持一致）
 AVAILABLE_MODELS = [
     {"id": "sensenova-6.7-flash-lite", "name": "SenseNova 6.7 Flash Lite"},
     {"id": "deepseek-v4-flash", "name": "DeepSeek V4 Flash"},
-    {"id": "sensenova-u1-fast", "name": "SenseNova U1 Fast"},
-    {"id": "custom", "name": "自定义模型"},
+    {"id": "qwen-plus", "name": "通义千问 Plus"},
+    {"id": "qwen-max", "name": "通义千问 Max"},
+    {"id": "qwen-turbo", "name": "通义千问 Turbo"},
+    {"id": "custom", "name": "自定义模型（.env 配置）"},
 ]
 
 # ---------- 简历管理 ----------
@@ -494,7 +496,7 @@ async def start_analysis(
     keyword: str = Form(...),
     city: str = Form("上海"),
     pages: int = Form(3),
-    model: str = Form("deepseek-chat"),
+    model: str = Form(AI_MODEL),
     resume: Optional[UploadFile] = File(None),
 ):
     """启动分析任务，返回 task_id。"""
@@ -641,7 +643,23 @@ async def get_history_log(run_id: int):
     if log_path and Path(log_path).exists():
         log_text = Path(log_path).read_text(encoding="utf-8")
     else:
-        log_text = "(日志文件不存在)"
+        # 降级：按文件名在项目当前 logs/ 目录查找（项目迁移后旧路径会失效）
+        fallback = None
+        if log_path:
+            fname = Path(log_path).name
+            candidate = LOG_DIR / fname
+            if candidate.exists():
+                fallback = candidate
+        if fallback is None:
+            # 也尝试分析任务特定的 _error.log
+            if log_path and "_error" not in log_path:
+                err_candidate = LOG_DIR / f"{Path(log_path).stem}_error.log"
+                if err_candidate.exists():
+                    fallback = err_candidate
+        if fallback:
+            log_text = fallback.read_text(encoding="utf-8")
+        else:
+            log_text = "(日志文件不存在)"
     return JSONResponse({"log": log_text})
 
 
@@ -823,16 +841,19 @@ if __name__ == "__main__":
     from src.scheduler import init_scheduler
     init_scheduler()
 
-    port = 7860
-    # 端口被占用时自动找可用端口
     import socket
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        if s.connect_ex(("127.0.0.1", port)) == 0:
-            import webbrowser
-            print(f"端口 {port} 已被占用，尝试端口 {port + 1}")
-            port = 7861
+    import webbrowser
+
+    def find_free_port(start: int = 7861, end: int = 7870) -> int:
+        """在指定范围内找一个可用端口。"""
+        for port in range(start, end + 1):
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                if s.connect_ex(("127.0.0.1", port)) != 0:
+                    return port
+        return start
+
+    port = find_free_port()
     url = f"http://127.0.0.1:{port}"
     print(f"启动服务: {url}")
-    import webbrowser
     webbrowser.open(url)
     uvicorn.run(app, host="0.0.0.0", port=port)

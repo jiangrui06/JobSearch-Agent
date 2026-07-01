@@ -1,5 +1,0 @@
-2026-06-11 14:13:21 [INFO] src.scraper.boss_scraper: 采集到 45 条实时数据
-2026-06-11 14:13:22 [INFO] src.analyzer.agent: 已初始化 DeepSeek 客户端（https://token.sensenova.cn/v1）
-2026-06-11 14:18:22 [INFO] httpx: HTTP Request: POST https://token.sensenova.cn/v1/chat/completions "HTTP/1.1 400 Bad Request"
-2026-06-11 14:18:22 [ERROR] src.analyzer.agent: DeepSeek 调用失败: Error code: 400 - {'error': {'message': 'engine is not available temporarily', 'type': 'failed_precondition_error', 'code': '9'}}
-2026-06-11 14:18:22 [INFO] src.analyzer.agent: [1/45] Python（大厂 六险一金） @ 深圳某大型ICT基础设施与智能终端公司 -> 0分 - 不推荐

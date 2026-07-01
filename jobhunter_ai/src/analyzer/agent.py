@@ -10,10 +10,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Optional
 
+import os
+
 import pandas as pd
 
 from config.settings import (
-    AI_MODEL,
+    AI_MODEL as _DEFAULT_AI_MODEL,
     DATA_DIR,
     DEEPSEEK_API_BASE,
     DEEPSEEK_API_KEY,
@@ -26,6 +28,11 @@ logger = logging.getLogger(__name__)
 
 # 请求超时（秒）
 REQUEST_TIMEOUT = 60
+
+
+def _current_ai_model() -> str:
+    """优先读取运行时的环境变量，便于 Web 界面动态切换模型。"""
+    return os.environ.get("AI_MODEL") or _DEFAULT_AI_MODEL or "deepseek-chat"
 
 SYSTEM_PROMPT = """你是一名顶级的 HR 专家和职业顾问，擅长分析职位描述与候选人简历之间的匹配度。
 
@@ -251,7 +258,7 @@ class JobAgent:
         with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
             future_to_idx: dict = {}
             for idx, job_desc, resume in tasks:
-                cache_key = _make_cache_key(job_desc, resume, AI_MODEL or "default")
+                cache_key = _make_cache_key(job_desc, resume, _current_ai_model())
                 cached = self._cache.get(cache_key)
                 if cached is not None:
                     results_map[idx] = cached
@@ -346,7 +353,7 @@ class JobAgent:
         for attempt in range(max_attempts):
             try:
                 response = self._client.chat.completions.create(
-                    model=AI_MODEL if AI_MODEL else "deepseek-chat",
+                    model=_current_ai_model(),
                     temperature=0.5,
                     messages=[
                         {"role": "system", "content": SYSTEM_PROMPT},
