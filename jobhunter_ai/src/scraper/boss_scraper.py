@@ -23,6 +23,12 @@ search = _jp_search
 
 logger = logging.getLogger(__name__)
 
+
+class BossLoginRequiredError(Exception):
+    """BOSS直聘要求登录（未登录或登录态失效）。"""
+    pass
+
+
 LOGIN_URL = 'https://www.zhipin.com/web/user/?ka=header-login'
 LISTEN_PATTERN = 'https://www.zhipin.com/wapi/zpgeek/search/joblist.json?_='
 
@@ -81,7 +87,11 @@ def _is_login_page(page) -> bool:
 
 
 def _is_logged_in(page) -> bool:
-    """通过URL和页面特征判断是否已登录（不走CSS选择器，用URL+搜索框检测）。"""
+    """通过URL和页面特征判断是否已登录。
+
+    BOSS直聘未登录时也会显示搜索页，因此不能仅凭搜索框判断。
+    需要检测登录态特有的页面元素（头像、消息入口、个人中心）。
+    """
     try:
         url = page.url.lower()
     except Exception:
@@ -96,18 +106,41 @@ def _is_logged_in(page) -> bool:
         return False
 
     # 如果在聊天页、职位详情、个人中心等页面 → 肯定已登录
-    if any(kw in url for kw in ('web/chat', 'job_detail', 'web/geek', 'web/search')):
+    if any(kw in url for kw in ('web/chat', 'job_detail', 'web/geek')):
         return True
 
-    # 如果在首页或城市页，检查搜索框（BOSS主页面特征）
-    try:
-        if page.ele('xpath=//input[@name="query"]', timeout=0.5):
-            return True
-    except Exception:
-        pass
+    # 检测登录态特有元素：用户头像、消息/投递入口、个人中心
+    logged_in_markers = (
+        'xpath://img[contains(@class,"avatar") or contains(@src,"avatar")]',
+        'xpath://a[contains(@href,"/web/geek/")]',
+        'xpath://a[contains(@href,"/web/chat/")]',
+        'xpath://span[contains(text(),"我的")]',
+        'xpath://span[contains(text(),"消息")]',
+        'xpath://div[contains(@class,"user-info")]',
+    )
+    for sel in logged_in_markers:
+        try:
+            if page.ele(sel, timeout=0.8):
+                return True
+        except Exception:
+            pass
 
-    # URL是zhipin.com正常页面且不在登录路径 → 认为已登录
-    return True
+    # 如果在搜索页且存在登录/注册按钮，判定为未登录
+    login_button_markers = (
+        'xpath://a[contains(text(),"登录")]',
+        'xpath://a[contains(text(),"注册")]',
+        'xpath://button[contains(text(),"登录")]',
+        'xpath://span[contains(text(),"登录")]',
+    )
+    for sel in login_button_markers:
+        try:
+            if page.ele(sel, timeout=0.8):
+                return False
+        except Exception:
+            pass
+
+    # 默认保守判定为未登录，避免采集到限制数据
+    return False
 
 
 def boss_login(page, timeout_seconds: int = 300) -> bool:
@@ -218,6 +251,27 @@ class BossZhipinScraper:
         Returns:
             岗位 dict 列表
         """
+        for attempt in range(2):
+            try:
+                return self._do_search(keyword, city, page, cancel_check)
+            except BossLoginRequiredError:
+                logger.warning("登录态失效，需要重新登录")
+                self._logged_in = False
+                if not self.ensure_login():
+                    logger.error("重新登录失败，使用模拟数据")
+                    return _generate_boss_mock()
+                # 登录成功后重试一次
+                continue
+        return _generate_boss_mock()
+
+    def _do_search(
+        self,
+        keyword: str,
+        city: str,
+        page: int,
+        cancel_check=None,
+    ) -> list[dict[str, Any]]:
+        """实际执行采集。"""
         if not self.ensure_login():
             logger.warning("未登录，使用模拟数据")
             return _generate_boss_mock()
@@ -259,6 +313,7 @@ class BossZhipinScraper:
 
         all_results = []
         seen_keys = set()  # 去重用
+        first_page_count = 0
 
         for page_idx in range(page):
             if cancel_check and cancel_check():
@@ -285,6 +340,17 @@ class BossZhipinScraper:
                             continue
                         jobs = self._parse_joblist(body)
                         if jobs:
+                            page_size = len(jobs)
+                            if page_idx == 0:
+                                first_page_count = page_size
+                                # BOSS直聘未登录时通常只返回 15 条
+                                if first_page_count <= 15:
+                                    logger.warning(
+                                        f"第一页仅返回 {first_page_count} 条数据，疑似未登录，将重新登录"
+                                    )
+                                    raise BossLoginRequiredError(
+                                        f"第一页仅 {first_page_count} 条，疑似未登录"
+                                    )
                             for j in jobs:
                                 key = f"{j[0]}|{j[4]}"
                                 if key not in seen_keys:
@@ -294,6 +360,8 @@ class BossZhipinScraper:
                             break
                     if found_data:
                         break
+                except BossLoginRequiredError:
+                    raise
                 except Exception as e:
                     logger.warning(f"第 {page_idx + 1} 页监听失败(重试 {retry + 1}): {e}")
                     page_obj.run_js('window.scrollTo(0, document.body.scrollHeight);')
@@ -311,7 +379,17 @@ class BossZhipinScraper:
         return self._format_results(all_results, city)
 
     def _parse_joblist(self, body: dict) -> list[list]:
-        """从响应体解析岗位列表。"""
+        """从响应体解析岗位列表，并检测登录失效。"""
+        if not isinstance(body, dict):
+            return []
+
+        # BOSS直聘 API 常见未登录响应：code != 0 或 message 含登录
+        code = body.get('code') if isinstance(body, dict) else None
+        message = (body.get('message') or '') if isinstance(body, dict) else ''
+        if code not in (0, None) or '登录' in message or 'login' in message.lower():
+            logger.warning(f"API 响应提示需要登录: code={code}, message={message}")
+            raise BossLoginRequiredError(f"BOSS直聘要求登录: {message}")
+
         raw_list = search('$..jobList', body)
         if not raw_list:
             return []
